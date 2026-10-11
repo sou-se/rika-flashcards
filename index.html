@@ -4536,7 +4536,7 @@ function flip() {
 function judge(ok) {
   const c = queue[idx];
   if (ok) { okCount++; mastered[c.key] = true; cheer(); }
-  else { ngList.push(c); delete mastered[c.key]; }
+  else { ngList.push(c); delete mastered[c.key]; encourage(); }
   saveMastered();
   idx++;
   if (idx >= queue.length) showResult();
@@ -4603,6 +4603,12 @@ function cheer() {
   if (!soundOn) return;
   chime([1047, 1319, 1568]);
   say(CHEERS[Math.floor(Math.random() * CHEERS.length)]);
+}
+const ENCOURAGE = ["がんばろう！", "次は覚えよう！", "もう一回やってみよう！", "大丈夫、くり返せば覚えられるよ！"];
+function encourage() {
+  if (!soundOn) return;
+  chime([659, 523]);
+  say(ENCOURAGE[Math.floor(Math.random() * ENCOURAGE.length)]);
 }
 function fanfare() {
   if (!soundOn) return;

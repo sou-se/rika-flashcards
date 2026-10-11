@@ -691,6 +691,373 @@ const FIG = {
     + T(140, 72, "C", { size: 15 }) + T(80, 128, "D", { size: 15, c: "#fff" }) + T(140, 222, "E", { size: 15 }) + T(200, 128, "F", { size: 15, c: "#fff" })
     + L(48, 64, 20, 46) + M(14, 40, "A") + L(36, 98, 14, 92) + M(10, 106, "B")
     + M(250, 18, "G") + M(264, 202, "H") + L(196, 196, 230, 236) + M(240, 240, "I")),
+  c15_sunshadow: svg(320, 150,
+    [50, 75, 100].map(y => A(16, y, 66, y, "#e8590c", 2)).join("") + T(40, 130, "日光", { size: 13 })
+    + `<circle cx="130" cy="75" r="28" fill="#fff" stroke="#555" stroke-width="2"/><path d="M130 47 A28 28 0 0 1 130 103 Z" fill="#adb5bd"/>` + T(118, 80, "球", { size: 13 })
+    + L(270, 25, 270, 130, "#333", 3) + T(270, 18, "スクリーン", { size: 12 }) + T(215, 80, "かげ？", { size: 13, c: "#868e96" })),
+
+  c15_pointshadow: svg(320, 150,
+    `<circle cx="30" cy="75" r="5" fill="#f59f00"/>` + T(30, 105, "点光源", { size: 12 })
+    + A(30, 75, 128, 48, "#e8590c", 1.8) + A(30, 75, 128, 102, "#e8590c", 1.8)
+    + `<circle cx="135" cy="75" r="28" fill="#fff" stroke="#555" stroke-width="2"/><path d="M135 47 A28 28 0 0 1 135 103 Z" fill="#adb5bd"/>` + T(123, 80, "球", { size: 13 })
+    + L(275, 20, 275, 135, "#333", 3) + T(275, 14, "スクリーン", { size: 12 }) + T(218, 80, "かげ？", { size: 13, c: "#868e96" })),
+
+  c15_box1: svg(330, 150,
+    [52, 70, 88].map(y => A(4, y, 34, y, "#e8590c", 2)).join("") + T(18, 112, "日光", { size: 12 })
+    + `<rect x="44" y="40" width="270" height="56" fill="#495057" stroke="#8b5e34" stroke-width="4"/><rect x="40" y="66" width="8" height="8" fill="#fff"/>`
+    + [[110, "A"], [170, "B"], [230, "C"], [290, "D"]].map(([x, s]) => L(x, 40, x, 96, "#fff", 1.5).replace("/>", ` stroke-dasharray="4 3"/>`) + T(x, 30, s, { size: 14 })).join("")
+    + T(44, 130, "小さな円形の穴", { size: 11, a: "start", w: "normal" }) + L(46, 118, 44, 78, "#555", 1) + T(240, 130, "暗箱", { size: 12 })),
+
+  c15_box2: svg(330, 150,
+    `<circle cx="18" cy="70" r="9" fill="#ffe066" stroke="#555"/>` + T(18, 100, "点光源", { size: 11 })
+    + `<rect x="44" y="40" width="270" height="56" fill="#495057" stroke="#8b5e34" stroke-width="4"/><rect x="40" y="66" width="8" height="8" fill="#fff"/>`
+    + [[110, "A"], [170, "B"], [230, "C"], [290, "D"]].map(([x, s]) => L(x, 40, x, 96, "#fff", 1.5).replace("/>", ` stroke-dasharray="4 3"/>`) + T(x, 30, s, { size: 14 })).join("")
+    + T(44, 130, "小さな円形の穴", { size: 11, a: "start", w: "normal" }) + L(46, 118, 44, 78, "#555", 1) + T(240, 130, "暗箱", { size: 12 })),
+
+  c15_pinhole: svg(320, 180,
+    A(40, 110, 40, 66, "#1c7ed6", 4) + T(40, 135, "物体", { size: 12 })
+    + `<rect x="100" y="40" width="130" height="100" fill="none" stroke="#555" stroke-width="2"/><rect x="97" y="86" width="6" height="8" fill="#fff"/>` + T(86, 160, "穴", { size: 12 }) + L(88, 148, 99, 94, "#555", 1)
+    + L(40, 70, 210, 126.7, "#e8590c", 1.5) + L(40, 110, 210, 53.3, "#e8590c", 1.5)
+    + L(170, 40, 170, 140, "#333", 2).replace("/>", ` stroke-dasharray="5 3"/>`) + L(210, 40, 210, 140, "#333", 2).replace("/>", ` stroke-dasharray="5 3"/>`)
+    + T(170, 32, "A", { size: 14 }) + T(210, 32, "B", { size: 14 }) + T(270, 95, "スクリーン", { size: 11 }) + L(240, 90, 213, 90, "#555", 1)),
+
+  c15_reflect: svg(320, 200,
+    `<rect x="40" y="160" width="240" height="10" fill="#a5d8ff" stroke="#555"/>` + T(298, 170, "鏡", { size: 13 })
+    + L(160, 36, 160, 160, "#555", 1.5).replace("/>", ` stroke-dasharray="5 4"/>`) + M(160, 22, "ア")
+    + A(60, 60, 112, 112, "#e8590c", 2.5) + L(112, 112, 160, 160, "#e8590c", 2.5) + A(160, 160, 250, 70, "#e8590c", 2.5)
+    + `<path d="M135.3 135.3 A35 35 0 0 1 160 125" fill="none" stroke="#333" stroke-width="1.5"/><path d="M160 125 A35 35 0 0 1 184.7 135.3" fill="none" stroke="#333" stroke-width="1.5"/>`
+    + T(140, 115, "A", { size: 14 }) + T(181, 115, "B", { size: 14 })),
+
+  c15_mirror1: svg(320, 210,
+    `<rect x="158" y="15" width="5" height="180" fill="#a5d8ff" stroke="#555" stroke-width=".8"/>` + T(160, 207, "平面鏡", { size: 11 })
+    + L(60, 160, 260, 160, "#555", 1).replace("/>", ` stroke-dasharray="4 3"/>`) + L(160, 102, 260, 160, "#555", 1.2).replace("/>", ` stroke-dasharray="4 3"/>`)
+    + A(60, 160, 120, 125.2, "#1c7ed6", 2) + L(118, 126.3, 160, 102, "#1c7ed6", 2) + A(160, 102, 80, 55.7, "#1c7ed6", 2)
+    + `<circle cx="60" cy="160" r="5" fill="#333"/><circle cx="260" cy="160" r="5" fill="#333"/><ellipse cx="70" cy="50" rx="10" ry="6" fill="#fff" stroke="#333"/><circle cx="70" cy="50" r="3" fill="#333"/>`
+    + T(60, 182, "物体", { size: 12 }) + T(260, 182, "像", { size: 12 }) + T(70, 34, "目", { size: 12 })
+    + M(205, 70, "ア") + L(194, 77, 163, 100, "#2f9e44", 1.5)),
+
+  c15_grid: svg(320, 200,
+    Array.from({ length: 21 }, (_, i) => L(20 + i * 14, 16, 20 + i * 14, 184, "#ced4da", 1)).join("")
+    + Array.from({ length: 13 }, (_, i) => L(20, 16 + i * 14, 300, 16 + i * 14, "#ced4da", 1)).join("")
+    + `<rect x="158" y="58" width="5" height="56" fill="#74c0fc" stroke="#1c7ed6"/>` + T(178, 90, "鏡", { size: 12 })
+    + `<circle cx="62" cy="44" r="4" fill="#fff" stroke="#333" stroke-width="2"/>` + T(52, 38, "X", { size: 13 })
+    + [[104, 30, "A"], [48, 86, "B"], [90, 100, "C"], [132, 170, "D"]].map(([x, y, s]) => `<circle cx="${x}" cy="${y}" r="4" fill="#333"/>` + T(x - 10, y - 5, s, { size: 13 })).join("")),
+
+  c15_refract: svg(320, 210,
+    `<rect x="10" y="110" width="300" height="90" fill="#d0ebff"/>` + L(10, 110, 310, 110, "#555", 1.5)
+    + T(36, 98, "空気", { size: 12 }) + T(30, 135, "水", { size: 12 })
+    + L(160, 20, 160, 200, "#555", 1.2).replace("/>", ` stroke-dasharray="5 4"/>`) + T(182, 28, "法線", { size: 11 })
+    + A(80, 30, 124, 74, "#e8590c", 2.5) + L(122, 72, 160, 110, "#e8590c", 2.5) + A(160, 110, 196, 182, "#e8590c", 2.5)
+    + `<path d="M138.8 88.8 A30 30 0 0 1 160 80" fill="none" stroke="#333" stroke-width="1.5"/><path d="M173.4 136.8 A30 30 0 0 1 160 140" fill="none" stroke="#333" stroke-width="1.5"/>`
+    + T(140, 72, "A", { size: 14 }) + T(172, 162, "B", { size: 14 })),
+
+  c15_lens: svg(340, 180,
+    [55, 75, 105, 125].map(y => A(6, y, 46, y, "#e8590c", 2)).join("")
+    + `<ellipse cx="60" cy="90" rx="8" ry="50" fill="#d0ebff" stroke="#555"/>` + L(20, 90, 335, 90, "#555", 1)
+    + L(60, 40, 312, 140, "#333", 1.5) + L(60, 140, 312, 40, "#333", 1.5)
+    + [[123, "①"], [186, "②"], [228, "③"], [270, "④"], [312, "⑤"]].map(([x, s]) => L(x, 30, x, 150, "#555", 1).replace("/>", ` stroke-dasharray="4 3"/>`) + T(x, 168, s, { size: 13 })).join("")
+    + [[91.5, "15cm"], [154.5, "15cm"], [207, "10cm"], [249, "10cm"], [291, "10cm"]].map(([x, s]) => T(x, 22, s, { size: 10, w: "normal" })).join("")
+    + L(60, 26, 60, 34, "#555", 1) + `<circle cx="186" cy="90" r="3.5" fill="#333"/>` + M(156, 132, "ア") + L(166, 124, 184, 93, "#2f9e44", 1.5)),
+
+  c15_rot1: svg(300, 170,
+    `<rect x="30" y="140" width="240" height="8" fill="#a5d8ff" stroke="#555"/>` + T(285, 148, "鏡", { size: 12 })
+    + L(150, 30, 150, 140, "#555", 1.2).replace("/>", ` stroke-dasharray="5 4"/>`)
+    + A(95, 44.7, 125, 96.7, "#e8590c", 2.2) + L(124, 95, 150, 140, "#e8590c", 2.2) + A(150, 140, 205, 44.7, "#e8590c", 2.2) + T(214, 42, "P", { size: 13 })
+    + `<path d="M122 140 A28 28 0 0 1 136 115.8" fill="none" stroke="#333" stroke-width="1.5"/><path d="M164 115.8 A28 28 0 0 1 178 140" fill="none" stroke="#333" stroke-width="1.5"/>`
+    + T(104, 132, "60°", { size: 12 }) + T(196, 132, "60°", { size: 12 }) + T(150, 164, "図1", { size: 11 })),
+
+  c15_lensimg: svg(320, 170,
+    L(10, 100, 312, 100, "#555", 1).replace("/>", ` stroke-dasharray="5 4"/>`) + `<ellipse cx="140" cy="100" rx="10" ry="62" fill="#d0ebff" stroke="#555"/>`
+    + `<rect x="45" y="68" width="10" height="32" fill="#fff" stroke="#555"/><path d="M50 56 Q44 64 50 68 Q56 64 50 56 Z" fill="#fa5252"/>` + T(50, 120, "物体", { size: 12 })
+    + A(50, 62, 120, 62, "#1c7ed6", 2) + L(118, 62, 140, 62, "#1c7ed6", 2) + A(140, 62, 210, 121.1, "#1c7ed6", 2) + L(208, 119.4, 230, 138, "#1c7ed6", 2)
+    + A(50, 62, 110, 87.3, "#2f9e44", 2) + L(108, 86.4, 230, 138, "#2f9e44", 2)
+    + `<circle cx="140" cy="100" r="3.5" fill="#333"/><circle cx="185" cy="100" r="3.5" fill="#333"/>` + T(122, 118, "O", { size: 13 })
+    + M(185, 26, "ア") + L(185, 39, 185, 96, "#2f9e44", 1.2)),
+  c16_buzzer: svg(340, 200,
+    L(10, 150, 70, 150, "#555", 2) + `<rect x="18" y="138" width="40" height="12" fill="#eee" stroke="#555"/><path d="M22 138 A16 16 0 0 1 54 138 Z" fill="#f783ac" stroke="#555"/>` + T(56, 190, "空気中", { size: 12 })
+    + `<rect x="122" y="70" width="104" height="90" fill="#a5d8ff" fill-opacity=".6"/><path d="M120 50 V160 H228 V50" fill="none" stroke="#555" stroke-width="2"/>` + `<rect x="130" y="148" width="40" height="12" fill="#eee" stroke="#555"/><path d="M134 148 A16 16 0 0 1 166 148 Z" fill="#f783ac" stroke="#555"/>` + T(173, 190, "水中", { size: 12 })
+    + `<path d="M234 160 V82 Q234 70 246 70 H282 Q294 70 294 82 V160" fill="#e7f5ff" fill-opacity=".5" stroke="#555" stroke-width="1.5"/>` + L(230, 160, 298, 160, "#555", 2) + L(264, 70, 264, 44, "#555", 3) + L(252, 44, 276, 44, "#555", 4)
+    + `<rect x="244" y="148" width="40" height="12" fill="#eee" stroke="#555"/><path d="M248 148 A16 16 0 0 1 280 148 Z" fill="#f783ac" stroke="#555"/>` + T(264, 102, "ほぼ真空", { size: 10, w: "normal" }) + T(264, 190, "真空ポンプ", { size: 12 })
+    + [0, 1, 2].map(i => { const x = 5 + i * 112; return T(x + 10, 22, ["①", "②", "③"][i], { size: 16 })
+      + `<path d="M${x + 80} 128 C${x + 78} 104 ${x + 104} 102 ${x + 104} 122 C${x + 104 + 0} 136 ${x + 92} 134 ${x + 91} 150" fill="#ffd8a8" stroke="#555" stroke-width="1.5"/>` + T(x + 92, i === 1 ? 96 : 168, "耳", { size: 11, w: "normal" }); }).join("")),
+
+  c16_reflect: svg(300, 200,
+    `<rect x="10" y="150" width="280" height="40" fill="#ced4da"/>` + T(150, 176, "コンクリート", { size: 12 })
+    + L(150, 38, 150, 150, "#555", 1.5).replace("/>", ` stroke-dasharray="5 4"/>`)
+    + A(40, 40, 148, 148, "#1c7ed6", 2.5) + A(152, 148, 260, 40, "#1c7ed6", 2.5)
+    + `<path d="M150 110 A40 40 0 0 0 121.7 121.7" fill="none" stroke="#333" stroke-width="1.5"/><path d="M150 104 A46 46 0 0 1 182.5 117.5" fill="none" stroke="#333" stroke-width="1.5"/>`
+    + M(118, 92, "ア") + M(184, 90, "イ") + M(150, 20, "ウ") + T(26, 34, "音", { size: 13 })),
+
+  c16_amp: svg(320, 160,
+    M(22, 22, "A") + `<path d="M20 85 Q80 25 140 85 Q80 145 20 85" fill="none" stroke="#333" stroke-width="2"/>` + L(20, 85, 140, 85, "#999", 1).replace("/>", ` stroke-dasharray="4 3"/>`)
+    + `<circle cx="20" cy="85" r="4" fill="#333"/><circle cx="140" cy="85" r="4" fill="#333"/>`
+    + M(182, 22, "B") + `<path d="M180 85 Q240 65 300 85 Q240 105 180 85" fill="none" stroke="#333" stroke-width="2"/>` + L(180, 85, 300, 85, "#999", 1).replace("/>", ` stroke-dasharray="4 3"/>`)
+    + `<circle cx="180" cy="85" r="4" fill="#333"/><circle cx="300" cy="85" r="4" fill="#333"/>`
+    + T(80, 148, "強くはじく", { size: 12, w: "normal" }) + T(240, 148, "弱くはじく", { size: 12, w: "normal" })),
+
+  c16_len: svg(320, 150,
+    M(22, 20, "C") + `<path d="M15 65 Q95 25 175 65 Q95 105 15 65" fill="none" stroke="#333" stroke-width="2"/><circle cx="15" cy="65" r="4" fill="#333"/><circle cx="175" cy="65" r="4" fill="#333"/>`
+    + A(95, 118, 15, 118, "#555", 1.5) + A(95, 118, 175, 118, "#555", 1.5)
+    + M(212, 20, "D") + `<path d="M210 65 Q255 25 300 65 Q255 105 210 65" fill="none" stroke="#333" stroke-width="2"/><circle cx="210" cy="65" r="4" fill="#333"/><circle cx="300" cy="65" r="4" fill="#333"/>`
+    + A(255, 118, 210, 118, "#555", 1.5) + A(255, 118, 300, 118, "#555", 1.5)
+    + T(160, 144, "はじく強さ・太さ・張る強さは同じ", { size: 11, w: "normal" })),
+
+  c16_thick: svg(320, 140,
+    M(22, 20, "E") + `<path d="M15 70 Q80 35 145 70 Q80 105 15 70" fill="none" stroke="#333" stroke-width="5"/>`
+    + M(182, 20, "F") + `<path d="M175 70 Q240 35 305 70 Q240 105 175 70" fill="none" stroke="#333" stroke-width="1.2"/>`
+    + T(160, 132, "長さ・はじく強さ・張る強さは同じ", { size: 11, w: "normal" })),
+
+  c16_tension: svg(320, 190,
+    [[0, 1, "G"], [165, 2, "H"]].map(([x, n, s]) => M(x + 20, 20, s)
+      + `<rect x="${x + 10}" y="62" width="110" height="22" fill="#e9d8c4" stroke="#555"/>` + `<polygon points="${x + 30},60 ${x + 36},46 ${x + 42},60" fill="#c08457"/><polygon points="${x + 88},60 ${x + 94},46 ${x + 100},60" fill="#c08457"/>`
+      + L(x + 10, 48, x + 120, 48, "#333", 1.5) + L(x + 120, 48, x + 132, 62, "#333", 1.5) + L(x + 132, 62, x + 132, 96, "#333", 1.5)
+      + [...Array(n)].map((_, k) => `<rect x="${x + 122}" y="${96 + k * 34}" width="20" height="24" rx="3" fill="#868e96" stroke="#333"/>` + (k < n - 1 ? L(x + 132, 120 + k * 34, x + 132, 130 + k * 34, "#333", 1.5) : "")).join("")).join("")
+    + T(160, 182, "弦の長さ・太さは同じ", { size: 11, w: "normal" })),
+
+  c16_osc: svg(340, 245,
+    [[10, 32, 30, 2, "元の音"], [180, 32, 12, 2, "ア"], [10, 157, 30, 1, "イ"]].map(([x, y, a, k, s]) =>
+      `<rect x="${x}" y="${y}" width="150" height="80" fill="#fff" stroke="#333" stroke-width="1.5"/>` + L(x, y + 40, x + 150, y + 40, "#aaa", 1).replace("/>", ` stroke-dasharray="4 3"/>`)
+      + `<path d="M${[...Array(61)].map((_, i) => `${(x + 150 * i / 60).toFixed(1)} ${(y + 40 - a * Math.sin(2 * Math.PI * k * i / 60)).toFixed(1)}`).join(" L")}" fill="none" stroke="#1c7ed6" stroke-width="2"/>`
+      + (s === "元の音" ? T(x + 4, y - 8, s, { size: 13, a: "start" }) : M(x + 14, y - 14, s))).join("")
+    + A(165, 72, 177, 72, "#555", 2) + A(85, 116, 85, 140, "#555", 2)),
+  c17_state: svg(340, 240,
+    [[60, "固体"], [280, "液体"]].map(([x, s]) => `<rect x="${x - 35}" y="178" width="70" height="30" rx="6" fill="#fff" stroke="#333" stroke-width="1.5"/>` + T(x, 199, s, { size: 14 })).join("")
+    + `<rect x="130" y="25" width="80" height="30" rx="6" fill="#fff" stroke="#333" stroke-width="1.5"/>` + T(170, 46, "気体", { size: 14 })
+    + A(97, 186, 243, 186, "#555", 2.5) + A(243, 200, 97, 200, "#555", 2.5) + M(170, 168, "A") + M(170, 222, "B")
+    + A(289, 170, 213, 58, "#555", 2.5) + A(198, 65, 274, 177, "#555", 2.5) + M(270, 102, "C") + M(218, 136, "D")
+    + A(51, 170, 127, 58, "#555", 2.5) + A(142, 65, 66, 177, "#555", 2.5) + M(70, 102, "E") + M(122, 136, "F")),
+
+  c17_graph: svg(320, 230,
+    A(40, 195, 312, 195, "#333", 1.5) + A(40, 195, 40, 20, "#333", 1.5) + T(30, 210, "0", { size: 11 })
+    + `<polyline points="40,170 52,150 148,150 268,50 305,50" fill="none" stroke="#1c7ed6" stroke-width="2.5"/>`
+    + [[52, 150], [148, 150], [268, 50]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.5" fill="#333"/>` + L(x, y, x, 195, "#999", 1).replace("/>", ` stroke-dasharray="3 3"/>`)).join("")
+    + L(40, 150, 52, 150, "#999", 1).replace("/>", ` stroke-dasharray="3 3"/>`) + L(40, 50, 268, 50, "#999", 1).replace("/>", ` stroke-dasharray="3 3"/>`)
+    + T(32, 174, "−20", { size: 10, a: "end" }) + T(32, 155, "A", { size: 13, a: "end" }) + T(32, 55, "B", { size: 13, a: "end" })
+    + T(52, 210, "1", { size: 11 }) + T(148, 210, "9", { size: 11 }) + T(268, 210, "19", { size: 11 })
+    + T(46, 16, "温度（℃）", { size: 11, a: "start", w: "normal" }) + T(312, 226, "加熱時間（分）", { size: 11, a: "end", w: "normal" })),
+
+  c17_plate: svg(320, 200,
+    `<path d="M20 20 H156 V140 H164 V20 H300 V180 H20 Z" fill="#dee2e6" stroke="#555" stroke-width="2"/>`
+    + `<path d="M130 32 Q138 42 130 48 Q122 42 130 32 Z" fill="#e03131"/>` + T(104, 46, "熱する", { size: 11 })
+    + M(222, 44, "ア") + M(70, 112, "イ") + M(222, 158, "ウ")
+    + T(160, 196, "ろうをぬった金属板（切れこみあり）", { size: 11, w: "normal" })),
+
+  c17_conv: svg(340, 200,
+    [[15, "A"], [125, "B"], [235, "C"]].map(([x, s]) => M(x + 37, 14, s)
+      + `<rect x="${x}" y="50" width="75" height="95" fill="#a5d8ff" fill-opacity=".6"/><path d="M${x} 34 V145 H${x + 75} V34" fill="none" stroke="#555" stroke-width="2"/>`
+      + (s === "A" ? A(x + 10, 172, x + 10, 150, "#e03131", 3) : s === "B" ? A(x + 37, 172, x + 37, 150, "#e03131", 3) : A(x + 98, 97, x + 80, 97, "#e03131", 3))).join("")
+    + T(170, 194, "赤い矢印＝熱するところ", { size: 10, w: "normal" })),
+
+  c17_particles: svg(330, 150,
+    [...Array(25)].map((_, i) => `<circle cx="${22 + (i % 5) * 13}" cy="${34 + Math.floor(i / 5) * 13}" r="6.2" fill="#e8b17a" stroke="#a0522d"/>`).join("")
+    + `<path d="M125 22 V112 Q125 118 131 118 H199 Q205 118 205 112 V22" fill="none" stroke="#555" stroke-width="1.5"/>`
+    + [...Array(30)].map((_, i) => { const r = Math.floor(i / 6), c = i % 6; return `<circle cx="${(135 + c * 11.5 + (r % 2) * 5 + ((i * 7) % 3) - 1).toFixed(1)}" cy="${(110 - r * 12 - ((i * 5) % 3)).toFixed(1)}" r="6.2" fill="#e8b17a" stroke="#a0522d"/>`; }).join("")
+    + `<circle cx="275" cy="68" r="48" fill="none" stroke="#555" stroke-width="1.5"/>`
+    + [[255, 38], [298, 46], [245, 78], [282, 72], [305, 92], [262, 104]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6.2" fill="#e8b17a" stroke="#a0522d"/>`).join("")
+    + M(54, 136, "ア") + M(165, 136, "イ") + M(275, 136, "ウ")),
+  c18_apparatus: svg(340, 220,
+    `<rect x="190" y="110" width="140" height="90" fill="#a5d8ff" fill-opacity=".6"/><path d="M190 96 V200 H330 V96" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<path d="M60 56 V90 L20 196 H120 L80 90 V56" fill="#fff" stroke="#555" stroke-width="2"/>`
+    + `<rect x="26" y="170" width="88" height="24" fill="#a5d8ff" fill-opacity=".5"/>`
+    + [30, 42, 54, 66, 78, 90, 102].map(x => `<circle cx="${x}" cy="190" r="4" fill="#333"/>`).join("")
+    + `<rect x="55" y="52" width="30" height="12" fill="#333"/>`
+    + L(66, 26, 66, 182, "#555", 2) + `<path d="M52 8 H80 L69 26 H63 Z" fill="#fff" stroke="#555" stroke-width="2"/>` + `<rect x="58" y="32" width="16" height="7" fill="#777"/>`
+    + `<path d="M76 76 V40 H100" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<path d="M100 40 Q200 22 222 112" fill="none" stroke="#333" stroke-width="6"/>`
+    + `<path d="M222 112 L244 186 H287 V160" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<rect x="265" y="44" width="44" height="96" rx="6" fill="#d0ebff" stroke="#555" stroke-width="2"/><rect x="278" y="138" width="18" height="18" fill="#d0ebff" stroke="#555" stroke-width="2"/>`
+    + [[287, 128], [283, 112], [290, 96]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="#fff" stroke="#555"/>`).join("")
+    + `<circle cx="66" cy="178" r="10" fill="none" stroke="#e03131" stroke-dasharray="3 2"/><circle cx="76" cy="74" r="9" fill="none" stroke="#e03131" stroke-dasharray="3 2"/>`
+    + T(98, 164, "X", { size: 14 }) + L(76, 177, 92, 168, "#555", 1) + T(104, 86, "Y", { size: 14 }) + L(84, 78, 98, 83, "#555", 1)
+    + M(16, 112, "①") + L(29, 116, 42, 136) + M(160, 22, "②") + L(172, 28, 180, 34) + M(176, 150, "③") + L(189, 150, 198, 150) + M(325, 28, "④") + L(318, 38, 309, 50)),
+
+  c18_graph: svg(300, 220,
+    A(40, 190, 288, 190, "#333", 2) + A(40, 190, 40, 12, "#333", 2)
+    + T(74, 22, "体積", { size: 12 }) + T(268, 210, "時間", { size: 12 }) + T(32, 206, "0", { size: 12 })
+    + `<path d="M40 190 C58 80 110 46 260 42" fill="none" stroke="#2f9e44" stroke-width="2.5"/>`
+    + `<path d="M40 190 C100 120 170 56 260 42" fill="none" stroke="#e03131" stroke-width="2.5"/>`
+    + M(84, 54, "A") + M(176, 132, "B")),
+
+  c18_collect: svg(340, 180,
+    `<rect x="10" y="90" width="100" height="70" fill="#a5d8ff" fill-opacity=".6"/><path d="M10 72 V160 H110 V72" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<rect x="52" y="36" width="30" height="72" rx="5" fill="#d0ebff" stroke="#555" stroke-width="2"/><rect x="60" y="106" width="14" height="10" fill="#d0ebff" stroke="#555" stroke-width="2"/>`
+    + `<path d="M16 50 L50 138 H67 V120" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<rect x="150" y="34" width="40" height="86" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="162" y="118" width="16" height="12" fill="#fff" stroke="#555" stroke-width="2"/>`
+    + `<path d="M142 160 H170 V44" fill="none" stroke="#555" stroke-width="2"/>` + A(112, 160, 140, 160, "#333", 2) + T(118, 150, "気体", { size: 11 })
+    + `<rect x="250" y="62" width="50" height="100" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="262" y="50" width="26" height="14" fill="#fff" stroke="#555" stroke-width="2"/>`
+    + `<path d="M234 30 H275 V152" fill="none" stroke="#555" stroke-width="2"/>` + A(204, 30, 232, 30, "#333", 2) + T(212, 20, "気体", { size: 11 })
+    + M(60, 16, "ア") + M(214, 70, "イ") + M(320, 52, "ウ")),
+  c19_burner: svg(320, 240,
+    `<rect x="130" y="14" width="20" height="150" fill="#ced4da" stroke="#555" stroke-width="2"/>`
+    + `<rect x="118" y="104" width="44" height="14" rx="3" fill="#adb5bd" stroke="#555" stroke-width="2"/>`
+    + `<rect x="118" y="138" width="44" height="14" rx="3" fill="#adb5bd" stroke="#555" stroke-width="2"/>`
+    + `<rect x="126" y="152" width="28" height="44" fill="#ced4da" stroke="#555" stroke-width="2"/>`
+    + `<ellipse cx="140" cy="202" rx="52" ry="12" fill="#adb5bd" stroke="#555" stroke-width="2"/>`
+    + `<rect x="154" y="166" width="120" height="10" fill="#a5d8ff" stroke="#555" stroke-width="1.5"/>`
+    + `<rect x="270" y="150" width="30" height="40" rx="4" fill="#495057" stroke="#333" stroke-width="2"/>`
+    + `<rect x="172" y="152" width="6" height="14" fill="#555"/><rect x="166" y="148" width="22" height="6" fill="#555"/>`
+    + L(66, 111, 118, 111) + M(52, 111, "ア") + L(66, 145, 118, 145) + M(52, 145, "イ")
+    + L(177, 146, 196, 120) + M(206, 112, "ウ") + L(285, 150, 285, 128) + M(285, 116, "エ")),
+  c20_air: svg(340, 140,
+    `<rect x="20" y="50" width="234" height="40" fill="#d0ebff" stroke="#555"/><rect x="254" y="50" width="63" height="40" fill="#ffe3e3" stroke="#555"/><rect x="317" y="50" width="6" height="40" fill="#fff3bf" stroke="#555"/>`
+    + M(137, 26, "ア") + M(285, 26, "イ") + M(320, 118, "ウ") + L(320, 90, 320, 105)
+    + T(137, 76, "約78％", { size: 14 }) + T(285, 76, "約21％", { size: 13 }) + T(300, 123, "約1％", { size: 12, a: "end" })),
+
+  c20_candle: svg(410, 200,
+    [["A", 0, 0, 0, 0], ["B", 80, 0, 1, 0], ["C", 160, 1, 0, 0], ["D", 240, 1, 1, 0], ["E", 320, 0, 0, 1]].map(([s, x0, gap, lid, plate]) => {
+      const x = x0 + 10, bot = gap ? 146 : 172, cx = plate ? x + 26 : x + 40;
+      let r = T(x + 40, 24, s, { size: 16 })
+        + L(x + 14, 58, x + 14, bot, "#555", 2.5) + L(x + 66, 58, x + 66, bot, "#555", 2.5)
+        + `<rect x="${cx - 5}" y="140" width="10" height="32" fill="#fff" stroke="#555"/><path d="M${cx} 122 Q${cx + 7} 134 ${cx} 140 Q${cx - 7} 134 ${cx} 122" fill="#ff922b"/>`;
+      if (lid) r += `<rect x="${x + 8}" y="50" width="64" height="8" fill="#adb5bd" stroke="#555"/>`;
+      if (plate) r += `<rect x="${x + 44}" y="44" width="5" height="96" fill="#868e96"/>`;
+      return r;
+    }).join("")
+    + L(0, 172, 410, 172, "#333", 2)
+    + T(205, 194, "B・Dはふた　C・Dは下にすき間　Eは金属の板", { size: 11, w: "normal" })),
+
+  c20_model: svg(340, 150,
+    `<rect x="10" y="40" width="90" height="80" fill="#fff" stroke="#555"/><rect x="125" y="40" width="90" height="80" fill="#fff" stroke="#555"/><rect x="240" y="40" width="90" height="80" fill="#fff" stroke="#555"/>`
+    + [[35, 62], [75, 62], [35, 98], [75, 98]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#333"/>`).join("")
+    + [[150, 62], [190, 62], [150, 98], [190, 98]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#fff" stroke="#333" stroke-width="2"/>`).join("")
+    + [[262, 62], [302, 62], [262, 98], [302, 98]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#333"/><circle cx="${x + 16}" cy="${y}" r="8" fill="#fff" stroke="#333" stroke-width="2"/>`).join("")
+    + T(112, 86, "＋", { size: 16 }) + A(218, 80, 238, 80, "#333", 2)
+    + T(55, 26, "燃えるもの", { size: 12 }) + M(170, 22, "ア") + T(285, 26, "燃えてできるもの", { size: 12 })
+    + T(170, 142, "●と○が結びつく", { size: 11, w: "normal" })),
+  c21_settle: svg(320, 170,
+    `<path d="M50 40 V140 H130 V40" fill="none" stroke="#555" stroke-width="2.5"/><rect x="51" y="60" width="78" height="79" fill="#a5d8ff" fill-opacity=".7"/>`
+    + `<path d="M190 40 V140 H270 V40" fill="none" stroke="#555" stroke-width="2.5"/><rect x="191" y="60" width="78" height="64" fill="#a5d8ff" fill-opacity=".7"/><rect x="191" y="124" width="78" height="15" fill="#a0522d"/>`
+    + M(90, 22, "ア") + M(230, 22, "イ")
+    + T(160, 162, "どちらも、かきまぜてからしばらく置いたようす", { size: 11, w: "normal" })),
+
+  c21_model: svg(340, 200,
+    `<path d="M20 30 V110 H90 V30" fill="none" stroke="#555" stroke-width="2.5"/><rect x="21" y="45" width="68" height="64" fill="#a5d8ff" fill-opacity=".7"/>`
+    + T(55, 132, "水", { size: 13 }) + T(55, 152, "100g", { size: 13 }) + T(55, 172, "100cm³", { size: 12 })
+    + T(115, 75, "＋", { size: 18 })
+    + `<path d="M135 110 Q160 82 185 110 Z" fill="#fff" stroke="#555" stroke-width="2"/>` + L(128, 110, 192, 110, "#555", 2)
+    + T(160, 132, "食塩", { size: 13 }) + T(160, 152, "20g", { size: 13 }) + T(160, 172, "9cm³", { size: 12 })
+    + A(200, 75, 235, 75, "#333", 2.5)
+    + `<path d="M250 30 V110 H320 V30" fill="none" stroke="#555" stroke-width="2.5"/><rect x="251" y="42" width="68" height="67" fill="#a5d8ff" fill-opacity=".7"/>`
+    + T(285, 130, "食塩水", { size: 13 }) + M(268, 152, "ア") + T(290, 157, "g", { size: 13 }) + M(268, 182, "イ") + T(298, 187, "cm³", { size: 12 })),
+
+  c21_curve: svg(320, 230,
+    L(50, 190, 300, 190, "#333", 2) + L(50, 190, 50, 20, "#333", 2)
+    + `<path d="M50 178 Q170 168 230 130 Q262 110 290 94" fill="none" stroke="#e03131" stroke-width="3"/>`
+    + `<path d="M50 48 L290 38" fill="none" stroke="#1971c2" stroke-width="3"/>`
+    + M(305, 94, "ア") + M(305, 38, "イ")
+    + T(50, 206, "0", { size: 11 }) + T(170, 206, "40", { size: 11 }) + T(290, 206, "80", { size: 11 })
+    + L(170, 190, 170, 194, "#333") + L(290, 190, 290, 194, "#333")
+    + T(175, 225, "水温（℃）", { size: 12 }) + T(56, 14, "とける量（g）", { size: 11, a: "start" })),
+  c22_roka: svg(320, 240,
+    `<rect x="30" y="215" width="210" height="8" fill="#c08457"/><rect x="60" y="30" width="10" height="185" fill="#c08457"/><rect x="40" y="96" width="180" height="6" fill="#c08457"/>`
+    + `<path d="M110 140 V212 H186 V140" fill="none" stroke="#555" stroke-width="2"/><rect x="112" y="188" width="72" height="22" fill="#a5d8ff"/>`
+    + `<polygon points="150,90 210,90 182,130 178,130" fill="#f1f3f5" stroke="#555" stroke-width="2"/><polygon points="157,93 203,93 180,123" fill="#fff" stroke="#999"/>`
+    + `<rect x="178" y="130" width="5" height="54" fill="#f1f3f5" stroke="#555"/>`
+    + L(148, 22, 182, 100, "#888", 4)
+    + `<polygon points="112,10 158,10 150,50 126,46" fill="#a5d8ff" stroke="#555" stroke-width="2"/>`
+    + `<circle cx="149" cy="24" r="13" fill="none" stroke="#e03131" stroke-dasharray="3 2"/>` + T(98, 34, "X", { size: 14 })
+    + `<circle cx="183" cy="180" r="11" fill="none" stroke="#e03131" stroke-dasharray="3 2"/>` + T(210, 186, "Y", { size: 14 })
+    + M(25, 62, "A") + L(38, 62, 60, 62)
+    + M(290, 30, "B") + L(277, 32, 168, 64)
+    + M(290, 82, "C") + L(277, 84, 204, 100)
+    + M(290, 134, "D") + L(277, 132, 186, 112)),
+
+  c22_shikumi: svg(320, 150,
+    L(10, 75, 70, 75, "#555", 3) + L(90, 75, 150, 75, "#555", 3) + L(170, 75, 230, 75, "#555", 3) + L(250, 75, 270, 75, "#555", 3)
+    + [[40, 50], [125, 46], [205, 52]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="10" fill="#e03131"/>`).join("")
+    + [[80, 40], [160, 30], [240, 34], [80, 108], [160, 118], [240, 104], [120, 132], [200, 136]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.5" fill="#1971c2"/>`).join("")
+    + A(80, 50, 80, 98, "#1971c2", 1.5) + A(160, 40, 160, 108, "#1971c2", 1.5) + A(240, 44, 240, 96, "#1971c2", 1.5)
+    + M(296, 22, "ア") + L(283, 26, 216, 48)
+    + M(296, 56, "イ") + L(283, 54, 246, 38)
+    + T(298, 80, "ろ紙", { size: 12 }) + L(284, 76, 272, 76, "#555", 1)),
+
+  c22_kessho: svg(330, 130,
+    T(60, 14, "A", { size: 15 }) + T(165, 14, "B", { size: 15 }) + T(270, 14, "C", { size: 15 })
+    + [60, 165, 270].map(x => `<circle cx="${x}" cy="72" r="50" fill="#f8f9fa" stroke="#555" stroke-width="2"/>`).join("")
+    + `<polygon points="38,60 50,48 86,48 74,60" fill="#fff" stroke="#333"/><polygon points="74,60 86,48 86,84 74,96" fill="#dee2e6" stroke="#333"/><rect x="38" y="60" width="36" height="36" fill="#fff" stroke="#333"/>`
+    + `<rect x="45" y="67" width="22" height="22" fill="none" stroke="#333"/><rect x="51" y="73" width="10" height="10" fill="none" stroke="#333"/>`
+    + `<polygon points="125,70 125,78 140,90 190,90 205,78 205,70" fill="#dee2e6" stroke="#333"/><polygon points="125,70 140,58 190,58 205,70 190,82 140,82" fill="#fff" stroke="#333"/>`
+    + `<polygon points="270,28 300,72 270,114 240,72" fill="#fff" stroke="#333"/>` + L(270, 28, 262, 84, "#333", 1) + L(270, 114, 262, 84, "#333", 1) + L(240, 72, 262, 84, "#333", 1) + L(300, 72, 262, 84, "#333", 1)
+    + `<path d="M270 28 L280 62 L270 114 M240 72 L280 62 L300 72" fill="none" stroke="#999" stroke-dasharray="3 2"/>`),
+
+  c22_jouhatsu: svg(300, 230,
+    L(112, 100, 86, 220, "#555", 3) + L(188, 100, 214, 220, "#555", 3)
+    + `<rect x="80" y="92" width="140" height="8" fill="#ced4da" stroke="#555"/><circle cx="150" cy="96" r="3" fill="#868e96"/>`
+    + `<path d="M112 72 H188 Q182 92 150 92 Q118 92 112 72 Z" fill="#fff" stroke="#555" stroke-width="2"/>`
+    + `<path d="M150 118 Q140 136 150 150 Q160 136 150 118 Z" fill="#ff922b"/><rect x="147" y="150" width="6" height="12" fill="#495057"/>`
+    + `<rect x="141" y="160" width="18" height="14" fill="#adb5bd" stroke="#555"/><path d="M120 220 V190 Q120 174 150 174 Q180 174 180 190 V220 Z" fill="#d0ebff" stroke="#555" stroke-width="2"/>`
+    + M(30, 66, "A") + L(43, 68, 114, 76)
+    + M(30, 104, "B") + L(43, 102, 80, 96)
+    + M(30, 150, "C") + L(43, 150, 100, 150)
+    + M(30, 200, "D") + L(43, 200, 120, 200)),
+
+  c22_jouryu: svg(340, 240,
+    `<rect x="40" y="222" width="170" height="8" fill="#c08457"/><rect x="60" y="20" width="6" height="202" fill="#c08457"/>`
+    + L(66, 80, 124, 80, "#555", 3) + L(66, 178, 160, 178, "#555", 3)
+    + `<rect x="123" y="72" width="14" height="44" fill="#f1f3f5" stroke="#555"/><circle cx="130" cy="144" r="32" fill="#d0ebff" stroke="#555" stroke-width="2"/>`
+    + `<circle cx="122" cy="166" r="3" fill="#555"/><circle cx="132" cy="168" r="3" fill="#555"/><circle cx="140" cy="164" r="3" fill="#555"/>`
+    + `<rect x="120" y="62" width="20" height="10" fill="#495057"/>` + L(130, 26, 130, 92, "#e03131", 2)
+    + `<path d="M138 68 H200 Q240 68 260 110 V200" fill="none" stroke="#555" stroke-width="4"/>`
+    + `<rect x="225" y="130" width="85" height="90" fill="#a5d8ff" fill-opacity=".6"/><path d="M225 120 V220 H310 V120" fill="none" stroke="#555" stroke-width="2"/>`
+    + `<path d="M250 110 V206 Q260 218 270 206 V110" fill="#fff" fill-opacity=".7" stroke="#555" stroke-width="2"/>`
+    + `<path d="M130 182 Q123 194 130 204 Q137 194 130 182 Z" fill="#ff922b"/><rect x="115" y="204" width="30" height="18" fill="#d0ebff" stroke="#555"/>`
+    + M(28, 40, "A") + L(41, 40, 60, 40)
+    + M(196, 150, "B") + L(183, 150, 162, 146)
+    + M(326, 200, "C") + L(313, 200, 271, 204)),
+
+  c22_tamago: svg(330, 170,
+    [[20, "A", 136, 14, 11], [125, "B", 100, 11, 16], [230, "C", 72, 11, 16]].map(([x, s, ey, rx, ry]) => T(x + 40, 28, s, { size: 15 })
+      + `<rect x="${x}" y="58" width="80" height="92" fill="#a5d8ff" fill-opacity=".6"/><path d="M${x} 40 V150 H${x + 80} V40" fill="none" stroke="#555" stroke-width="2"/>`
+      + `<ellipse cx="${x + 40}" cy="${ey}" rx="${rx}" ry="${ry}" fill="#fff8e7" stroke="#555" stroke-width="2"/>`).join("")),
+
+  c22_tenbin: svg(340, 170,
+    L(40, 50, 300, 50, "#555", 4) + `<polygon points="235,52 224,70 246,70" fill="#ffe066" stroke="#555"/>`
+    + T(40, 36, "7%", { size: 14 }) + T(235, 36, "13%", { size: 14 }) + T(300, 36, "？%", { size: 14 })
+    + L(40, 50, 40, 108, "#555") + L(300, 50, 300, 108, "#555")
+    + `<circle cx="40" cy="124" r="16" fill="#a5d8ff" stroke="#555"/><circle cx="300" cy="124" r="16" fill="#a5d8ff" stroke="#555"/>`
+    + T(40, 160, "100g", { size: 13 }) + T(300, 160, "300g", { size: 13 })
+    + `<path d="M42 58 Q138 92 233 58" fill="none" stroke="#555" stroke-dasharray="4 3"/><path d="M237 58 Q268 80 298 58" fill="none" stroke="#555" stroke-dasharray="4 3"/>`
+    + T(138, 98, "ア", { size: 14 }) + T(268, 92, "イ", { size: 14 })),
+  c23_graph: (() => {
+    const X = t => 50 + t * 4.5, Y = g => 260 - g * 4;
+    const pl = (pts, c) => `<polyline points="${pts.map(([t, g]) => X(t).toFixed(1) + "," + Y(g).toFixed(1)).join(" ")}" fill="none" stroke="${c}" stroke-width="2.5"/>`;
+    let s = "";
+    for (let k = 0; k <= 12; k++) s += L(X(k * 5), Y(0), X(k * 5), Y(60), "#ced4da", 1) + L(X(0), Y(k * 5), X(60), Y(k * 5), "#ced4da", 1);
+    for (let k = 0; k <= 6; k++) s += T(X(k * 10), 278, k * 10, { size: 11, w: "normal" }) + T(40, Y(k * 10) + 4, k * 10, { size: 11, w: "normal", a: "end" });
+    s += L(X(0), Y(0), X(62), Y(0), "#333", 1.5) + L(X(0), Y(0), X(0), Y(62), "#333", 1.5);
+    s += pl([[0, 20], [60, 40]], "#2f9e44");
+    s += pl([[0, 10], [5, 10.6], [10, 11.6], [15, 13.1], [20, 15], [25, 17.3], [30, 20.2], [35, 25], [40, 30], [45, 35.5], [50, 41.5], [55, 48], [60, 55]], "#e03131");
+    s += pl([[0, 5], [5, 5.6], [10, 6.8], [15, 8.2], [20, 10], [25, 12.2], [30, 15.2], [33, 17.6], [35, 20], [38, 24.5], [40, 30], [42, 38], [44, 48], [45, 55], [45.6, 60]], "#1971c2");
+    s += T(X(45.6), 14, "A", { size: 14 }) + T(X(60) + 12, Y(55) + 5, "B", { size: 14 }) + T(X(60) + 12, Y(40) + 5, "C", { size: 14 });
+    s += T(14, 120, "溶", { size: 12 }) + T(14, 136, "解", { size: 12 }) + T(14, 152, "度", { size: 12 }) + T(14, 168, "(g)", { size: 10, w: "normal" });
+    s += T(X(30), 296, "温度（℃）", { size: 12 });
+    return svg(345, 302, s);
+  })(),
+
+  c23_bar: svg(340, 110,
+    `<rect x="20" y="42" width="60" height="28" fill="#dee2e6" stroke="#555"/><rect x="80" y="42" width="240" height="28" fill="#a5d8ff" stroke="#555"/>`
+    + T(50, 61, "食塩", { size: 13 }) + T(200, 61, "水", { size: 13 })
+    + T(50, 32, "20%", { size: 13 }) + T(200, 32, "80%", { size: 13 })
+    + T(50, 92, "？g", { size: 13 }) + T(200, 92, "400g", { size: 13 })),
+
+  c23_tenbin4: svg(340, 170,
+    L(40, 50, 300, 50, "#555", 4) + `<polygon points="92,52 81,70 103,70" fill="#ffe066" stroke="#555"/>`
+    + T(40, 36, "0%", { size: 14 }) + T(92, 36, "20%", { size: 14 }) + T(300, 36, "100%", { size: 14 })
+    + L(40, 50, 40, 108, "#555") + L(300, 50, 300, 108, "#555")
+    + `<ellipse cx="40" cy="124" rx="28" ry="16" fill="#a5d8ff" stroke="#555"/><ellipse cx="300" cy="124" rx="28" ry="16" fill="#fff" stroke="#555"/>`
+    + T(40, 129, "400g", { size: 12 }) + T(300, 129, "？g", { size: 12 })
+    + `<path d="M42 58 Q66 76 90 58" fill="none" stroke="#555" stroke-dasharray="4 3"/><path d="M94 58 Q196 96 298 58" fill="none" stroke="#555" stroke-dasharray="4 3"/>`
+    + T(66, 90, "20", { size: 12 }) + T(196, 98, "80", { size: 12 })
+    + T(170, 160, "水は0%、食塩は100%と考える", { size: 11, w: "normal" })),
+
+  c23_tenbin5: svg(340, 170,
+    L(40, 50, 300, 50, "#555", 4) + `<polygon points="127,52 116,70 138,70" fill="#ffe066" stroke="#555"/>`
+    + T(40, 36, "5%", { size: 14 }) + T(127, 36, "？%", { size: 14 }) + T(300, 36, "20%", { size: 14 })
+    + L(40, 50, 40, 108, "#555") + L(300, 50, 300, 108, "#555")
+    + `<ellipse cx="40" cy="124" rx="28" ry="16" fill="#a5d8ff" stroke="#555"/><ellipse cx="300" cy="124" rx="28" ry="16" fill="#a5d8ff" stroke="#555"/>`
+    + T(40, 129, "200g", { size: 12 }) + T(300, 129, "100g", { size: 12 })
+    + `<path d="M42 58 Q84 82 125 58" fill="none" stroke="#555" stroke-dasharray="4 3"/><path d="M129 58 Q214 94 298 58" fill="none" stroke="#555" stroke-dasharray="4 3"/>`
+    + T(84, 92, "ア", { size: 14 }) + T(214, 98, "イ", { size: 14 })),
 };
 
 // ===== カードデータ =====
@@ -1715,6 +2082,787 @@ const ERAS = [
           { f: "dial12", q: "3月1日20時に星Aがアにあった。3月1日中に星Aがオの位置にあるのは何時？", a: "4時", n: "ア→オは時計回りに240度＝16時間前。20−16＝4時。" },
           { f: "dial12", q: "3月1日20時に星Aがアにあった。1月1日20時にはどの位置？", a: "サ", n: "2か月前なので時計回りに60度。" },
           { f: "dial12", q: "3月1日20時に星Aがアにあった。4月1日18時にはどの位置？", a: "ア", n: "1か月後で＋30度、2時間前で−30度。差し引き0。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no15",
+    no: "No.15",
+    name: "💡 No.15 光の性質とはたらき",
+    source: "要点 p.28〜37",
+    decks: [
+      {
+        id: "s1", no: 1, title: "光の進み方", page: "p.28〜29",
+        cards: [
+          { q: "光は真空中で1秒に約何km進む？", a: "約30万km", n: "1秒で地球を約7周半する速さ。" },
+          { q: "光の速さは、1秒で地球を約何周する速さ？", a: "約7周半", n: "1秒で約30万km進む。" },
+          { q: "光は同じ物質の中を通るとき、どのように進む？", a: "直進する", r: "ちょくしん", n: "まっすぐ進むこと。" },
+          { q: "日光（太陽光線）は、どんな光線？", a: "平行光線", r: "へいこうこうせん", n: "太陽が遠いところにあるから。" },
+          { q: "日光が平行光線になるのはなぜ？", a: "太陽が遠いところにあるから", n: "" },
+          { f: "c15_sunshadow", q: "日光で球のかげをスクリーンにうつすと、円形のかげの直径は球の直径と比べてどうなる？", a: "球の直径と同じ", n: "日光は平行光線なので、かげは広がらない。" },
+          { q: "点光源の光は広がって進む。このような光線を何という？", a: "拡散光線", r: "かくさんこうせん", n: "日光は平行光線、点光源の光は拡散光線。" },
+          { f: "c15_pointshadow", q: "点光源で球のかげをスクリーンにうつすと、円形のかげの直径は球の直径と比べてどうなる？", a: "球の直径より大きい", n: "点光源の光は広がって進むから。" },
+          { f: "c15_box1", q: "日光を暗箱の小さな穴から入れ、A〜Dにスクリーンを立てると、明るい光の円の大きさと明るさはどうなる？", a: "大きさも明るさもすべて同じ", long: true, n: "日光は平行光線なので、光のすじは広がらない。" },
+          { f: "c15_box2", q: "点光源の光を暗箱の小さな穴から入れたとき、穴に近いほど、光の円の大きさと明るさはどうなる？", a: "小さく、明るくなる", n: "光が広がって進むから。" },
+          { f: "c15_box2", q: "点光源の光を暗箱の小さな穴から入れたとき、穴から遠いほど、光の円の大きさと明るさはどうなる？", a: "大きく、暗くなる", n: "同じ量の光が広いところに広がるので暗くなる。" },
+          { f: "c15_box2", q: "点光源のとき、A〜Dのうち光の円がいちばん明るいのはどこ？", a: "A", n: "穴に近いほど光の円が小さく、明るい。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "ピンホールカメラ", page: "p.30",
+        cards: [
+          { q: "ピンホールカメラは、日本語で何という？", a: "針穴写真機", r: "はりあなしゃしんき", n: "光の直進を利用したカメラ。" },
+          { q: "ピンホールカメラのスクリーンには、何という紙を使う？", a: "トレーシングペーパー", n: "うすくて光を通す紙。" },
+          { q: "ピンホールカメラのスクリーンにうつるものを何という？", a: "像", r: "ぞう", n: "" },
+          { q: "ピンホールカメラの内筒を前後に動かすと、何が変化する？", a: "スクリーンにうつる像の大きさ", r: "うちづつ", n: "外筒（そとづつ）の中で内筒を動かす。" },
+          { f: "c15_pinhole", q: "ピンホールカメラの像は、物体と比べて向きがどうなる？", a: "上下左右がさかさま", n: "光が穴を通って直進し、交差するから。" },
+          { q: "ピンホールカメラで「ア」の字を見ると、像はどう見える？", a: "上下左右が逆の「ア」（180度回した形）", long: true, n: "上下も左右もさかさまになる。" },
+          { f: "c15_pinhole", q: "穴とスクリーンの間を長くする（A→B）と、像の大きさはどうなる？", a: "大きくなる", n: "" },
+          { f: "c15_pinhole", q: "穴とスクリーンの間を長くする（A→B）と、像の明るさはどうなる？", a: "暗くなる", n: "同じ量の光が大きな像に広がるから。" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "光の反射", page: "p.31",
+        cards: [
+          { f: "c15_reflect", q: "アの点線のように、面（鏡）に垂直におろした線を何という？", a: "法線", r: "ほうせん", n: "角度は法線からはかる。" },
+          { f: "c15_reflect", q: "図のAの角を何という？", a: "入射角", r: "にゅうしゃかく", n: "入射光と法線の間の角。" },
+          { f: "c15_reflect", q: "図のBの角を何という？", a: "反射角", r: "はんしゃかく", n: "反射光と法線の間の角。" },
+          { q: "光の反射の法則とは？", a: "入射角＝反射角", n: "入射角と反射角は等しい。" },
+          { q: "鏡に入る光を入射光という。鏡ではね返った光を何という？", a: "反射光", r: "はんしゃこう", n: "" },
+          { q: "入射角が40度のとき、反射角は何度？", a: "40度", n: "反射の法則より、入射角＝反射角。" },
+          { q: "でこぼこした面に入った光が、あらゆる向きに反射することを何という？", a: "乱反射", r: "らんはんしゃ", n: "ものの表面がでこぼこしているから起こる。" },
+          { q: "乱反射のとき、1本1本の光は何にしたがって反射している？", a: "反射の法則", n: "1本ずつ見ると、入射角＝反射角になっている。" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "平面鏡", page: "p.32〜33",
+        cards: [
+          { q: "鏡にうつる物体の像は、どこにできる？", a: "鏡に対して物体と対称な位置", r: "たいしょう", n: "物体から鏡までと、鏡から像までのきょりは同じ。" },
+          { f: "c15_mirror1", q: "アのように、像が鏡にうつっているところ（光が鏡で反射する点）を何という？", a: "反射点", r: "はんしゃてん", n: "像と目を結んだ直線と鏡が交わる点。" },
+          { q: "平面鏡の作図のしかたを、順に3つ答えよ。", a: "①物体と対称な位置に像をかく\n②像と目を直線で結ぶ\n③反射点と物体を直線で結ぶ", long: true, n: "②で、鏡の中の線は点線でかく。" },
+          { q: "平面鏡の作図で、鏡の中（鏡のおく）の線はどうかく？", a: "点線でかく", n: "実際に光が通っていないから。" },
+          { q: "自分の全身を見るために必要な鏡の長さは？", a: "身長の半分以上", n: "" },
+          { q: "身長140cmの人が全身を見るには、鏡の長さは何cm以上あればよい？", a: "70cm", n: "身長の半分。140÷2＝70" },
+          { q: "鏡の像は、左右がどうなる？", a: "左右が逆になる", r: "ぎゃく", n: "" },
+          { q: "鏡にうつる像の数を作図で調べるとき、まずかく線は？", a: "鏡を延長した線", r: "えんちょう", n: "次にその線に対して対称な位置に像をかく。" },
+          { q: "鏡にうつる像の作図で、鏡を見るヒト（X）から、鏡のどこに向けて直線を引く？", a: "鏡の両端", r: "りょうたん", n: "2本の直線の間が、Xが見ることができる範囲。" },
+          { q: "自分のすがたを鏡で見ることができないのは、どんな場合？", a: "自分と自分の像を線で結んだとき、反射点が鏡の中にない場合", long: true, n: "" },
+          { q: "鏡の中の像を見ることができるのは、どんな場合？", a: "自分と鏡の両端を結んだ範囲の中に像が入っている場合", long: true, n: "" },
+          { f: "c15_grid", q: "A〜Dのうち、自分のすがたを鏡で見ることができないのはどれ？", a: "AとD", n: "AとDは、自分と自分の像を結んだ線が鏡を通らない。" },
+          { f: "c15_grid", q: "Xが鏡を見たとき、A〜Dのうちどれの像が見られる？", a: "BとC", n: "Xと鏡の両端を結んだ範囲に、BとCの像が入る。" },
+        ]
+      },
+      {
+        id: "s5", no: 5, title: "光の屈折", page: "p.34〜36",
+        cards: [
+          { q: "光がある物質の中から別の物質の中へ進むとき、その境界面で折れ曲がることを何という？", a: "光の屈折", r: "くっせつ", n: "" },
+          { q: "2つの物質のさかいの面を何という？", a: "境界面", r: "きょうかいめん", n: "" },
+          { q: "境界面に垂直に入った光は、どう進む？", a: "そのまま直進する", r: "すいちょく", n: "折れ曲がらない。" },
+          { q: "境界面にななめに入った光は、どう進む？", a: "境目で折れ曲がって進む", n: "空気と水の境目などで折れ曲がる。" },
+          { f: "c15_refract", q: "図のAの角を何という？", a: "入射角", r: "にゅうしゃかく", n: "入射光と法線の間の角。" },
+          { f: "c15_refract", q: "図のBの角を何という？", a: "屈折角", r: "くっせつかく", n: "屈折した光と法線の間の角。" },
+          { f: "c15_refract", q: "光が空気から水へななめに入るとき、屈折角は入射角と比べてどうなる？", a: "入射角より小さい", n: "光は法線に近づくように折れ曲がる（テキストの図より）。" },
+          { q: "光が水から空気へななめに出るとき、屈折角は入射角と比べてどうなる？", a: "入射角より大きい", n: "光は法線から遠ざかるように折れ曲がる（テキストの図より）。" },
+          { q: "カップの底の10円玉が見えない位置で、カップに水を入れるとどうなる？", a: "10円玉がうき上がって見える", n: "水面で光が屈折するから。" },
+          { q: "板ガラスを通りぬけて出て行く光は、板ガラスを通る前の光とどんな向きになる？", a: "平行になる", r: "へいこう", n: "入るときと出るときに1回ずつ屈折する。" },
+          { q: "板ガラスのおくにある物体を見るとどう見える？", a: "ずれて見える", n: "光が屈折するから。" },
+          { q: "プリズムに白色の光を通すと、どう見える？", a: "色が分かれて見える", n: "にじのような色のならびになる。" },
+          { q: "プリズムで白色の光の色が分かれて見えるのはなぜ？", a: "光の色によって、ガラスで屈折する角度がちがうから", long: true, n: "" },
+          { q: "とつレンズ（凸レンズ）は、どんなものに使われている？", a: "虫めがね・遠視用のめがね", r: "えんし", n: "" },
+          { f: "c15_lens", q: "とつレンズの軸に平行に進む光が1点に集まる点（ア）を何という？", a: "焦点", r: "しょうてん", n: "" },
+          { f: "c15_lens", q: "図で、とつレンズから焦点までは何cm？", a: "30cm", n: "15cm＋15cm＝30cm" },
+          { f: "c15_lens", q: "②（焦点の位置）にスクリーンを立てると、どううつる？", a: "明るい小さな点になる", n: "光が1点に集まる。" },
+          { f: "c15_lens", q: "①と③のスクリーンでは、どちらの光の円が明るい？", a: "③", n: "③のほうが光の円が小さいので明るい。" },
+          { q: "とつレンズで光を集めるしくみを利用した、よく知られている実験は？", a: "日光を虫めがねで集めて紙をこがす", long: true, n: "焦点に光が集まって熱くなる。" },
+        ]
+      },
+      {
+        id: "s6", no: 6, title: "光の3原色", page: "p.36",
+        cards: [
+          { q: "光の3原色は、何色と何色と何色？", a: "赤色・青色・緑色", r: "さんげんしょく", n: "重ね合わせるとさまざまな色の光がつくれる。" },
+          { q: "光の3原色の光を重ね合わせると、どうなる？", a: "さまざまな色の光をつくることができる", long: true, n: "" },
+          { q: "赤・緑・青の3色の光をすべて重ねると、何色になる？", a: "白色", n: "テキストの写真の中央。" },
+          { q: "赤と緑の光を重ねると、何色になる？", a: "黄色", n: "テキストの写真より。" },
+          { q: "緑と青の光を重ねると、何色になる？", a: "水色", n: "テキストの写真より。" },
+          { q: "赤と青の光を重ねると、何色になる？", a: "赤むらさき色", n: "テキストの写真より。" },
+        ]
+      },
+      {
+        id: "s7", no: 7, title: "鏡の回転（発展）", page: "p.37",
+        cards: [
+          { f: "c15_rot1", q: "図1で、光と鏡のなす角は60°。入射角は何度？", a: "30度", n: "入射角は法線との角。90−60＝30" },
+          { q: "図1（入射角30度）の鏡を20度回転させると、入射角は何度になる？", a: "50度", n: "30＋20＝50" },
+          { q: "鏡を20度回転させると、入射角は回転させる前と比べて何度大きくなる？", a: "20度", n: "" },
+          { q: "鏡を20度回転させると、反射角は回転させる前と比べて何度大きくなる？", a: "20度", n: "入射角＝反射角なので、反射角も同じだけ大きくなる。" },
+          { q: "鏡を20度回転させると、反射光Qは元の反射光Pと比べて何度ずれる？", a: "40度", n: "入射角も反射角も20度ずつ大きくなるので、20×2＝40" },
+          { q: "鏡が①度回転すると、反射光は何度ずれる？", a: "②度（2倍）", n: "鏡の回転角の2倍ずれる。" },
+          { q: "鏡を15度回転させると、反射光は何度ずれる？", a: "30度", n: "15×2＝30" },
+        ]
+      },
+      {
+        id: "s8", no: 8, title: "とつレンズによる光の進み方（発展）", page: "p.37",
+        cards: [
+          { f: "c15_lensimg", q: "とつレンズの軸と平行に進む光は、レンズを通ったあとどこを通る？", a: "焦点（ア）", r: "しょうてん", n: "" },
+          { f: "c15_lensimg", q: "とつレンズの中心Oを通る光は、どう進む？", a: "そのまま直進する", n: "" },
+          { f: "c15_lensimg", q: "とつレンズでできる像は、どこにできる？", a: "軸に平行な光と中心を通る光が交わるところ", long: true, n: "2本の光が交わる点に像ができる。" },
+          { q: "物体が焦点より遠くにあるとき、とつレンズでスクリーンにできる像の向きは？", a: "上下左右が逆（さかさま）", n: "テキストの図では、像はさかさまにできている。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no16",
+    no: "No.16",
+    name: "🔔 No.16 音の性質とはたらき",
+    source: "要点 p.38〜45",
+    decks: [
+      {
+        id: "s1", no: 1, title: "音と振動", page: "p.38〜40",
+        cards: [
+          { q: "音を出すもののことを何という？", a: "発音体（音源）", r: "はつおんたい（おんげん）", n: "たいこ・スピーカー・人ののどなど。" },
+          { q: "音を出しているものは、どうなっている？", a: "ふるえている（振動している）", r: "しんどう", n: "声を出しながらのどに手を当てると、ふるえているのがわかる。" },
+          { q: "音は、何がなければ伝わらない？", a: "音を伝えるもの（振動するもの）", long: true, n: "例：空気・水・鉄など。" },
+          { q: "音を伝えるものの例を3つ答えよう。", a: "空気・水・鉄など", n: "気体・液体・固体のどれでも音を伝える。" },
+          { q: "耳の中にある、ふるえて音を聞こえさせるうすいまくを何という？", a: "鼓膜", r: "こまく", n: "空気の振動が伝わって鼓膜が振動し、音が聞こえる。" },
+          { q: "音が聞こえるまでの順番。発音体→（　）→耳。（　）に入るのは？", a: "音を伝えるもの（空気など）", long: true, n: "発音体の振動が空気を伝わり、耳の鼓膜をふるわせる。" },
+          { q: "振動が次々と伝わる現象を何という？", a: "波", r: "なみ", n: "音の波のことを音波という。" },
+          { q: "音は発音体（音源）を中心にして、どのように広がる？", a: "四方八方に広がる", r: "しほうはっぽう", n: "" },
+          { f: "c16_buzzer", q: "①空気中でブザーを鳴らすと、音は聞こえる？聞こえない？", a: "聞こえる", n: "空気が音を伝える。" },
+          { f: "c16_buzzer", q: "②水中でブザーを鳴らすと、耳に音は聞こえる？聞こえない？", a: "聞こえる", n: "水（液体）も音を伝える。" },
+          { f: "c16_buzzer", q: "③ほぼ真空の中でブザーを鳴らすと、音は聞こえる？聞こえない？", a: "聞こえない", n: "真空には音を伝えるもの（空気）がないから。" },
+          { q: "音は気体・液体・固体のうち、どの中を伝わる？", a: "気体・液体・固体のすべて", n: "空気（気体）だけでなく、水（液体）や鉄（固体）の中も伝わる。" },
+          { q: "真空鈴の実験で、丸底フラスコの水をふっとうさせるのはなぜ？", a: "水蒸気でフラスコの中の空気をおい出すため", r: "すいじょうき", long: true, n: "フラスコの中を水蒸気でいっぱいにして、空気を外へおし出す。" },
+          { q: "真空鈴の実験で、火を消したあとすぐにピンチコックでゴム管を閉じるのはなぜ？", a: "フラスコ内に空気が入ってこないようにするため", long: true, n: "冷えると水蒸気が水にもどり、中がほぼ真空になる。" },
+          { q: "真空鈴の実験。フラスコが冷えたあとにふると、鈴の音はどうなる？", a: "ほとんど聞こえなくなる", n: "フラスコの中がほぼ真空になったから。" },
+          { q: "真空鈴の実験。ピンチコックを開いて空気を入れてからふると、鈴の音はどうなる？", a: "再び聞こえるようになる", r: "ふたたび", n: "空気が音を伝えるから。" },
+          { q: "鈴の音が聞こえるとき・聞こえないとき、フラスコ内に空気はある？ない？", a: "聞こえるとき…ある・聞こえないとき…ない", long: true, n: "" },
+          { q: "真空鈴の実験からわかること。空気のはたらきによって何が伝わっている？", a: "音", n: "空気がないと音は伝わらない。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "音の速さ", page: "p.41",
+        cards: [
+          { q: "空気中で音が伝わる速さは、秒速約何m？", a: "秒速340m", n: "水中や固体中では、もっと速く伝わる。" },
+          { q: "音が速く伝わるのは、空気中と水中・固体中のどちら？", a: "水中・固体中", n: "空気中より水中や固体中のほうが速い。" },
+          { q: "「秒速」とはどんな速さ？", a: "1秒間に進む道のりで表した速さ", long: true, n: "" },
+          { q: "音の速さは、何によって少し変化する？", a: "気温", n: "例：0℃で秒速331m、15℃で秒速340m。" },
+          { q: "気温0℃のときと15℃のとき、音の速さはそれぞれ秒速何m？", a: "0℃…秒速331m・15℃…秒速340m", long: true, n: "気温が高いほうが少し速い。" },
+          { q: "音と風の向きが同じ（追い風・風速5m）とき、音の速さは秒速何m？", a: "秒速345m", n: "340＋5＝345（m）" },
+          { q: "音と風の向きが逆（向かい風・風速5m）のとき、音の速さは秒速何m？", a: "秒速335m", n: "340−5＝335（m）" },
+          { q: "救急車（秒速20m）が走りながら音を出すとき、前と後ろに進む音の速さは？", a: "どちらも秒速340m", long: true, n: "発音体が動いても、音の速さは変わらない。" },
+          { q: "音の速さに、風速・発音体の速さは影響する？", a: "風速は影響する・発音体の速さは影響しない", r: "えいきょう", long: true, n: "" },
+          { q: "【練習】追い風（風速3m）のとき、音の速さは秒速何m？（無風で秒速340m）", a: "秒速343m", n: "340＋3＝343（m）" },
+          { q: "【練習】向かい風（風速10m）のとき、音の速さは秒速何m？（無風で秒速340m）", a: "秒速330m", n: "340−10＝330（m）" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "音の性質", page: "p.42",
+        cards: [
+          { q: "音がものの表面に当たってはね返ることを何という？", a: "音の反射", r: "はんしゃ", n: "光と同じように反射の法則が成り立つ。" },
+          { q: "音の反射でも成り立つ「反射の法則」とは？", a: "入射角＝反射角", r: "にゅうしゃかく・はんしゃかく", n: "光の反射と同じ。" },
+          { f: "c16_reflect", q: "図のアの角を何という？", a: "入射角", r: "にゅうしゃかく", n: "ウ（法線）と入ってくる音の間の角。" },
+          { f: "c16_reflect", q: "図のイの角を何という？", a: "反射角", r: "はんしゃかく", n: "アとイの大きさは等しい。" },
+          { f: "c16_reflect", q: "図のウの、面に垂直な点線を何という？", a: "法線", r: "ほうせん", n: "" },
+          { q: "音がものに当たったとき、エネルギーの一部が吸収されて音が小さくなることを何という？", a: "音の吸収", r: "きゅうしゅう", long: true, n: "" },
+          { q: "音を吸収しやすいのは、どんなもの？", a: "やわらかいもの（布やスポンジなど）", r: "ぬの", long: true, n: "かたいもの（コンクリートなど）は音を反射しやすい。" },
+          { q: "発音体から遠くなるほど音が小さくなることを何という？", a: "音の減衰", r: "げんすい", n: "音が四方八方に広がるために起こる。" },
+          { q: "音の減衰が起こるのはなぜ？", a: "音が発音体を中心に四方八方に広がるから", long: true, n: "" },
+          { q: "同じ高さの音を出す音さA・Bを並べ、Aだけをたたくと、Bはどうなる？", a: "Bの音さも鳴り始める", n: "これを共鳴という。" },
+          { q: "一方の音さをたたくと、もう一方の音さも鳴り始める現象を何という？", a: "共鳴", r: "きょうめい", n: "同じ高さの音を出す音さどうしで起こる。" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "モノコードの実験", page: "p.43〜44",
+        cards: [
+          { q: "モノコードで、ことじを動かすと何が変わる？", a: "弦の長さ", r: "げん", n: "" },
+          { q: "モノコードで、おもりの重さを変えると何が変わる？", a: "弦を張る強さ", r: "げん・はる", n: "おもりを重くすると強く張れる。" },
+          { q: "弦の振れはばのことを何という？", a: "振幅", r: "しんぷく", n: "" },
+          { f: "c16_amp", q: "AとBで、音が大きいのはどちら？", a: "A", n: "強くはじくと振幅が大きくなる。" },
+          { q: "振幅が大きいほど、音はどうなる？", a: "大きくなる", n: "弦を強くはじくと振幅が大きくなり、音が大きくなる。" },
+          { f: "c16_len", q: "CとDで、音が高いのはどちら？", a: "D", n: "弦が短いほうが高い音が出る。" },
+          { q: "弦の長さが長いほど・短いほど、どちらで音が高くなる？", a: "短いほど", n: "" },
+          { f: "c16_thick", q: "EとFで、音が高いのはどちら？", a: "F", n: "弦が細いほうが高い音が出る。" },
+          { q: "弦の太さが太いほど・細いほど、どちらで音が高くなる？", a: "細いほど", n: "" },
+          { f: "c16_tension", q: "GとHで、音が高いのはどちら？", a: "H", n: "おもりが重いほど弦を強く張れる。" },
+          { q: "弦を張る強さが強いほど・弱いほど、どちらで音が高くなる？", a: "強いほど", n: "" },
+          { q: "高い音を出すには、弦をどうすればよい？（3つ）", a: "短くする・細くする・強く張る", long: true, n: "強く張る＝おもりを重くする。", g: "高い音は「みじかく・ほそく・つよく」" },
+          { q: "弦の長さ・太さ・張る強さは、音の高さと大きさのどちらに関係する？", a: "音の高さ", n: "音の大きさは、はじく強さ（振幅）に関係する。" },
+        ]
+      },
+      {
+        id: "s5", no: 5, title: "振動", page: "p.45",
+        cards: [
+          { q: "1秒間に弦が振動する回数のことを何という？", a: "振動数", r: "しんどうすう", n: "" },
+          { q: "振動数の単位は？", a: "ヘルツ（Hz）", n: "" },
+          { q: "1回の振動とは、どんな動き？", a: "1往復の動き", r: "おうふく", n: "行って帰ってきて1回と数える。" },
+          { q: "振動数が多いほど、音はどうなる？", a: "高くなる", n: "振動数が少ないと低い音になる。" },
+          { q: "音の振動のようすを、波の形で見ることができる装置を何という？", a: "オシロスコープ", n: "" },
+          { f: "c16_osc", q: "アは元の音と比べて、波の何が変わった？音はどうなった？", a: "振幅が小さくなった・音が小さくなった", long: true, n: "山の数（振動数）は同じで、波の高さだけが低い。" },
+          { f: "c16_osc", q: "イは元の音と比べて、波の何が変わった？音はどうなった？", a: "振動数が少なくなった・音が低くなった", long: true, n: "波の高さ（振幅）は同じで、山の数が少ない。" },
+          { q: "同じ高さ・大きさの音でも、楽器によって聞こえ方がちがう。このちがいを何という？", a: "音色のちがい", r: "ねいろ", long: true, n: "オシロスコープで見ると、波の形のちがいとして表される。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no17",
+    no: "No.17",
+    name: "🔥 No.17 熱の性質とはたらき",
+    source: "要点 p.46〜53",
+    decks: [
+      {
+        id: "s1", no: 1, title: "熱のはたらき", page: "p.46〜47",
+        cards: [
+          { q: "ものに熱を加えると温度はどうなる？ものから熱をうばうと？", a: "加える…上がる・うばう…下がる", long: true, n: "" },
+          { q: "ものをあたためると、ふくらんで体積が増えること。これを何という？", a: "膨張", r: "ぼうちょう", n: "" },
+          { q: "ものを冷やすと、ちぢんで体積が減ること。これを何という？", a: "収縮", r: "しゅうしゅく", n: "" },
+          { q: "水は例外で、何℃のときに体積が最も小さくなる？", a: "4℃", n: "水は4℃のときがいちばん体積が小さい。" },
+          { q: "あたためたり冷やしたりすると変化する、ものの3つの状態は？", a: "固体・液体・気体", r: "こたい・えきたい・きたい", n: "このような変化を状態変化という。" },
+          { q: "ものの状態が、固体・液体・気体の間で変わることを何という？", a: "状態変化", r: "じょうたいへんか", n: "あたためたり冷やしたりすると起こる。" },
+          { f: "c17_state", q: "Aの変化（固体→液体）を何という？", a: "融解", r: "ゆうかい", n: "あたためたときの変化。" },
+          { f: "c17_state", q: "Bの変化（液体→固体）を何という？", a: "凝固", r: "ぎょうこ", n: "冷やしたときの変化。" },
+          { f: "c17_state", q: "Cの変化（液体→気体）を何という？", a: "気化", r: "きか", n: "あたためたときの変化。蒸発やふっとうで起こる。" },
+          { f: "c17_state", q: "Dの変化（気体→液体）を何という？", a: "凝縮", r: "ぎょうしゅく", n: "冷やしたときの変化。" },
+          { f: "c17_state", q: "Eの変化（固体→気体）を何という？", a: "昇華", r: "しょうか", n: "液体にならずに、そのまま気体になる。" },
+          { f: "c17_state", q: "Fの変化（気体→固体）を何という？", a: "凝華", r: "ぎょうか", n: "冷やしたときの変化。" },
+          { f: "c17_state", q: "A〜Fのうち、あたためたときの変化をすべて答えよう。", a: "A・C・E", n: "B・D・Fは冷やしたときの変化。" },
+          { q: "昇華するものの例。あたためると液体にならずにそのまま二酸化炭素（気体）になるものは？", a: "ドライアイス", long: true, n: "" },
+          { q: "やかんの口から出る「湯気」は、固体・液体・気体のどれ？", a: "液体", r: "ゆげ", n: "水蒸気が冷やされて、小さな水のつぶになったもの。" },
+          { q: "やかんの口のすぐ近くの、目に見えない「水蒸気」は、固体・液体・気体のどれ？", a: "気体", r: "すいじょうき", n: "水蒸気は目に見えない。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "氷の加熱実験", page: "p.48",
+        cards: [
+          { f: "c17_graph", q: "−20℃の氷40gを加熱したグラフ。Aの温度は何℃？", a: "0℃", n: "氷がとけ始める温度（水の融点）。" },
+          { f: "c17_graph", q: "−20℃の氷40gを加熱したグラフ。Bの温度は何℃？", a: "100℃", n: "水のふっとうが始まる温度（水のふっ点）。" },
+          { f: "c17_graph", q: "0〜1分の間、水はどんな状態？", a: "氷（固体）", n: "" },
+          { f: "c17_graph", q: "1〜9分の間、水はどんな状態？", a: "氷と水（固体と液体）", n: "氷がとけている間、温度は0℃のまま変わらない。" },
+          { f: "c17_graph", q: "9〜19分の間、水はどんな状態？", a: "水（液体）", n: "" },
+          { f: "c17_graph", q: "19分以後、水はどんな状態？", a: "水と水蒸気（液体と気体）", n: "ふっとうしている間、温度は100℃のまま変わらない。" },
+          { q: "氷がとけている間、温度はどうなる？", a: "0℃のまま変わらない", n: "加えた熱は氷をとかすのに使われる。" },
+          { q: "氷40gの温度を20℃上げる（−20℃→0℃）のに必要な時間は？", a: "1分", n: "グラフの0〜1分。" },
+          { q: "水40gの温度を100℃上げる（0℃→100℃）のに必要な時間は？", a: "10分", n: "19−9＝10（分）" },
+          { q: "水40gの温度を20℃上げるのに必要な時間は？", a: "2分", n: "100℃で10分なので、10÷5＝2（分）" },
+          { q: "氷と水を比べると、氷のほうが何倍あたたまりやすい？", a: "2倍", n: "20℃上げるのに、氷は1分、水は2分。2÷1＝2（倍）" },
+          { q: "【練習】このグラフと同じ火で、水40gの温度を30℃上げるのに必要な時間は？", a: "3分", n: "10℃上げるのに1分かかる。30÷10＝3（分）" },
+          { q: "【練習】このグラフで、氷がすべてとけるまでに、とけ始めてから何分かかった？", a: "8分", n: "9−1＝8（分）" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "状態変化する温度", page: "p.49",
+        cards: [
+          { q: "固体がとけて液体に変化する温度を何という？", a: "融点", r: "ゆうてん", n: "" },
+          { q: "液体がふっとうして気体に変化する温度を何という？", a: "ふっ点", r: "ふってん", n: "" },
+          { q: "水の融点とふっ点は何℃？", a: "融点0℃・ふっ点100℃", n: "" },
+          { q: "エタノールの融点とふっ点は何℃？", a: "融点−115℃・ふっ点78℃", n: "水よりも低い温度でふっとうする。" },
+          { q: "酸素の融点とふっ点は何℃？", a: "融点−219℃・ふっ点−183℃", r: "さんそ", n: "ふだんの温度では気体。" },
+          { q: "鉄の融点とふっ点は何℃？", a: "融点1538℃・ふっ点2862℃", n: "ふだんの温度では固体。" },
+          { q: "−100℃のとき、水とエタノールはそれぞれ固体・液体・気体のどれ？", a: "水…固体・エタノール…液体", long: true, n: "エタノールの融点は−115℃なので、−100℃では液体。" },
+          { q: "90℃のとき、水とエタノールはそれぞれ固体・液体・気体のどれ？", a: "水…液体・エタノール…気体", long: true, n: "エタノールのふっ点は78℃なので、90℃では気体。" },
+          { q: "液体をふっとうさせ、出てきた蒸気を冷やして再び液体にして集める方法を何という？", a: "蒸留", r: "じょうりゅう", long: true, n: "この方法で混合物を分けることができる。" },
+          { q: "水とエタノールの混合物を加熱すると、先にふっとうするのはどちら？", a: "エタノール", n: "ふっ点が低いから。蒸気にはほとんどエタノールだけがふくまれる。" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "熱の伝わり方", page: "p.50〜52",
+        cards: [
+          { q: "固体中や、直接ふれあっているものどうしの間での熱の伝わり方を何という？", a: "伝導", r: "でんどう", long: true, n: "" },
+          { q: "熱は、温度がどちらからどちらへ伝わる？", a: "温度の高いほうから低いほうへ", n: "" },
+          { q: "伝導の例。やかんの取っ手は何でできている？", a: "プラスチック", n: "熱が伝わりにくいので、熱くならない。" },
+          { q: "銀・銅・金・アルミニウム・鉄を、熱が伝わりやすい順に並べよう。", a: "銀＞銅＞金＞アルミニウム＞鉄", long: true, n: "銀がいちばん伝わりやすく、鉄がいちばん伝わりにくい。" },
+          { q: "銀・銅・金・アルミニウム・鉄のうち、熱がいちばん伝わりやすい金属は？", a: "銀", n: "" },
+          { q: "金属・ガラス・木を、熱が伝わりやすい順に並べよう。", a: "金属＞ガラス＞木", n: "" },
+          { q: "金属・水・空気を、熱が伝わりやすい順に並べよう。", a: "金属＞水＞空気", n: "" },
+          { q: "ろうをぬった金属板の一部を熱すると、ろうはどんな順にとけていく？", a: "熱したところから近い順", long: true, n: "熱は金属板の中を伝わっていく。" },
+          { f: "c17_plate", q: "切れこみのある金属板を熱した。ア・イ・ウのろうがとける順は？", a: "イ→ウ→ア", n: "熱は切れこみを回りこんで伝わる。アは直線では近いが、伝わる道のりは遠い。" },
+          { q: "気体中や液体中で、気体や液体が移動しながら全体に熱が伝わる伝わり方を何という？", a: "対流", r: "たいりゅう", long: true, n: "" },
+          { q: "対流の例。クーラーのふき出し口は、部屋の上と下のどちらにある？", a: "上のほう", n: "冷たい空気は下へ動くので、部屋全体が冷える。" },
+          { f: "c17_conv", q: "Aのように左下を熱すると、水はどのように動く？", a: "左側を上がり→上を右へ→右側を下がり→底を左へもどる", long: true, n: "あたためられた水は上へ動く。" },
+          { f: "c17_conv", q: "Bのように底の真ん中を熱すると、水はどのように動く？", a: "真ん中を上がり→左右に分かれて両側を下がり→底を真ん中へもどる", long: true, n: "" },
+          { f: "c17_conv", q: "Cのように横の真ん中あたりを熱すると、水はどのように動く？", a: "熱したところより上の水だけが回る（右側を上がり→上を左へ→左側を下がる）", long: true, n: "熱したところより下の水はほとんど動かず、なかなかあたたまらない。" },
+          { q: "光（赤外線など）によって熱が伝わる伝わり方を何という？", a: "放射", r: "ほうしゃ", n: "途中の空気などを通りぬけ、光が当たるものに直接熱を伝える。" },
+          { q: "目には見えないが、熱を運ぶ光を何という？", a: "赤外線", r: "せきがいせん", n: "" },
+          { q: "光や熱をよく吸収して、あたたまりやすいのは何色のもの？", a: "黒色", n: "冬には黒っぽい服を着ることが多い。" },
+          { q: "光や熱をよく反射して、あたたまりにくいのは何色のもの？", a: "白色", n: "百葉箱の外側は白くぬられている。" },
+          { q: "熱の伝わり方は？「ストーブに手をかざすと、手がすぐにあたたまる」", a: "放射", r: "ほうしゃ", n: "日かげより日なたのほうがあたたかいのも放射。" },
+          { q: "熱の伝わり方は？「冬に鉄棒をさわると冷たい」", a: "伝導", r: "でんどう", n: "手の熱が鉄棒に伝わっていく。" },
+          { q: "熱の伝わり方は？「みそしるをあたためると、みそが動くのが見られる」", a: "対流", r: "たいりゅう", n: "" },
+        ]
+      },
+      {
+        id: "s5", no: 5, title: "物質をつくるつぶ", page: "p.53",
+        cards: [
+          { f: "c17_particles", q: "ア・イ・ウは、固体・液体・気体のどのつぶのようす？", a: "ア…固体・イ…液体・ウ…気体", long: true, n: "" },
+          { q: "固体のつぶは、どのようになっている？", a: "つぶが規則正しく並んでいる", r: "きそく", n: "" },
+          { q: "液体のつぶは、どのようになっている？", a: "つぶどうしが集まっているが、場所が決まっていない", long: true, n: "だから入れ物によって形が変わる。" },
+          { q: "気体のつぶは、どのようになっている？", a: "つぶはばらばらで、間かくがとても広い", long: true, n: "" },
+          { q: "熱を加えると、つぶの運動はどうなる？", a: "激しくなる", r: "はげしく", n: "" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no18",
+    no: "No.18",
+    name: "🔥 No.18 酸素とその性質",
+    source: "要点 p.54〜59",
+    decks: [
+      {
+        id: "s1", no: 1, title: "酸素のはたらきと性質", page: "p.54〜55",
+        cards: [
+          { q: "酸素が入った集気びんに火のついたろうそくを入れると、どうなる？", a: "大きなほのおを出して、空気中より激しく燃える", long: true, n: "" },
+          { q: "酸素が入った集気びんに熱したスチールウールを入れると、どうなる？", a: "火花を出して、空気中より激しく燃える", long: true, n: "" },
+          { q: "集気びんの中の気体全体は燃えなかった。このことから、酸素自身は燃える？燃えない？", a: "燃えない", n: "酸素は自分は燃えない。" },
+          { q: "酸素がもつ、ものが燃えるのを助けるはたらきを何という？", a: "助燃性", r: "じょねんせい", n: "二酸化炭素には助燃性がない。" },
+          { q: "スチールウールを燃やす実験で、集気びんに水を入れておく理由は？", a: "火花で集気びんがわれるのを防ぐため", long: true, n: "高温の火花や燃えかすが底に落ちても、水があればわれない。" },
+          { q: "酸素の色やにおいは？", a: "色もにおいもない（無色・無臭）", r: "むしょく・むしゅう", n: "" },
+          { q: "酸素は、水にとけやすい？とけにくい？", a: "とけにくい", n: "だから水上置換法で集める。" },
+          { q: "酸素は、空気と比べて重い？軽い？", a: "少し重い（約1.1倍）", n: "" },
+          { q: "空気中に酸素は約何％ふくまれる？", a: "約21％", n: "いちばん多いのはちっ素（約78％）。" },
+          { q: "酸素は、はく息とすう息のどちらに多くふくまれる？", a: "すう息（空気）", n: "呼吸で酸素を取り入れるので、はく息では少なくなる。" },
+          { q: "酸素は、植物が何をしたときに発生する？", a: "光合成", r: "こうごうせい", n: "光合成では二酸化炭素を取り入れて酸素を出す。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "酸素の発生", page: "p.55〜57",
+        cards: [
+          { q: "酸素を発生させるときに使う液体の薬品は？", a: "うすい過酸化水素水", r: "かさんかすいそすい", n: "" },
+          { q: "過酸化水素水のかわりに使ってもよい、消毒薬の名前は？", a: "オキシドール", n: "うすい過酸化水素水のこと。" },
+          { q: "酸素を発生させるときに使う固体の薬品は？", a: "二酸化マンガン", r: "にさんかまんがん", n: "" },
+          { q: "二酸化マンガンは何色？", a: "黒色", n: "" },
+          { f: "c18_apparatus", q: "酸素を発生させる装置。①の器具の名前は？", a: "三角フラスコ", n: "" },
+          { f: "c18_apparatus", q: "酸素を発生させる装置。②の名前は？", a: "ゴム管", n: "" },
+          { f: "c18_apparatus", q: "酸素を発生させる装置。③の器具の名前は？", a: "水そう", n: "" },
+          { f: "c18_apparatus", q: "酸素を発生させる装置。④の器具の名前は？", a: "集気びん", n: "ふたにはガラス板を使う。" },
+          { f: "c18_apparatus", q: "この装置のように、水と置きかえて気体を集める方法を何という？", a: "水上置換法", r: "すいじょうちかんほう", n: "" },
+          { f: "c18_apparatus", q: "Xの部分（ろうとの先）は、三角フラスコの底と口のどちらに近いところにする？", a: "底に近いところ", n: "" },
+          { f: "c18_apparatus", q: "Yの部分（ガラス管の先）は、三角フラスコの底と口のどちらに近いところにする？", a: "口に近いところ", n: "" },
+          { q: "ろうとの先を底近く、ガラス管の先を口近くにする理由は？", a: "液体や気体が正しい向きに流れるようにするため", long: true, n: "ガラス管の先が液に入ると、気体が出ていかず液がおし出されてしまう。" },
+          { q: "出始めの気体を集めない理由は？", a: "三角フラスコの中にあった空気がまざっているから", long: true, n: "" },
+          { q: "集気びんにガラス板でふたをするとき、びんの口にあてるのは、ざらざらの面？つるつるの面？", a: "ざらざらの面", n: "ガラス板がくっついたり、中の気体がもれたりしないようにするため。" },
+          { q: "酸素を発生させる実験中、三角フラスコが熱くなる。なぜ？", a: "熱が発生するから（やけどに注意）", n: "" },
+          { q: "実験後、液体の薬品（過酸化水素水）はどうなっている？", a: "水になっている", n: "過酸化水素が酸素と水に分かれたから。" },
+          { q: "実験後、固体の薬品（二酸化マンガン）はどうなっている？", a: "変化しない（そのまま残る）", n: "" },
+          { q: "酸素が発生するときの言葉の式は？", a: "過酸化水素 → 酸素 ＋ 水", long: true, n: "二酸化マンガンは式に入らない。" },
+          { q: "二酸化マンガンのように、自分は使っても減らず、反応を速めるものを何という？", a: "しょくばい（触媒）", n: "" },
+          { q: "二酸化マンガンを用いないと、酸素の発生はどうなる？", a: "発生に時間がかかる", n: "" },
+          { q: "二酸化マンガンのかわりに使えるものの例は？", a: "レバーやジャガイモ", n: "" },
+          { f: "c18_graph", q: "同じ過酸化水素水に、A・Bで量のちがう二酸化マンガンを加えた。二酸化マンガンの量が多いのはどちら？", a: "A", n: "二酸化マンガンが多いほど反応が速い。" },
+          { f: "c18_graph", q: "このグラフで、最後に発生した酸素の体積は、AとBでどうなっている？", a: "同じになる", n: "酸素の量は過酸化水素水の量で決まる。二酸化マンガンは速さだけを変える。" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "気体の集め方", page: "p.58",
+        cards: [
+          { q: "酸素のように水にとけにくい気体を集める方法は？", a: "水上置換法", r: "すいじょうちかんほう", n: "" },
+          { q: "水上置換法は水と置きかえるので、何の少ない気体を集めることができる？", a: "まじりけ（空気のまざり）", n: "" },
+          { q: "水上置換法は水と置きかえるので、集めた気体の何がわかる？", a: "体積", n: "" },
+          { q: "アンモニアのように、水にとけやすく空気より軽い気体を集める方法は？", a: "上方置換法", r: "じょうほうちかんほう", n: "空気と気体を置きかえる。" },
+          { q: "塩化水素のように、水にとけやすく空気より重い気体を集める方法は？", a: "下方置換法", r: "かほうちかんほう", n: "空気と気体を置きかえる。" },
+          { f: "c18_collect", q: "ア・イ・ウの気体の集め方の名前は？", a: "ア 水上置換法・イ 上方置換法・ウ 下方置換法", long: true, n: "イはびんの口が下、ウはびんの口が上。" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "酸素の発生計算", page: "p.59",
+        cards: [
+          { q: "言葉の式で、矢印の左側の重さの合計と右側の重さの合計はどうなる？", a: "必ず等しくなる", n: "" },
+          { q: "過酸化水素17gから8gの酸素が発生する。このとき発生する水は何g？", a: "9g", n: "17g−8g＝9g" },
+          { q: "過酸化水素17gから酸素8gが発生する。過酸化水素34gからは酸素何g？", a: "16g", n: "34÷17＝2倍。8g×2＝16g" },
+          { q: "過酸化水素34gが反応したとき、発生する水は何g？（17gから水9g）", a: "18g", n: "9g×2＝18g" },
+          { q: "【練習】過酸化水素17gから酸素8g。過酸化水素51gからは酸素何g？", a: "24g", n: "51÷17＝3倍。8g×3＝24g" },
+          { q: "【練習】過酸化水素17gから酸素8g。酸素4gを得るには過酸化水素は何g必要？", a: "8.5g", n: "4÷8＝0.5倍。17g×0.5＝8.5g" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no19",
+    no: "No.19",
+    name: "🫧 No.19 二酸化炭素とその性質",
+    source: "要点 p.60〜65",
+    decks: [
+      {
+        id: "s1", no: 1, title: "二酸化炭素のはたらきと性質", page: "p.60〜61",
+        cards: [
+          { q: "二酸化炭素が入った集気びんに火のついたろうそくを入れると、どうなる？", a: "火はすぐに消える", n: "" },
+          { q: "二酸化炭素自身は燃える？燃えない？", a: "燃えない", n: "" },
+          { q: "二酸化炭素には、酸素のような何という性質がない？", a: "助燃性", r: "じょねんせい", n: "ものが燃えるのを助ける性質がない。" },
+          { q: "酸素の中でろうそくを燃やしたあと、石灰水を入れてよくふるとどうなる？", a: "石灰水が白くにごる", r: "せっかいすい", n: "ろうそくが燃えると二酸化炭素が発生するから。" },
+          { q: "石灰水は、何を水にとかしたもの？", a: "消石灰（水酸化カルシウム）", r: "しょうせっかい", n: "" },
+          { q: "石灰水には、何と反応すると白くにごる性質がある？", a: "二酸化炭素", n: "二酸化炭素があるかどうかを調べるのに使う。" },
+          { q: "二酸化炭素の色やにおいは？", a: "色もにおいもない（無色・無臭）", r: "むしょく・むしゅう", n: "" },
+          { q: "二酸化炭素は、水にとけやすい？とけにくい？", a: "少しとける", n: "水にとけたものを炭酸水という。" },
+          { q: "二酸化炭素は、空気と比べて重い？軽い？", a: "重い（約1.5倍）", n: "" },
+          { q: "空気中に二酸化炭素は約何％ふくまれる？", a: "約0.04％", n: "" },
+          { q: "二酸化炭素は、すう息とはく息のどちらに多くふくまれる？", a: "はく息", n: "" },
+          { q: "二酸化炭素は、何がふくまれるもの（木、アルコール、ろうそくなど）を燃やすと発生する？", a: "炭素", r: "たんそ", n: "" },
+          { q: "大気中の二酸化炭素が年々増加しているのは、何の燃焼によるもの？", a: "化石燃料（石炭・石油・天然ガス）", r: "かせきねんりょう", n: "" },
+          { q: "二酸化炭素の増加は、何の原因になっている？", a: "地球温暖化", r: "ちきゅうおんだんか", n: "" },
+          { q: "大気中の二酸化炭素は、1年のうち夏と冬のどちらに少なくなる？", a: "夏", n: "植物の光合成がさかんな夏に少なく、光合成があまり行われない冬に多くなる。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "二酸化炭素の発生", page: "p.62",
+        cards: [
+          { q: "二酸化炭素を発生させるときに使う液体の薬品は？", a: "塩酸", r: "えんさん", n: "うすい塩酸を使う。" },
+          { q: "塩酸は、何という気体が水にとけたもの？", a: "塩化水素", r: "えんかすいそ", n: "" },
+          { q: "二酸化炭素を発生させるときに使う固体の薬品は、何をふくむもの？", a: "炭酸カルシウム", r: "たんさんかるしうむ", n: "" },
+          { q: "炭酸カルシウムをふくむ固体の例を挙げよう。", a: "石灰石・貝がら・卵のから・大理石 など", long: true, n: "" },
+          { q: "二酸化炭素を発生させる実験装置は、何のときと同じ？", a: "酸素のとき", n: "実験上の注意も酸素のときと同じ。" },
+          { q: "発生した二酸化炭素は、ふつう何という方法で集める？", a: "水上置換法", r: "すいじょうちかんほう", n: "下方置換法で集めることもある。" },
+          { q: "二酸化炭素を下方置換法で集めることもできるのはなぜ？", a: "空気より重いから", n: "" },
+          { q: "実験後、液体の薬品（塩酸）はどうなっている？", a: "別の水溶液（塩化カルシウムをふくむ水溶液）になる", long: true, n: "" },
+          { q: "実験後、固体の薬品（石灰石）はどうなっている？", a: "とけてなくなる", n: "あわ（二酸化炭素）を出してとける。" },
+          { q: "二酸化炭素が発生するときの言葉の式は？", a: "塩酸＋炭酸カルシウム → 二酸化炭素＋塩化カルシウム＋水", long: true, n: "" },
+          { q: "重そうを熱すると、何という気体が発生する？", a: "二酸化炭素", n: "重そうの熱分解という。" },
+          { q: "重そうの別の名前は？", a: "炭酸水素ナトリウム", r: "たんさんすいそなとりうむ", n: "" },
+          { q: "重そうを熱したときの言葉の式は？", a: "炭酸水素ナトリウム → 炭酸ナトリウム＋水＋二酸化炭素", long: true, n: "" },
+          { q: "重そうは、どんなものにふくまれている？", a: "胃薬やふくらし粉（ベーキングパウダー）", long: true, n: "" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "二酸化炭素の発生計算", page: "p.63〜64",
+        cards: [
+          { q: "石灰石1gと塩酸10cm³がちょうど反応し、二酸化炭素が250cm³発生する。塩酸50cm³とちょうど反応する石灰石は何g？", a: "5g", long: true, n: "50÷10＝5倍。1g×5＝5g" },
+          { q: "石灰石1gと塩酸10cm³で二酸化炭素250cm³。塩酸50cm³がちょうど反応すると、二酸化炭素は最大何cm³？", a: "1250cm³", n: "250cm³×5＝1250cm³" },
+          { q: "石灰石1gと塩酸10cm³がちょうど反応する。石灰石8gとちょうど反応する塩酸は何cm³？", a: "80cm³", n: "8÷1＝8倍。10cm³×8＝80cm³" },
+          { q: "石灰石1gで二酸化炭素250cm³。石灰石8gがちょうど反応すると、二酸化炭素は最大何cm³？", a: "2000cm³", n: "250cm³×8＝2000cm³" },
+          { q: "2つの薬品の倍率がちがうときは、どちらの倍率にあわせて計算する？", a: "低いほうの倍率", n: "少ないほうの薬品がなくなったところで反応が止まる。" },
+          { q: "石灰石3gと塩酸40gがちょうど反応し、二酸化炭素750cm³。塩酸200gに石灰石18gを加えると、二酸化炭素は最大何cm³？", a: "3750cm³", long: true, n: "石灰石は18÷3＝6倍、塩酸は200÷40＝5倍。低いほうの5倍にあわせて750×5＝3750cm³" },
+          { q: "石灰石3gと塩酸40gがちょうど反応する。塩酸200gに石灰石18gを加えたとき、残るのはどちら？何g？", a: "石灰石が3g残る", long: true, n: "反応する石灰石は3g×5＝15g。18g−15g＝3g" },
+          { q: "【練習】石灰石1gと塩酸10cm³で二酸化炭素250cm³。石灰石3gに塩酸50cm³を加えると、二酸化炭素は最大何cm³？", a: "750cm³", long: true, n: "石灰石3倍、塩酸5倍。低いほうの3倍にあわせて250×3＝750cm³（塩酸が残る）" },
+          { q: "【練習】石灰石1gで二酸化炭素250cm³。二酸化炭素を500cm³発生させるには、石灰石は何g必要？", a: "2g", n: "500÷250＝2倍。1g×2＝2g" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "加熱器具の使い方", page: "p.64〜65",
+        cards: [
+          { q: "アルコールランプに入れるアルコールの量は、容器の何分目まで？", a: "8分目", n: "7〜8分目くらいまで。入れすぎない。" },
+          { q: "アルコールランプのアルコールが、どのくらい以下になったらつぎたす？", a: "半分", n: "少ないまま使うと、中で気体に火がうつってあぶない。" },
+          { q: "アルコールランプに火をつけるとき、取ったふたはどうする？", a: "じゃまにならないところに立てておく", long: true, n: "" },
+          { q: "マッチの火は、アルコールランプのしんにどこから近づける？", a: "横から", n: "" },
+          { q: "アルコールランプからアルコールランプへ火をつけてもよい？", a: "いけない", n: "アルコールがこぼれて火事になるおそれがある。" },
+          { q: "アルコールランプの火を消すとき、ふたはどこからかぶせる？", a: "ななめ横から", n: "息でふき消してはいけない。" },
+          { q: "火を消したあと、もう一度ふたを取って、容器が冷えたらまたかぶせるのはなぜ？", a: "ガラスのふたが熱でわれたり、次にふたが取れなくなったりしないように", long: true, n: "" },
+          { f: "c19_burner", q: "ガスバーナー。アとイのねじの名前は？", a: "ア 空気調節ねじ・イ ガス調節ねじ", long: true, n: "上が空気、下がガス。" },
+          { f: "c19_burner", q: "ガスバーナー。ウとエの名前は？", a: "ウ コック・エ 元せん", long: true, n: "" },
+          { q: "ガスバーナーを使う前に、まず何を確かめる？", a: "空気調節ねじとガス調節ねじが閉まっていること", long: true, n: "" },
+          { q: "ガスバーナーに火をつける手順は？", a: "元せんを開く→コックを開ける→マッチに火をつけてからガス調節ねじを少しずつ開いて点火", long: true, n: "" },
+          { q: "ほのおを適当な大きさにしたら、空気調節ねじを開いて何色のほのおにする？", a: "青い", n: "空気が足りないと、赤っぽい（オレンジ色の）ほのおになる。" },
+          { q: "ガスバーナーの火を消す順番は？", a: "空気調節ねじ→ガス調節ねじ→コック→元せん", long: true, n: "つけるときの反対の順。" },
+          { q: "【まとめ】ガスバーナーに火をつけるとき、元せん・ガス調節ねじ・空気調節ねじを操作する順番は？", a: "元せん→ガス調節ねじ→空気調節ねじ", long: true, n: "ガス調節ねじを開く前にマッチに火をつける。" },
+          { q: "【まとめ】ガスバーナーの火を消すとき、元せん・ガス調節ねじ・空気調節ねじを操作する順番は？", a: "空気調節ねじ→ガス調節ねじ→元せん", long: true, n: "" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no20",
+    no: "No.20",
+    name: "🔥 No.20 ものの燃焼",
+    source: "要点 p.66〜71",
+    decks: [
+      {
+        id: "s1", no: 1, title: "空気とものの燃焼", page: "p.66〜67",
+        cards: [
+          { q: "空気の成分で、約78％をしめる気体は？", a: "ちっ素", n: "空気の大部分はちっ素。ものを燃やすはたらきはない。" },
+          { q: "空気の成分で、約21％をしめる気体は？", a: "酸素", r: "さんそ", n: "ものを燃やすはたらきがある。" },
+          { q: "空気の成分で、約1％をしめる気体は？", a: "アルゴン", n: "" },
+          { q: "空気の成分で、約0.04％をしめる気体は？", a: "二酸化炭素", r: "にさんかたんそ", n: "とても少ないが、ものが燃えると増える。" },
+          { f: "c20_air", q: "空気の成分の割合。ア・イ・ウの気体は？", a: "アちっ素・イ酸素・ウアルゴン", n: "約78％・約21％・約1％。二酸化炭素は約0.04％。" },
+          { q: "空気中の気体の割合をはかる道具を何という？", a: "気体検知管", r: "きたいけんちかん", n: "酸素用と二酸化炭素用がある。" },
+          { q: "気体検知管は、使う前にどうする？", a: "両はしを折りとって使う", n: "" },
+          { q: "酸素用の気体検知管を使うとき、注意することは？", a: "熱くなるので注意する", n: "使ったあとすぐにさわらない。" },
+          { f: "c20_candle", q: "すぐに火が消えるのは、A〜Eのどれとどれ？", a: "BとD", n: "ふたがあると、上から空気が出ていけず、新しい空気が入らない。" },
+          { f: "c20_candle", q: "ろうそくが短くなると火が消えるのは、A〜Eのどれ？", a: "A", n: "下にすき間がないので、新しい空気が入りにくい。" },
+          { f: "c20_candle", q: "ろうそくがなくなるまで燃え続けるのは、A〜Eのどれとどれ？", a: "CとE", n: "" },
+          { f: "c20_candle", q: "CとEのろうそくが燃え続けるのはなぜ？", a: "新しい空気が入れかわり続けるから", long: true, n: "Cは下から入って上から出る。Eは金属の板の両側で空気が入れかわる。" },
+          { q: "ほのおを出さずに燃えるものを2つ答えよう。", a: "木炭・スチールウール", r: "もくたん", n: "固体のまま燃えるので、ほのおが出ない。" },
+          { q: "ほのおが出るのは、どんな状態の物質が燃えるとき？", a: "気体", n: "ろうそくは、ろうが気体になって燃えるのでほのおが出る。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "ものの燃焼と燃えてできるもの", page: "p.68〜69",
+        cards: [
+          { q: "燃焼とは、どういうこと？", a: "ものが酸素と結びついて、熱や光を出すこと", long: true, r: "ねんしょう", n: "" },
+          { f: "c20_model", q: "燃焼の模式図。●の燃えるものと結びつくアは何？", a: "酸素", n: "燃えるものと酸素が結びついて、燃えてできるものになる。" },
+          { q: "燃焼の3条件の1つめは？", a: "燃えるものがあること", n: "" },
+          { q: "燃焼の3条件の2つめは？", a: "新しい空気（酸素）があること", n: "" },
+          { q: "燃焼の3条件の3つめは？", a: "燃えるために必要な温度以上になること", long: true, n: "この温度を発火点という。" },
+          { q: "ものが燃え始める温度を何という？", a: "発火点", r: "はっかてん", n: "" },
+          { q: "ものが燃えるためには、3つの条件のうちいくつ必要？", a: "3つすべて", n: "" },
+          { q: "火を消すには、燃えるための条件をどうすればよい？", a: "少なくともどれか1つをなくす", n: "" },
+          { q: "ろうそくをふき消すと火が消えるのは、何がなくなったから？", a: "燃えるもの", n: "ふくと、しんのまわりのろうの気体がふき飛ばされる。" },
+          { q: "たき火に水をかけると火が消えるのは、何がなくなったから？", a: "燃えるために必要な温度（発火点以上の温度）", long: true, n: "水で冷やされる。" },
+          { q: "アルコールランプにふたをすると火が消えるのは、何がなくなったから？", a: "新しい空気（酸素）", n: "" },
+          { q: "水素が燃えると何ができる？", a: "水", n: "水素＋酸素→水（気体の状態で発生する）" },
+          { q: "水素の入った試験管に火をつけると、どうなる？", a: "ポンという音がして燃える", n: "" },
+          { q: "最も軽い気体で、水にとけにくい気体は？", a: "水素", r: "すいそ", n: "" },
+          { q: "炭素が酸素とじゅうぶんに結びついてできる気体は？", a: "二酸化炭素", n: "このような燃え方を完全燃焼という。" },
+          { q: "酸素がじゅうぶんにあるときの燃え方を何という？", a: "完全燃焼", r: "かんぜんねんしょう", n: "炭素＋酸素→二酸化炭素" },
+          { q: "酸素がじゅうぶんにないとき、炭素が燃えてできる気体は？", a: "一酸化炭素", r: "いっさんかたんそ", n: "このような燃え方を不完全燃焼という。" },
+          { q: "酸素がじゅうぶんにないときの燃え方を何という？", a: "不完全燃焼", r: "ふかんぜんねんしょう", n: "炭素＋酸素→一酸化炭素" },
+          { q: "一酸化炭素にはどんな性質がある？", a: "強い毒性がある", r: "どくせい", n: "火事のときなどに発生する。燃えると二酸化炭素になる。" },
+          { q: "アルコールやろうにふくまれているものは？", a: "水素と炭素", n: "だから燃えると水と二酸化炭素ができる。" },
+          { q: "アルコールが燃えると何ができる？", a: "水と二酸化炭素", n: "アルコール＋酸素→水＋二酸化炭素" },
+          { q: "鉄が燃えると何ができる？", a: "酸化鉄", r: "さんかてつ", n: "鉄＋酸素→酸化鉄" },
+          { q: "鉄が燃えてできる酸化鉄は、別名何という？", a: "黒さび", r: "くろさび", n: "" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "燃焼計算", page: "p.70〜71",
+        cards: [
+          { q: "反応の前と後で重さが等しくなることを何という？", a: "質量保存の法則", r: "しつりょうほぞんのほうそく", n: "燃焼計算は、まず言葉の式を書き、その下に量を書く。" },
+          { q: "水素の燃焼を言葉の式で表すと？", a: "水素＋酸素→水", n: "" },
+          { q: "水素1gを完全燃焼させると水9gができる。結びつく酸素は何g？", a: "8g", n: "9g−1g＝8g（質量保存の法則）" },
+          { q: "水素：酸素：水の重さの比は？", a: "1：8：9", n: "水素1g＋酸素8g→水9g" },
+          { q: "水素3gが完全燃焼すると、水は何gできる？", a: "27g", n: "9g×3＝27g" },
+          { q: "水素3gが完全燃焼するとき、結びつく酸素は何g？", a: "24g", n: "8g×3＝24g" },
+          { q: "炭素の燃焼を言葉の式で表すと？", a: "炭素＋酸素→二酸化炭素", n: "" },
+          { q: "炭素3gを完全燃焼させると二酸化炭素11gができる。結びつく酸素は何g？", a: "8g", n: "11g−3g＝8g" },
+          { q: "炭素：酸素：二酸化炭素の重さの比は？", a: "3：8：11", n: "炭素3g＋酸素8g→二酸化炭素11g" },
+          { q: "炭素12gが完全燃焼すると、二酸化炭素は何gできる？", a: "44g", n: "12÷3＝4倍。11g×4＝44g" },
+          { q: "炭素12gが完全燃焼するとき、結びつく酸素は何g？", a: "32g", n: "8g×4＝32g" },
+          { q: "【練習】水素5gが完全燃焼すると、水は何gできる？", a: "45g", n: "9g×5＝45g" },
+          { q: "【練習】水36gができたとき、燃えた水素は何g？", a: "4g", n: "36÷9＝4倍。1g×4＝4g" },
+          { q: "【練習】炭素6gが完全燃焼すると、二酸化炭素は何gできる？", a: "22g", n: "6÷3＝2倍。11g×2＝22g" },
+          { q: "【練習】炭素9gが完全燃焼するとき、結びつく酸素は何g？", a: "24g", n: "9÷3＝3倍。8g×3＝24g" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no21",
+    no: "No.21",
+    name: "🧂 No.21 もののとけ方",
+    source: "要点 p.2〜7",
+    decks: [
+      {
+        id: "s1", no: 1, title: "水溶液", page: "p.2〜3",
+        cards: [
+          { q: "ものが水にとけてできた液を何という？", a: "水溶液", r: "すいようえき", n: "" },
+          { q: "「とける」とは、どういうこと？", a: "ものが目に見えないほど小さくなって水と混ざること", long: true, n: "" },
+          { q: "水溶液はどんなようす？（無色とう明・とう明・にごっている）", a: "とう明である", n: "色がついていても、すき通っていれば水溶液。" },
+          { q: "硫酸銅水溶液は何色？", a: "青色", r: "りゅうさんどう", n: "色はついているが、とう明。" },
+          { q: "水溶液の中のこさは、どうなっている？", a: "どこでもこさは同じ", n: "下のほうがこくなることはない。" },
+          { q: "水溶液をしばらく置いておくと、水ととけているものは分かれる？", a: "分かれない", n: "砂と水は、しばらくすると砂が下にしずんで分かれる。" },
+          { f: "c21_settle", q: "かきまぜてからしばらく置いた。水溶液といえるのはア・イのどちら？", a: "ア", n: "イ（砂＋水）は砂がしずんで分かれるので水溶液ではない。" },
+          { q: "水溶液をろ過すると、とけているものをとり出せる？", a: "できない", r: "ろか", n: "とけたつぶはろ紙の穴より小さいので通りぬける。（No.22で学習）" },
+          { f: "c21_model", q: "水100gに食塩20gをとかした。食塩水の重さアは何g？", a: "120g", n: "とかす前ととかしたあとで、全体の重さは変わらない。" },
+          { q: "ものを水にとかす前ととかしたあとで、全体の重さはどうなる？", a: "変わらない", n: "水の重さ＋とかしたものの重さ＝水溶液の重さ" },
+          { q: "水に食塩をとかしても、体積があまり増えないのはなぜ？", a: "水のつぶの間のすき間に食塩のつぶが入りこむから", long: true, n: "水100cm³＋食塩9cm³→食塩水105cm³" },
+          { q: "角砂糖が水にとけていくとき、どんなようすが見られる？", a: "もやのようなもの", n: "とけた砂糖で、こさのちがう部分ができるため。" },
+          { q: "食塩・砂糖・ほう酸・ミョウバンは、固体・液体・気体のどれ？", a: "固体", n: "" },
+          { q: "砂糖の水溶液を何という？", a: "砂糖水", n: "とけているのは固体。" },
+          { q: "ほう酸水にとけている物質は？", a: "ほう酸（固体）", r: "ほうさん", n: "" },
+          { q: "石灰水にとけている物質は？", a: "水酸化カルシウム（消石灰）", r: "すいさんかカルシウム（しょうせっかい）", n: "とけているのは固体。" },
+          { q: "アルコール水にとけている物質は、固体・液体・気体のどれ？", a: "液体", n: "アルコールがとけている。" },
+          { q: "過酸化水素の水溶液を何という？", a: "オキシドール（過酸化水素水）", r: "かさんかすいそ", n: "とけている過酸化水素は液体。" },
+          { q: "塩化水素の水溶液を何という？", a: "塩酸", r: "えんさん", n: "とけている塩化水素は気体。" },
+          { q: "二酸化炭素の水溶液を何という？", a: "炭酸水", r: "たんさんすい", n: "とけている二酸化炭素は気体。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "もののとけ方と溶解度", page: "p.4〜5",
+        cards: [
+          { q: "溶解度とは？", a: "水100gにとかすことができる物質の最大の量", long: true, r: "ようかいど", n: "水の温度によって変わる。" },
+          { q: "ほう酸の溶解度。0℃・20℃・40℃・60℃・80℃では何g？", a: "3g・5g・9g・15g・24g", long: true, n: "100℃では38g。水温で大きく変わる。" },
+          { q: "食塩の溶解度は、20℃・60℃で何g？", a: "35.8g・37.0g", n: "水温が変わっても、あまり変わらない。" },
+          { q: "水温が同じとき、とける量は水の量にどうなる？", a: "比例する", r: "ひれい", n: "水が2倍なら、とける量も2倍。" },
+          { q: "60℃の水200gにとけるほう酸は最大何g？", a: "30g", n: "60℃の水100gに15g。15g×200g/100g＝30g" },
+          { q: "飽和とは？", a: "物質をこれ以上とけなくなるまでとかした状態", long: true, r: "ほうわ", n: "この水溶液を飽和水溶液という。" },
+          { q: "ふつう、水温が高くなると溶解度はどうなる？", a: "大きくなる", n: "" },
+          { q: "水温が高くなると溶解度が小さくなるものは？", a: "気体の物質と、水酸化カルシウム（消石灰）", long: true, n: "炭酸水をあたためるとあわが出るのはこのため。" },
+          { q: "溶解度を表したグラフを何という？", a: "溶解度曲線", r: "ようかいどきょくせん", n: "" },
+          { f: "c21_curve", q: "溶解度曲線。ほう酸のグラフはア・イのどちら？", a: "ア", n: "ほう酸は水温によって溶解度が大きく変わる。イは食塩。" },
+          { q: "80℃の水100gにほう酸をとけるだけとかして40℃まで冷やすと、何g出てくる？", a: "15g", n: "80℃で24g、40℃で9gとける。24g−9g＝15g" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "とけているもののとり出し方", page: "p.5",
+        cards: [
+          { q: "溶解度の差を利用して、結晶をとり出す方法を何という？", a: "再結晶", r: "さいけっしょう", n: "" },
+          { q: "ほう酸水からほう酸をとり出すには、どうするのがよい？", a: "水温を下げたり、水を蒸発させたりする", long: true, r: "じょうはつ", n: "" },
+          { q: "食塩水から食塩をとり出すには、どうするのがよい？", a: "水を蒸発させる", n: "" },
+          { q: "食塩水を冷やしても、食塩の結晶があまりとり出せないのはなぜ？", a: "温度による溶解度の差が小さいから", long: true, n: "" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "溶解度計算", page: "p.6〜7",
+        cards: [
+          { q: "ほう酸15gをとかすには、20℃の水が少なくとも何g必要？", a: "300g", n: "20℃の水100gにほう酸5g。15÷5＝3倍なので、100g×3＝300g" },
+          { q: "20℃の水200gにとかせるほう酸は最大何g？", a: "10g", n: "5g×2＝10g" },
+          { q: "20℃の水200gにほう酸をとけるだけとかした。60℃にすると、さらに何gとかせる？", a: "20g", long: true, n: "20℃で5g×2＝10g、60℃で15g×2＝30g。30g−10g＝20g" },
+          { q: "80℃の水300gにほう酸60gをとかした。40℃にすると、何gとけずに出てくる？", a: "33g", n: "40℃の水300gにとけるのは9g×3＝27g。60g−27g＝33g" },
+          { q: "60℃の飽和ほう酸水は、水100gのとき何gになる？", a: "115g", n: "水100g＋ほう酸15g＝115g" },
+          { q: "60℃の飽和ほう酸水230gにふくまれる水とほう酸は何g？", a: "水200g・ほう酸30g", n: "230÷115＝2倍。水100g×2、ほう酸15g×2" },
+          { q: "【練習】40℃の水300gにとけるほう酸は最大何g？", a: "27g", n: "9g×3＝27g" },
+          { q: "【練習】ほう酸45gをとかすには、60℃の水が少なくとも何g必要？", a: "300g", n: "45÷15＝3倍。100g×3＝300g" },
+          { q: "【練習】80℃の水200gにほう酸をとけるだけとかして20℃に冷やすと、何g出てくる？", a: "38g", long: true, n: "（24g−5g）×2＝38g" },
+          { q: "【練習】80℃の飽和ほう酸水372gにふくまれるほう酸は何g？", a: "72g", n: "水100gで124g。372÷124＝3倍。24g×3＝72g" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no22",
+    no: "No.22",
+    name: "🧂 No.22 水溶液のこさ",
+    source: "要点 p.8〜13",
+    decks: [
+      {
+        id: "s1", no: 1, title: "実験（ろ過・蒸発・蒸留）", page: "p.8〜10",
+        cards: [
+          { q: "液体の中にとけずに混じっている物質をとり出す方法を何という？", a: "ろ過", r: "ろか", n: "ろ紙でこしとる方法。" },
+          { f: "c22_roka", q: "ろ過装置のAの器具の名前は？", a: "ろうと台", n: "ろうとをのせる台。" },
+          { f: "c22_roka", q: "ろ過装置のBの器具の名前は？", a: "ガラス棒", r: "がらすぼう", n: "液をつたわらせて注ぐ。" },
+          { f: "c22_roka", q: "ろ過装置のCの器具の名前は？", a: "ろうと", n: "" },
+          { f: "c22_roka", q: "ろ過装置のDは何？", a: "ろ紙", r: "ろし", n: "ろうとの中に入れる紙。" },
+          { q: "ろ紙はどのように折って、ろうとに入れる？", a: "4つに折り、ろうとの形に開いて入れ、水でぬらしてろうとにくっつける", long: true, n: "ぬらすとろ紙がろうとにぴったりくっつく。" },
+          { q: "ろ紙は、ろうとの口より上・下のどちらにくるようにする？", a: "下", n: "ろ紙がろうとの口より下にくるようにする。" },
+          { f: "c22_roka", q: "図のXの部分で、液を注ぐときに注意することは？", a: "液は必ずガラス棒をつたわらせ、ガラス棒の先をろ紙につける", long: true, n: "ガラス棒のかたむけ方にも注意する。" },
+          { f: "c22_roka", q: "図のYの部分で、注意することは？", a: "ろうとの先のとがったほうをビーカーのかべにつける", long: true, n: "" },
+          { q: "ろうとの先をビーカーのかべにつけるのはなぜ？", a: "ろ液が流れやすくなり、ろ過がはやく進むから。液が飛び散るのを防ぐため。", long: true, n: "" },
+          { q: "ろ紙を通りぬけられるのは、どんな物質？", a: "ろ紙の穴よりも小さい物質", n: "水にとけている物質のつぶはとても小さいので通りぬける。" },
+          { f: "c22_shikumi", q: "ろ過で、ろ紙の上に残るアのような大きなつぶは何？", a: "とけ残り（とけずに混じっていた物質）", n: "ろ紙の穴より大きいので通りぬけられない。" },
+          { f: "c22_shikumi", q: "ろ紙を通りぬけて下のビーカーにたまる液を何という？", a: "ろ液", r: "ろえき", n: "イのような小さなつぶ（とけている物質）は通りぬける。" },
+          { f: "c22_kessho", q: "Aの立方体（サイコロ）の形の結晶は何？", a: "食塩", r: "しょくえん", n: "結晶の形で物質を見分けられる。" },
+          { f: "c22_kessho", q: "Bのうすい板のような形の結晶は何？", a: "ほう酸", r: "ほうさん", n: "六角形の平たい形。" },
+          { f: "c22_kessho", q: "Cの正八面体の形の結晶は何？", a: "ミョウバン", n: "ピラミッドを2つ合わせたような形。" },
+          { q: "食塩・ほう酸・ミョウバンの結晶は何色？", a: "白色", n: "どれも白っぽい（とう明な）結晶。" },
+          { q: "水にとけているものをすべてとり出す方法を何という？", a: "蒸発", r: "じょうはつ", n: "加熱して水を蒸発させる。" },
+          { f: "c22_jouhatsu", q: "蒸発の実験装置のAの器具の名前は？", a: "蒸発皿", r: "じょうはつざら", n: "" },
+          { f: "c22_jouhatsu", q: "蒸発の実験装置のBの名前は？", a: "（セラミック付き）金あみ", r: "かなあみ", n: "" },
+          { f: "c22_jouhatsu", q: "蒸発の実験装置のCの器具の名前は？", a: "三きゃく", r: "さんきゃく", n: "" },
+          { f: "c22_jouhatsu", q: "蒸発の実験装置のDの器具の名前は？", a: "アルコールランプ", n: "" },
+          { q: "水溶液を蒸発させると、蒸発皿に残るものは？", a: "水にとけていた固体", r: "こたい", n: "食塩水なら食塩が残る。" },
+          { q: "砂糖水やでんぷん溶液を蒸発させると、何が残る？", a: "黒い固体（砂糖やでんぷんがこげたもの）", long: true, n: "" },
+          { q: "蒸発させても蒸発皿に何も残らない水溶液は、どんな物質をとかしたもの？", a: "液体や気体の物質", n: "水といっしょに出ていってしまう。" },
+          { q: "水溶液から水だけをとり出す方法を何という？", a: "蒸留", r: "じょうりゅう", n: "水蒸気を冷やして水にもどす。" },
+          { f: "c22_jouryu", q: "蒸留の実験装置のAの名前は？", a: "スタンド", n: "" },
+          { f: "c22_jouryu", q: "蒸留の実験装置で、水溶液を入れて熱するBの器具の名前は？", a: "フラスコ", n: "" },
+          { f: "c22_jouryu", q: "Bから出た水蒸気が冷たい水に冷やされ、Cの試験管にたまる混じり気のない水を何という？", a: "蒸留水", r: "じょうりゅうすい", long: true, n: "" },
+          { q: "蒸留の実験で、フラスコに入れておく小さな石を何という？", a: "ふっとう石", r: "ふっとうせき", n: "急に激しくふっとうするのを防ぐために入れる。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "食塩水のこさ比べ", page: "p.10",
+        cards: [
+          { q: "食塩水Aと食塩水Bをなめたとき、Aのほうがしょっぱかった。こいのはどっち？", a: "A", n: "しょっぱいほうがこい。（実験では、なめてはいけない薬品も多いので注意）" },
+          { q: "水100gに食塩20gをとかした食塩水Aと、食塩30gをとかした食塩水B。こいのはどっち？", a: "B", n: "同じ量の水なら、多くとかしたほうがこい。" },
+          { q: "同じ体積の食塩水Aと食塩水Bの重さを比べたら、Aのほうが重かった。こいのはどっち？", a: "A", n: "同じ体積なら、重いほうがこい。" },
+          { q: "同じ重さの食塩水Aと食塩水Bの体積を比べたら、Aのほうが体積が大きかった。こいのはどっち？", a: "B", n: "同じ重さなら、体積が小さいほうがこい（つまっている）。Aはうすい。" },
+          { f: "c22_tamago", q: "食塩水にたまごを入れた。こさのこい順に並べると？", a: "C→B→A", n: "こい食塩水ほど、たまごがうきやすい。" },
+          { q: "食塩水がこいほど、たまごはうきやすい？しずみやすい？", a: "うきやすい", n: "こいほど同じ体積あたりの重さが重いから。" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "こさの表し方", page: "p.11",
+        cards: [
+          { q: "食塩水やほう酸水などの、水溶液のこさのことを何という？", a: "濃度", r: "のうど", n: "" },
+          { q: "濃度は、何に対する何の割合？", a: "水溶液全体の重さに対する、とけているものの重さの割合", long: true, n: "%（百分率）で表す。" },
+          { q: "%で表す割合のことを何という？", a: "百分率", r: "ひゃくぶんりつ", n: "" },
+          { q: "濃度（%）を求める公式は？（公式1）", a: "とけているものの重さ÷水溶液全体の重さ×100", long: true, n: "" },
+          { q: "水溶液全体の重さ＝？", a: "水の重さ＋とけているものの重さ", n: "分母は水だけの重さではないので注意。" },
+          { q: "【例1】水100gに食塩25gをすべてとかした。食塩水のこさは何%？", a: "20%", n: "全体＝100＋25＝125g。25÷125×100＝20（%）" },
+          { q: "とけているものの重さを求める公式は？（公式2）", a: "水溶液全体の重さ×濃度÷100", long: true, n: "" },
+          { q: "【例2】15%のこさの食塩水200gにふくまれている食塩は何g？", a: "30g", n: "200×15÷100＝30（g）" },
+          { q: "【練習】水80gに食塩20gをとかした。食塩水のこさは何%？", a: "20%", n: "全体＝80＋20＝100g。20÷100×100＝20（%）" },
+          { q: "【練習】水150gに食塩50gをとかした。食塩水のこさは何%？", a: "25%", n: "全体＝150＋50＝200g。50÷200×100＝25（%）" },
+          { q: "【練習】10%の食塩水300gにふくまれている食塩は何g？", a: "30g", n: "300×10÷100＝30（g）" },
+          { q: "【練習】8%の食塩水250gにふくまれている食塩は何g？", a: "20g", n: "250×8÷100＝20（g）" },
+          { q: "【練習】20%の食塩水を150gつくるには、食塩と水はそれぞれ何g必要？", a: "食塩30g・水120g", n: "食塩＝150×20÷100＝30g。水＝150−30＝120g" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "こさ計算", page: "p.12〜13",
+        cards: [
+          { q: "【例3】15%の食塩水100gに水200gを混ぜると、何%の食塩水になる？", a: "5%", n: "食塩＝100×15÷100＝15g。全体＝100＋200＝300g。15÷300×100＝5（%）" },
+          { q: "食塩水に水を混ぜても、変わらないものは何？", a: "とけている食塩の重さ", n: "全体の重さだけがふえるので、こさはうすくなる。" },
+          { q: "【例4】10%の食塩水200gと25%の食塩水100gを混ぜると、何%の食塩水になる？", a: "15%", n: "食塩＝200×10÷100＋100×25÷100＝20＋25＝45g。全体＝300g。45÷300×100＝15（%）" },
+          { f: "c22_tenbin", q: "【例5】7%の食塩水A100gとあるこさの食塩水B300gを混ぜると13%になった。Bのこさは何%？", a: "15%", long: true, n: "てんびん法：重さの比1：3なので、きょりの比は3：1。ア＝13−7＝6%が③なので①＝2%。B＝13＋2＝15（%）" },
+          { f: "c22_tenbin", q: "てんびん法で、アとイのきょりの比は？（100gと300gを混ぜる）", a: "3：1", n: "きょりの比は、重さの比（1：3）の逆になる。" },
+          { q: "てんびん法で、うでの長さ（きょり）の比は、重さの比とどんな関係？", a: "逆の比（逆比）になる", r: "ぎゃくひ", n: "重いほうが支点に近くなる。" },
+          { q: "【例6】15%の食塩水200gから水を50g蒸発させると、何%の食塩水になる？", a: "20%", n: "食塩＝200×15÷100＝30g。全体＝200−50＝150g。30÷150×100＝20（%）" },
+          { q: "食塩水から水を蒸発させると、こさはどうなる？", a: "こくなる", n: "食塩の重さは変わらず、全体の重さだけがへるから。" },
+          { q: "【練習】20%の食塩水200gに水200gを混ぜると、何%？", a: "10%", n: "食塩＝40g。全体＝400g。40÷400×100＝10（%）" },
+          { q: "【練習】5%の食塩水300gと15%の食塩水200gを混ぜると、何%？", a: "9%", n: "食塩＝15＋30＝45g。全体＝500g。45÷500×100＝9（%）" },
+          { q: "【練習】4%の食塩水300gと12%の食塩水100gを混ぜると、何%？", a: "6%", n: "食塩＝12＋12＝24g。全体＝400g。24÷400×100＝6（%）。てんびん法：重さ3：1→きょり1：3。8%を1：3に分けて4＋2＝6%" },
+          { q: "【練習】10%の食塩水300gから水を100g蒸発させると、何%？", a: "15%", n: "食塩＝30g。全体＝200g。30÷200×100＝15（%）" },
+          { q: "【練習】10%の食塩水200gに食塩50gを加えてすべてとかすと、何%？", a: "28%", n: "食塩＝20＋50＝70g。全体＝200＋50＝250g。70÷250×100＝28（%）" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no23",
+    no: "No.23",
+    name: "🧪 No.23 溶解度・濃度計算",
+    source: "要点 p.14〜19",
+    decks: [
+      {
+        id: "s1", no: 1, title: "濃度の公式", page: "p.14",
+        cards: [
+          { q: "濃度（%）を求める公式は？（公式1）", a: "とけているものの重さ÷水溶液全体の重さ×100", long: true, r: "のうど", n: "水溶液全体の重さ＝水の重さ＋とけているものの重さ" },
+          { q: "とけているものの重さを求める公式は？（公式2）", a: "水溶液全体の重さ×濃度÷100", long: true, n: "" },
+          { q: "【練習】水60gに食塩15gをとかした。こさは何%？", a: "20%", n: "全体＝60＋15＝75g。15÷75×100＝20（%）" },
+          { q: "【練習】12%の食塩水150gにふくまれている食塩は何g？", a: "18g", n: "150×12÷100＝18（g）" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "溶解度曲線", page: "p.14〜15",
+        cards: [
+          { q: "水100gにとける物質の最大の重さを何という？", a: "溶解度", r: "ようかいど", n: "温度によって変わる。" },
+          { q: "温度と溶解度の関係を表したグラフを何という？", a: "溶解度曲線", r: "ようかいどきょくせん", n: "" },
+          { q: "物質がもうそれ以上とけなくなった水溶液を何という？", a: "飽和水溶液", r: "ほうわすいようえき", n: "とけるだけとかした水溶液のこと。" },
+          { f: "c23_graph", q: "【例1(1)】30℃の水100gに最も多くとける物質は、A〜Cのどれ？", a: "C", n: "30℃のところを見ると、Cが30gで最も多い。" },
+          { f: "c23_graph", q: "【例1(2)】AとBをある温度で同量の水にとかしたら、同じ量だけとけた。水温は何℃？", a: "40℃", long: true, n: "グラフのAとBが交わるところ（40℃・30g）を読む。" },
+          { f: "c23_graph", q: "Aが20gちょうどとけるのは何℃くらい？", a: "35℃", n: "例1(3)の考え方。" },
+          { f: "c23_graph", q: "Bが20gちょうどとけるのは何℃くらい？", a: "30℃", n: "例1(3)の考え方。" },
+          { f: "c23_graph", q: "Cが20gちょうどとけるのは何℃くらい？", a: "0℃", n: "例1(3)の考え方。" },
+          { f: "c23_graph", q: "【例1(3)】50℃の水100gにA〜Cを20gずつとかし、温度を下げた。最も高い温度で結晶が出始めるのは？", a: "A", long: true, n: "20gちょうどとけるのはA35℃・B30℃・C0℃。いちばん高い温度のAが先に出る。" },
+          { f: "c23_graph", q: "【例1(4)】45℃の水100gにAをとけるだけとかし、20℃にした。何gのAがとけずに出てくる？", a: "45g", long: true, n: "45℃で55g、20℃で10gとけるので、55−10＝45（g）" },
+          { f: "c23_graph", q: "【例1(5)】35℃の水にBをとけるだけとかした水溶液のこさは何%？", a: "20%", n: "35℃で水100gにBは25gとける。25÷（100＋25）×100＝20（%）" },
+          { f: "c23_graph", q: "温度による溶解度の変化が最も小さい物質は、A〜Cのどれ？", a: "C", n: "グラフのかたむきがいちばんゆるやか。" },
+          { f: "c23_graph", q: "0℃の水100gにとける量が多い順に並べると？", a: "C→B→A", n: "C20g・B10g・A5g" },
+          { f: "c23_graph", q: "【練習】20℃の水200gに、Aはとけるだけで何gとける？", a: "20g", n: "20℃で水100gに10g。水200gなら10×2＝20（g）" },
+          { f: "c23_graph", q: "【練習】60℃の水100gにBをとけるだけとかし、20℃に冷やした。何gのBが出てくる？", a: "40g", long: true, n: "60℃で55g、20℃で15g。55−15＝40（g）" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "溶解度計算", page: "p.16〜17",
+        cards: [
+          { q: "ほう酸の溶解度（水100gにとける量）は、0℃・20℃・40℃でそれぞれ何g？", a: "0℃3g・20℃5g・40℃9g", long: true, n: "表：0℃3g、20℃5g、40℃9g、60℃15g、80℃24g、100℃38g" },
+          { q: "ほう酸の溶解度（水100gにとける量）は、60℃・80℃・100℃でそれぞれ何g？", a: "60℃15g・80℃24g・100℃38g", long: true, n: "温度が高いほど多くとける。" },
+          { q: "【例2(1)】60℃の水300gにほう酸をとけるだけとかした液を80℃にすると、あと何gとかせる？", a: "27g", long: true, n: "80℃：24×3＝72g、60℃：15×3＝45g。72−45＝27（g）" },
+          { q: "【例2(2)】60℃の水300gにほう酸をとけるだけとかした液を冷やすと、18g出てきた。水温は何℃？", a: "40℃", long: true, n: "水100gあたり18÷3＝6g出た。15−6＝9gとける温度なので40℃。" },
+          { q: "【例3(1)】20℃の飽和ほう酸水420gにふくまれているほう酸は何g？", a: "20g", n: "表では水100g＋ほう酸5g＝105g。420÷105＝4倍なので、5×4＝20（g）" },
+          { q: "【例3(2)】40℃の飽和ほう酸水545gを80℃にすると、あと何gのほう酸をとかせる？", a: "75g", long: true, n: "表では109g。545÷109＝5倍→水500g・ほう酸45g。80℃の水500gには24×5＝120g。120−45＝75（g）" },
+          { q: "飽和水溶液の重さから計算するとき、まず何を考える？", a: "水100gのときの飽和水溶液の重さ（100g＋とける量）と比べて何倍か", long: true, n: "例：20℃のほう酸なら100＋5＝105g" },
+          { q: "【練習】40℃の水50gに、ほう酸は何gまでとける？", a: "4.5g", n: "9×（50÷100）＝4.5（g）" },
+          { q: "【練習】80℃の水200gにほう酸をとけるだけとかし、20℃に冷やした。何g出てくる？", a: "38g", long: true, n: "（24−5）×2＝38（g）" },
+          { q: "【練習】100℃の水100gにほう酸をとけるだけとかし、60℃に冷やした。何g出てくる？", a: "23g", n: "38−15＝23（g）" },
+          { q: "【練習】60℃の飽和ほう酸水230gにふくまれているほう酸は何g？", a: "30g", n: "表では100＋15＝115g。230÷115＝2倍なので、15×2＝30（g）" },
+          { q: "【練習】20℃の水200gにほう酸15gを入れてよくかき混ぜた。何gとけ残る？", a: "5g", n: "20℃の水200gには5×2＝10gまでとける。15−10＝5（g）" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "濃度計算", page: "p.18〜19",
+        cards: [
+          { f: "c23_bar", q: "【例4】水400gに食塩をとかして20%の食塩水をつくった。加えた食塩は何g？", a: "100g", long: true, n: "水の割合は80%。80%が400gなので1%は5g。食塩は20%なので5×20＝100（g）" },
+          { q: "20%の食塩水では、水の割合は何%？", a: "80%", n: "100−20＝80（%）" },
+          { q: "てんびん法では、水と食塩はそれぞれ何%の食塩水と考える？", a: "水は0%、食塩は100%", n: "" },
+          { f: "c23_tenbin4", q: "【例4・てんびん法】きょりの比が20：80のとき、400gと？gの重さの比は？", a: "4：1", n: "重さの比はきょりの比（1：4）の逆。？＝400×1/4＝100（g）" },
+          { q: "【例5】20%の食塩水100gと5%の食塩水200gを混ぜると、何%？", a: "10%", n: "食塩＝20＋10＝30g。全体＝300g。30÷300×100＝10（%）" },
+          { f: "c23_tenbin5", q: "【例5・てんびん法】200gと100gを混ぜる。アとイのきょりの比は？", a: "1：2", n: "重さの比2：1の逆。" },
+          { f: "c23_tenbin5", q: "【例5・てんびん法】アは何%？　また？%は何%？", a: "ア5%・？は10%", n: "20−5＝15%を1：2に分けるとア＝5%。5＋5＝10（%）" },
+          { q: "【練習】水300gに食塩をとかして25%の食塩水をつくった。食塩は何g？", a: "100g", n: "水は75%で300g。1%は4g。25%は4×25＝100（g）" },
+          { q: "【練習】水180gに食塩をとかして10%の食塩水をつくった。食塩は何g？", a: "20g", n: "水は90%で180g。1%は2g。10%は2×10＝20（g）" },
+          { q: "【練習】30%の食塩水100gと10%の食塩水300gを混ぜると、何%？", a: "15%", n: "食塩＝30＋30＝60g。全体＝400g。60÷400×100＝15（%）" },
+          { q: "【練習】15%の食塩水300gに水を何g加えると、10%になる？", a: "150g", n: "食塩は45g。10%で45gなら全体は450g。450−300＝150（g）" },
+          { q: "【練習】8%の食塩水200gに食塩を何g加えると、20%になる？", a: "30g", long: true, n: "てんびん法：8%と100%、支点20%でつりあうきょりは12：80＝3：20。重さの比は20：3なので200×3/20＝30（g）。確かめ：（16＋30）÷230×100＝20（%）" },
         ]
       },
     ]

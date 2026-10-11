@@ -1058,6 +1058,272 @@ const FIG = {
     + T(40, 129, "200g", { size: 12 }) + T(300, 129, "100g", { size: 12 })
     + `<path d="M42 58 Q84 82 125 58" fill="none" stroke="#555" stroke-dasharray="4 3"/><path d="M129 58 Q214 94 298 58" fill="none" stroke="#555" stroke-dasharray="4 3"/>`
     + T(84, 92, "ア", { size: 14 }) + T(214, 98, "イ", { size: 14 })),
+  c24_eye: (() => {
+    let s = `<rect x="60" y="16" width="18" height="160" rx="9" fill="#fff" stroke="#555" stroke-width="2"/>`
+      + `<rect x="65" y="92" width="8" height="86" fill="#e03131"/><circle cx="69" cy="180" r="11" fill="#e03131" stroke="#555" stroke-width="2"/>`;
+    for (let y = 30; y <= 160; y += 10) s += L(78, y, y % 50 === 0 ? 92 : 86, y, "#555", 1.2);
+    [[48, "ア"], [92, "イ"], [136, "ウ"]].forEach(([y, m]) => {
+      s += L(100, 92, 196, y, "#999", 1).replace("/>", ` stroke-dasharray="4 3"/>`)
+        + `<ellipse cx="214" cy="${y}" rx="16" ry="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="210" cy="${y}" r="5" fill="#333"/>`
+        + M(256, y, m);
+    });
+    return svg(300, 222, s + T(160, 214, "温度計の目もりを読む目の位置", { size: 11, w: "normal" }));
+  })(),
+
+  c24_daily: svg(320, 215,
+    A(40, 190, 40, 14, "#333", 2) + A(40, 190, 306, 190, "#333", 2)
+    + T(22, 98, "気", { size: 13 }) + T(22, 116, "温", { size: 13 }) + T(175, 210, "時刻", { size: 13 })
+    + `<path d="M50 165 C110 165 120 34 160 34 S220 165 290 160" fill="none" stroke="#e03131" stroke-width="3"/>`
+    + `<path d="M50 112 Q170 84 290 112" fill="none" stroke="#1971c2" stroke-width="3" stroke-dasharray="7 5"/>`
+    + M(206, 30, "ア") + M(282, 84, "イ")),
+
+  c24_graph: (() => {
+    const X = t => 40 + (t - 5) * 20, Y = v => 200 - v * 5;
+    const pl = (f, c, d) => `<polyline points="${Array.from({ length: 53 }, (_, i) => 5 + i * 0.25).map(t => X(t).toFixed(1) + "," + Y(f(t)).toFixed(1)).join(" ")}" fill="none" stroke="${c}" stroke-width="2.5"${d ? ` stroke-dasharray="${d}"` : ""}/>`;
+    let s = "";
+    for (let t = 5; t <= 18; t++) s += L(X(t), Y(0), X(t), Y(35), "#dee2e6", 1) + T(X(t), 216, t > 12 ? t - 12 : t === 12 ? 0 : t, { size: 10, w: "normal" });
+    for (let v = 0; v <= 35; v += 5) s += L(X(5), Y(v), X(18), Y(v), "#dee2e6", 1) + T(32, Y(v) + 4, v, { size: 10, w: "normal", a: "end" });
+    s += L(X(5), Y(0), X(18), Y(0), "#333", 1.5) + L(X(5), Y(0), X(5), Y(35), "#333", 1.5);
+    s += pl(t => 26 * Math.sin(Math.PI * (t - 5) / 14), "#e03131");
+    s += pl(t => 11 + 22 * Math.max(0, Math.sin(Math.PI * (t - 6) / 14)), "#1971c2", "6 4");
+    s += pl(t => 11 + 16 * Math.max(0, Math.sin(Math.PI * (t - 6) / 16)), "#2f9e44", "2 3");
+    s += M(240, 28, "B") + M(270, 94, "C") + M(292, 124, "A") + L(292, 137, 292, 150, "#333", 1.2);
+    s += T(16, 12, "（℃）", { size: 10, w: "normal" }) + T(100, 232, "午前", { size: 11, w: "normal" }) + T(260, 232, "午後", { size: 11, w: "normal" }) + T(180, 232, "時刻（時）", { size: 11, w: "normal" });
+    return svg(320, 240, s);
+  })(),
+
+  c24_hyakuyo: (() => {
+    let s = `<rect x="0" y="200" width="300" height="50" fill="#b2f2bb"/>`
+      + L(108, 120, 102, 202, "#555", 3) + L(202, 120, 208, 202, "#555", 3) + L(108, 130, 204, 196, "#888", 1.5) + L(202, 130, 106, 196, "#888", 1.5)
+      + `<rect x="100" y="40" width="110" height="80" fill="#fff" stroke="#555" stroke-width="2"/>`
+      + `<polygon points="90,40 220,40 212,26 98,26" fill="#fff" stroke="#555" stroke-width="2"/>`
+      + `<rect x="150" y="46" width="54" height="68" fill="#fff" stroke="#555" stroke-width="1.5"/>`;
+    for (let y = 50; y <= 114; y += 8) s += L(104, y, 146, y - 3, "#999", 1.2) + L(154, y, 200, y - 3, "#999", 1.2);
+    s += L(250, 80, 250, 200, "#333", 1).replace("/>", ` stroke-dasharray="3 3"/>`) + A(250, 140, 250, 82, "#333", 1.5) + A(250, 140, 250, 198, "#333", 1.5) + L(212, 80, 256, 80, "#333", 1);
+    s += M(56, 30, "ア") + L(69, 31, 96, 33, "#333", 1.2)
+      + M(56, 82, "イ") + L(69, 82, 112, 82, "#333", 1.2)
+      + M(40, 226, "ウ")
+      + M(232, 150, "エ") + L(222, 141, 196, 112, "#333", 1.2)
+      + M(278, 140, "オ");
+    return svg(300, 250, s);
+  })(),
+
+  c24_kanshitsu: (() => {
+    let s = `<rect x="20" y="10" width="200" height="236" rx="6" fill="#f8f9fa" stroke="#555"/>`;
+    [[70, 82], [160, 112]].forEach(([x, top]) => {
+      s += `<rect x="${x - 8}" y="40" width="16" height="152" rx="8" fill="#fff" stroke="#555" stroke-width="2"/>`
+        + `<rect x="${x - 3}" y="${top}" width="6" height="${194 - top}" fill="#e03131"/><circle cx="${x}" cy="194" r="8" fill="#e03131"/>`;
+      for (let y = 55; y <= 175; y += 10) s += L(x + 8, y, x + 14, y, "#555", 1);
+    });
+    s += `<ellipse cx="160" cy="196" rx="13" ry="15" fill="#e9ecef" fill-opacity=".85" stroke="#888" stroke-width="1.5"/>`
+      + L(160, 211, 160, 226, "#aaa", 3)
+      + `<rect x="138" y="218" width="44" height="22" fill="#a5d8ff" stroke="#555"/>`
+      + T(178, 194, "ガーゼ", { size: 10, w: "normal", a: "start" });
+    s += M(70, 26, "A") + M(160, 26, "B");
+    return svg(240, 252, s);
+  })(),
+
+  c24_table: (() => {
+    const rows = [[25, 100, 92, 84, 76, 68], [24, 100, 91, 83, 75, 68], [23, 100, 91, 83, 75, 67], [22, 100, 91, 82, 74, 66], [21, 100, 91, 82, 73, 65]];
+    let s = `<rect x="5" y="5" width="320" height="44" fill="#e5dbff"/><rect x="5" y="5" width="320" height="174" fill="none" stroke="#555" stroke-width="1.5"/>`;
+    s += T(40, 24, "乾球の", { size: 12 }) + T(40, 41, "示度(℃)", { size: 12 }) + T(200, 22, "乾球と湿球の示度の差(℃)", { size: 12 });
+    ["0.0", "1.0", "2.0", "3.0", "4.0"].forEach((v, i) => s += T(100 + i * 50, 44, v, { size: 12 }));
+    s += L(75, 27, 325, 27, "#555", 1) + L(5, 49, 325, 49, "#555", 1.5);
+    for (let i = 0; i < 5; i++) s += L(75 + i * 50, i === 0 ? 5 : 27, 75 + i * 50, 179, "#555", 1);
+    rows.forEach((r, j) => {
+      const y = 49 + j * 26;
+      if (j) s += L(5, y, 325, y, "#999", 1);
+      s += T(40, y + 18, r[0], { size: 13 });
+      r.slice(1).forEach((v, i) => s += T(100 + i * 50, y + 18, v, { size: 13, w: "normal" }));
+    });
+    return svg(330, 184, s);
+  })(),
+
+  c24_satable: (() => {
+    const t = [0, 5, 10, 15, 20, 25, 30], g = ["4.8", "6.8", "9.4", "12.8", "17.3", "23.1", "30.4"];
+    let s = `<rect x="4" y="10" width="90" height="56" fill="#e5dbff"/><rect x="4" y="10" width="334" height="56" fill="none" stroke="#555" stroke-width="1.5"/>` + L(4, 38, 338, 38, "#555", 1);
+    s += T(49, 29, "気温（℃）", { size: 11 }) + T(49, 57, "飽和水蒸気量(g)", { size: 10 });
+    t.forEach((v, i) => s += L(94 + i * 34.857, 10, 94 + i * 34.857, 66, "#555", 1) + T(111.4 + i * 34.857, 29, v, { size: 12 }) + T(111.4 + i * 34.857, 57, g[i], { size: 11, w: "normal" }));
+    return svg(342, 76, s);
+  })(),
+  c25_conv: svg(320, 220,
+    L(10, 192, 310, 192, "#555", 2) + [...Array(15)].map((_, i) => L(14 + i * 20, 204, 24 + i * 20, 194, "#888", 1)).join("")
+    + `<ellipse cx="60" cy="172" rx="42" ry="16" fill="#e9ecef" stroke="#555"/><ellipse cx="260" cy="172" rx="42" ry="16" fill="#e9ecef" stroke="#555"/>`
+    + M(60, 172, "ア") + M(260, 172, "イ")
+    + A(60, 150, 60, 45, "#1c7ed6", 3) + A(80, 30, 240, 30, "#1c7ed6", 3) + A(260, 45, 260, 150, "#1c7ed6", 3) + A(212, 172, 108, 172, "#1c7ed6", 3)
+    + T(36, 104, "①", { size: 15 }) + T(160, 20, "④", { size: 15 }) + T(286, 104, "③", { size: 15 }) + T(160, 160, "②", { size: 15 })),
+
+  c25_16dir: (() => {
+    const cx = 150, cy = 140, P = (k, r) => [cx + r * Math.sin(k * Math.PI / 8), cy - r * Math.cos(k * Math.PI / 8)];
+    let s = "";
+    for (let k = 0; k < 16; k++) { const [x, y] = P(k, 100); s += L(cx, cy, x.toFixed(1), y.toFixed(1), k % 4 ? "#74c0fc" : "#1c7ed6", k % 4 ? 1.5 : 2.5); }
+    [[0, "北"], [4, "東"], [8, "南"], [12, "西"], [14, "北西"]].forEach(([k, t]) => { const [x, y] = P(k, k === 14 ? 122 : 116); s += T(x.toFixed(1), (y + 5).toFixed(1), t, { size: 14 }); });
+    [[2, "A"], [6, "B"], [10, "C"], [15, "ア"], [5, "イ"]].forEach(([k, t]) => { const [x, y] = P(k, 118); s += M(x.toFixed(1), y.toFixed(1), t); });
+    return svg(300, 280, s);
+  })(),
+
+  c25_dirDE: (() => {
+    let s = "";
+    [[80, "D"], [240, "E"]].forEach(([cx, t]) => {
+      s += `<circle cx="${cx}" cy="100" r="55" fill="none" stroke="#888" stroke-dasharray="4 3"/>`;
+      for (let k = 0; k < 4; k++) { const a = k * Math.PI / 4, dx = 55 * Math.sin(a), dy = 55 * Math.cos(a); s += L((cx - dx).toFixed(1), (100 - dy).toFixed(1), (cx + dx).toFixed(1), (100 + dy).toFixed(1), "#bbb", 1).replace("/>", ` stroke-dasharray="3 3"/>`); }
+      s += T(cx, 36, "北", { size: 13 }) + M(cx - 62, 30, t) + `<circle cx="${cx}" cy="100" r="3" fill="#333"/>`;
+    });
+    s += A(25, 100, 135, 100, "#1c7ed6", 3) + A(279, 61, 203, 137, "#1c7ed6", 3);
+    return svg(320, 170, s);
+  })(),
+
+  c25_vane: svg(320, 170,
+    `<polygon points="90,38 74,14 106,14" fill="#adb5bd" stroke="#555"/>` + A(90, 30, 90, 150, "#c2255c", 3) + `<circle cx="90" cy="80" r="4" fill="#fff" stroke="#333"/>`
+    + T(90, 166, "（上から見た風向計）", { size: 11, w: "normal" })
+    + L(240, 40, 240, 120, "#555", 1.5) + L(200, 80, 280, 80, "#555", 1.5)
+    + T(240, 32, "北", { size: 13 }) + T(240, 138, "南", { size: 13 }) + T(190, 85, "西", { size: 13 }) + T(292, 85, "東", { size: 13 })),
+
+  c25_lsA: svg(320, 180,
+    `<rect x="0" y="0" width="320" height="170" fill="#f1f3f5"/><rect x="150" y="138" width="170" height="32" fill="#74c0fc"/>`
+    + `<path d="M0 112 L118 112 Q160 116 192 170 L0 170 Z" fill="#c9a77c"/>`
+    + T(40, 148, "陸", { size: 15 }) + T(290, 160, "海", { size: 15, c: "#1864ab" })
+    + A(50, 92, 50, 40, "#c92a2a", 2.5) + A(60, 28, 280, 28, "#c92a2a", 2.5) + A(290, 40, 290, 92, "#c92a2a", 2.5) + A(280, 102, 60, 102, "#c92a2a", 2.5)),
+
+  c25_lsB: svg(320, 180,
+    `<rect x="0" y="0" width="320" height="170" fill="#f1f3f5"/><rect x="150" y="138" width="170" height="32" fill="#74c0fc"/>`
+    + `<path d="M0 112 L118 112 Q160 116 192 170 L0 170 Z" fill="#c9a77c"/>`
+    + T(40, 148, "陸", { size: 15 }) + T(290, 160, "海", { size: 15, c: "#1864ab" })
+    + A(290, 92, 290, 40, "#c92a2a", 2.5) + A(280, 28, 60, 28, "#c92a2a", 2.5) + A(50, 40, 50, 92, "#c92a2a", 2.5) + A(60, 102, 280, 102, "#c92a2a", 2.5)),
+
+  c25_foehn: svg(340, 232,
+    `<rect x="0" y="0" width="340" height="200" fill="#e7f5ff"/>`
+    + `<path d="M20 200 C120 200 120 40 170 40 C220 40 220 200 320 200 Z" fill="#8ce99a" stroke="#2f9e44"/>`
+    + `<ellipse cx="116" cy="70" rx="14" ry="32" fill="#fff" stroke="#999"/>`
+    + L(0, 200, 340, 200, "#555", 2)
+    + `<circle cx="119" cy="108" r="4" fill="#333"/><circle cx="170" cy="40" r="4" fill="#333"/><circle cx="20" cy="200" r="4" fill="#333"/><circle cx="320" cy="200" r="4" fill="#333"/>`
+    + L(123, 108, 170, 108, "#333", 1.2).replace("/>", ` stroke-dasharray="3 3"/>`)
+    + A(150, 112, 150, 196, "#333", 1.5) + A(150, 196, 150, 112, "#333", 1.5) + T(182, 160, "800m", { size: 12 })
+    + A(170, 48, 170, 104, "#333", 1.5) + A(170, 104, 170, 48, "#333", 1.5) + T(206, 82, "600m", { size: 12 })
+    + T(104, 104, "B", { size: 14 }) + T(170, 28, "C", { size: 14 }) + T(20, 222, "A", { size: 14 }) + T(320, 222, "D", { size: 14 })
+    + T(86, 22, "雲", { size: 11, w: "normal" }) + L(92, 26, 108, 42, "#999", 1)),
+
+  c25_cform: svg(320, 210,
+    L(10, 198, 310, 198, "#555", 2)
+    + `<ellipse cx="160" cy="168" rx="60" ry="22" fill="#f1f3f5" stroke="#555" stroke-dasharray="4 3"/>`
+    + [[128, 162], [148, 158], [170, 160], [192, 164], [136, 176], [158, 178], [180, 176]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#fff" stroke="#1c7ed6" stroke-width="1.5"/>`).join("")
+    + A(160, 142, 160, 108, "#1c7ed6", 3)
+    + `<ellipse cx="160" cy="70" rx="85" ry="32" fill="#e7f5ff" stroke="#555"/>`
+    + [[110, 58], [135, 52], [160, 56], [185, 52], [210, 58], [122, 64], [172, 64], [198, 64]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#1c7ed6"/>`).join("")
+    + [[118, 84], [142, 88], [166, 84], [190, 88], [208, 82]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#fff" stroke="#1c7ed6" stroke-width="1.5"/>`).join("")
+    + L(20, 74, 300, 74, "#c2255c", 1.5).replace("/>", ` stroke-dasharray="5 4"/>`)
+    + M(282, 30, "ア") + L(270, 34, 215, 56, "#555", 1)
+    + M(282, 120, "イ") + L(270, 116, 212, 86, "#555", 1)
+    + M(32, 52, "ウ") + L(38, 64, 46, 73, "#555", 1)),
+
+  c25_cloud: svg(320, 200,
+    `<rect x="0" y="0" width="320" height="182" fill="#d0ebff"/><rect x="0" y="182" width="320" height="18" fill="#69db7c"/>`
+    + `<ellipse cx="92" cy="34" rx="68" ry="13" fill="#fff" stroke="#adb5bd"/>`
+    + [[70, 70, 30], [100, 60, 26], [62, 104, 30], [104, 100, 30], [80, 130, 36], [118, 136, 28], [48, 136, 26]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="#adb5bd"/>`).join("")
+    + `<ellipse cx="84" cy="160" rx="66" ry="12" fill="#868e96"/>`
+    + [...Array(9)].map((_, i) => L(36 + i * 12, 174, 32 + i * 12, 182, "#495057", 1.2)).join("")
+    + `<rect x="190" y="118" width="120" height="22" rx="10" fill="#868e96"/>`
+    + [...Array(14)].map((_, i) => L(196 + i * 8, 146, 192 + i * 8, 180, "#868e96", 1)).join("")
+    + M(178, 70, "A") + M(250, 96, "B")),
+  c26_wx_kaisei: svg(200, 120,
+    `<circle cx="100" cy="60" r="34" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_wx_hare: svg(200, 120,
+    `<circle cx="100" cy="60" r="34" fill="#fff" stroke="#222" stroke-width="2.5"/><line x1="100" y1="26" x2="100" y2="94" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>`),
+  c26_wx_kumori: svg(200, 120,
+    `<circle cx="100" cy="60" r="34" fill="#fff" stroke="#222" stroke-width="2.5"/><circle cx="100" cy="60" r="17.0" fill="#fff" stroke="#222" stroke-width="2.2"/>`),
+  c26_wx_ame: svg(200, 120,
+    `<circle cx="100" cy="60" r="34" fill="#222" stroke="#222" stroke-width="2.5"/>`),
+  c26_wx_yuki: svg(200, 120,
+    `<circle cx="100" cy="60" r="34" fill="#fff" stroke="#222" stroke-width="2.5"/><line x1="66" y1="60" x2="134" y2="60" stroke="#222" stroke-width="2" stroke-linecap="round"/><line x1="83" y1="30.6" x2="117" y2="89.4" stroke="#222" stroke-width="2" stroke-linecap="round"/><line x1="117" y1="30.6" x2="83" y2="89.4" stroke="#222" stroke-width="2" stroke-linecap="round"/>`),
+  c26_wind1: svg(200, 170,
+    `<line x1="100" y1="124" x2="100" y2="19" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="19" x2="113.1" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="140" r="16" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_wind2: svg(200, 170,
+    `<line x1="100" y1="124" x2="100" y2="19" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="19" x2="113.1" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="28" x2="113.1" y2="18.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="140" r="16" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_wind6: svg(200, 170,
+    `<line x1="100" y1="124" x2="100" y2="19" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="19" x2="113.1" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="28" x2="113.1" y2="18.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="37" x2="113.1" y2="27.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="46" x2="113.1" y2="36.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="55" x2="113.1" y2="45.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="64" x2="113.1" y2="54.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="140" r="16" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_wind7: svg(200, 170,
+    `<line x1="100" y1="124" x2="100" y2="19" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="19" x2="113.1" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="28" x2="113.1" y2="18.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="37" x2="113.1" y2="27.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="46" x2="113.1" y2="36.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="55" x2="113.1" y2="45.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="64" x2="113.1" y2="54.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="19" x2="86.9" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="140" r="16" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_wind12: svg(200, 170,
+    `<line x1="100" y1="124" x2="100" y2="19" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="100" y1="19" x2="113.1" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="28" x2="113.1" y2="18.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="37" x2="113.1" y2="27.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="46" x2="113.1" y2="36.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="55" x2="113.1" y2="45.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="64" x2="113.1" y2="54.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="19" x2="86.9" y2="9.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="28" x2="86.9" y2="18.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="37" x2="86.9" y2="27.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="46" x2="86.9" y2="36.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="55" x2="86.9" y2="45.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="100" y1="64" x2="86.9" y2="54.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="100" cy="140" r="16" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_stA: svg(260, 220,
+    `<text x="30" y="20" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><line x1="30" y1="28" x2="30" y2="54" stroke="#222" stroke-width="1.8" stroke-linecap="round"/><polygon points="30,26 25,36 35,36" fill="#222"/><line x1="24" y1="42" x2="36" y2="42" stroke="#222" stroke-width="1.5" stroke-linecap="round"/><line x1="152.7" y1="137.3" x2="219.9" y2="70.1" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="219.9" y1="70.1" x2="235.6" y2="72.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="213.5" y1="76.5" x2="229.3" y2="79.3" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="207.2" y1="82.8" x2="222.9" y2="85.7" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="200.8" y1="89.2" x2="216.5" y2="92" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="140" cy="150" r="18" fill="#fff" stroke="#222" stroke-width="2.5"/><line x1="140" y1="132" x2="140" y2="168" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>`),
+  c26_stB: svg(300, 180,
+    `<text x="30" y="20" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><line x1="30" y1="28" x2="30" y2="54" stroke="#222" stroke-width="1.8" stroke-linecap="round"/><polygon points="30,26 25,36 35,36" fill="#222"/><line x1="24" y1="42" x2="36" y2="42" stroke="#222" stroke-width="1.5" stroke-linecap="round"/><line x1="98" y1="100" x2="228" y2="100" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="228" y1="100" x2="237.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="219" y1="100" x2="228.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="210" y1="100" x2="219.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="201" y1="100" x2="210.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="192" y1="100" x2="201.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="183" y1="100" x2="192.1" y2="113.1" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="228" y1="100" x2="237.1" y2="86.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="219" y1="100" x2="228.1" y2="86.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="80" cy="100" r="18" fill="#fff" stroke="#222" stroke-width="2.5"/><circle cx="80" cy="100" r="9.0" fill="#fff" stroke="#222" stroke-width="2.2"/>`),
+  c26_stC: svg(260, 220,
+    `<text x="30" y="20" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><line x1="30" y1="28" x2="30" y2="54" stroke="#222" stroke-width="1.8" stroke-linecap="round"/><polygon points="30,26 25,36 35,36" fill="#222"/><line x1="24" y1="42" x2="36" y2="42" stroke="#222" stroke-width="1.5" stroke-linecap="round"/><line x1="137.3" y1="102.7" x2="73.6" y2="166.4" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="73.6" y1="166.4" x2="57.9" y2="163.5" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="80" y1="160" x2="64.3" y2="157.2" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="86.4" y1="153.6" x2="70.6" y2="150.8" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="150" cy="90" r="18" fill="#222" stroke="#222" stroke-width="2.5"/>`),
+  c26_stD: svg(260, 220,
+    `<text x="30" y="20" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><line x1="30" y1="28" x2="30" y2="54" stroke="#222" stroke-width="1.8" stroke-linecap="round"/><polygon points="30,26 25,36 35,36" fill="#222"/><line x1="24" y1="42" x2="36" y2="42" stroke="#222" stroke-width="1.5" stroke-linecap="round"/><line x1="143.1" y1="143.4" x2="104.8" y2="51" stroke="#222" stroke-width="2.5" stroke-linecap="round"/><line x1="104.8" y1="51" x2="113.5" y2="37.5" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><line x1="108.3" y1="59.3" x2="116.9" y2="45.9" stroke="#222" stroke-width="2.2" stroke-linecap="round"/><circle cx="150" cy="160" r="18" fill="#fff" stroke="#222" stroke-width="2.5"/>`),
+  c26_compass: svg(340, 300,
+    `<circle cx="170" cy="150" r="105" fill="#f8f9fa" stroke="#999" stroke-dasharray="4 3"/><line x1="170" y1="150" x2="170" y2="45" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><text x="170" y="34" font-size="15" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><line x1="170" y1="150" x2="210.2" y2="53" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="244.2" y2="75.8" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><line x1="170" y1="150" x2="267" y2="109.8" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="275" y2="150" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><text x="291" y="155" font-size="15" text-anchor="middle" fill="#2b2a33" font-weight="bold">東</text><line x1="170" y1="150" x2="267" y2="190.2" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="244.2" y2="224.2" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><line x1="170" y1="150" x2="210.2" y2="247" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="170" y2="255" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><text x="170" y="276" font-size="15" text-anchor="middle" fill="#2b2a33" font-weight="bold">南</text><line x1="170" y1="150" x2="129.8" y2="247" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="95.8" y2="224.2" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><line x1="170" y1="150" x2="73" y2="190.2" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="65" y2="150" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><text x="49" y="155" font-size="15" text-anchor="middle" fill="#2b2a33" font-weight="bold">西</text><line x1="170" y1="150" x2="73" y2="109.8" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><line x1="170" y1="150" x2="95.8" y2="75.8" stroke="#495057" stroke-width="1.8" stroke-linecap="round"/><line x1="170" y1="150" x2="129.8" y2="53" stroke="#868e96" stroke-width="1.2" stroke-linecap="round"/><circle cx="217.1" cy="36.4" r="13" fill="#2f9e44"/><text x="217.1" y="41.4" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ア</text><circle cx="257" cy="237" r="13" fill="#2f9e44"/><text x="257" y="242" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">イ</text><circle cx="56.4" cy="197.1" r="13" fill="#2f9e44"/><text x="56.4" y="202.1" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ウ</text><circle cx="122.9" cy="36.4" r="13" fill="#2f9e44"/><text x="122.9" y="41.4" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">エ</text>`),
+  c26_blow1: svg(300, 230,
+    `<circle cx="150" cy="115" r="85" fill="#f8f9fa" stroke="#999" stroke-dasharray="4 3"/><line x1="150" y1="115" x2="150" y2="30" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="210.1" y2="54.9" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="235" y2="115" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="210.1" y2="175.1" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="150" y2="200" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="89.9" y2="175.1" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="65" y2="115" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="89.9" y2="54.9" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><text x="150" y="24" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><text x="247" y="120" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">東</text><text x="150" y="218" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">南</text><text x="53" y="120" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">西</text><line x1="75.4" y1="145.9" x2="190.5" y2="98.2" stroke="#1971c2" stroke-width="3" stroke-linecap="round"/><polygon points="197.1,95.5 185.1,94.8 189.1,104.4" fill="#1971c2"/>`),
+  c26_blow2: svg(300, 230,
+    `<circle cx="150" cy="115" r="85" fill="#f8f9fa" stroke="#999" stroke-dasharray="4 3"/><line x1="150" y1="115" x2="150" y2="30" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="210.1" y2="54.9" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="235" y2="115" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="210.1" y2="175.1" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="150" y2="200" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="89.9" y2="175.1" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="65" y2="115" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><line x1="150" y1="115" x2="89.9" y2="54.9" stroke="#adb5bd" stroke-width="1.2" stroke-linecap="round"/><text x="150" y="24" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">北</text><text x="247" y="120" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">東</text><text x="150" y="218" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">南</text><text x="53" y="120" font-size="13" text-anchor="middle" fill="#2b2a33" font-weight="bold">西</text><line x1="207.1" y1="172.1" x2="119" y2="84" stroke="#1971c2" stroke-width="3" stroke-linecap="round"/><polygon points="113.9,78.9 117.9,90.3 125.3,82.9" fill="#1971c2"/>`),
+  c26_isobar: svg(340, 200,
+    `<rect x="0" y="0" width="340" height="200" fill="#e7f5ff"/><ellipse cx="150" cy="100" rx="30" ry="20" fill="none" stroke="#333" stroke-width="1.8"/><ellipse cx="150" cy="100" rx="60" ry="42" fill="none" stroke="#333" stroke-width="1.8"/><ellipse cx="150" cy="100" rx="95" ry="66" fill="none" stroke="#333" stroke-width="1.8"/><ellipse cx="150" cy="100" rx="130" ry="90" fill="none" stroke="#333" stroke-width="1.8"/><text x="150" y="105" font-size="16" text-anchor="middle" fill="#2b2a33" font-weight="bold">高</text><circle cx="312" cy="160" r="13" fill="#2f9e44"/><text x="312" y="165" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ア</text><line x1="299" y1="156" x2="274" y2="132" stroke="#2f9e44" stroke-width="1.8" stroke-linecap="round"/>`),
+  c26_hl_top: svg(360, 200,
+    `<circle cx="90" cy="95" r="18" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="90" cy="95" r="32" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="90" cy="95" r="46" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="90" cy="95" r="60" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="270" cy="95" r="18" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="270" cy="95" r="32" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="270" cy="95" r="46" fill="none" stroke="#555" stroke-width="1.3"/><circle cx="270" cy="95" r="60" fill="none" stroke="#555" stroke-width="1.3"/><path d="M102 95 L105 95.9 L107.9 97.2 L110.7 98.8 L113.3 100.7 L115.8 103 L118.1 105.6 L120.1 108.5 L121.9 111.6 L123.5 115.1 L124.7 118.7 L125.5 122.6 L126.1 126.7 L126.3 130.9 L126 135.2 L125.4 139.6 L124.4 144.2 L123 148.7 L121.1 153.2 L118.8 157.7" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="121.1" y1="153.2" x2="119.6" y2="155.8" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="116.1,162.1 125.9,155.3 116.9,150.1" fill="#c92a2a"/><path d="M90 107 L89.1 110 L87.8 112.9 L86.2 115.7 L84.3 118.3 L82 120.8 L79.4 123.1 L76.5 125.1 L73.4 126.9 L69.9 128.5 L66.3 129.7 L62.4 130.5 L58.3 131.1 L54.1 131.3 L49.8 131 L45.4 130.4 L40.8 129.4 L36.3 128 L31.8 126.1 L27.3 123.8" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="31.8" y1="126.1" x2="29.2" y2="124.6" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="22.9,121.1 29.7,130.9 34.9,121.9" fill="#c92a2a"/><path d="M78 95 L75 94.1 L72.1 92.8 L69.3 91.2 L66.7 89.3 L64.2 87 L61.9 84.4 L59.9 81.5 L58.1 78.4 L56.5 74.9 L55.3 71.3 L54.5 67.4 L53.9 63.3 L53.7 59.1 L54 54.8 L54.6 50.4 L55.6 45.8 L57 41.3 L58.9 36.8 L61.2 32.3" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="58.9" y1="36.8" x2="60.4" y2="34.2" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="63.9,27.9 54.1,34.7 63.1,39.9" fill="#c92a2a"/><path d="M90 83 L90.9 80 L92.2 77.1 L93.8 74.3 L95.7 71.7 L98 69.2 L100.6 66.9 L103.5 64.9 L106.6 63.1 L110.1 61.5 L113.7 60.3 L117.6 59.5 L121.7 58.9 L125.9 58.7 L130.2 59 L134.6 59.6 L139.2 60.6 L143.7 62 L148.2 63.9 L152.7 66.2" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="148.2" y1="63.9" x2="150.8" y2="65.4" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="157.1,68.9 150.3,59.1 145.1,68.1" fill="#c92a2a"/><path d="M336.3 123 L335.1 118 L333.4 113.2 L331.5 108.7 L329.2 104.6 L326.7 100.7 L324 97.2 L321 94 L317.8 91.2 L314.6 88.7 L311.2 86.7 L307.7 85 L304.2 83.7 L300.6 82.8 L297.1 82.2 L293.7 82.1 L290.3 82.3 L287.1 82.8 L284 83.7 L281.1 84.9" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="284" y1="83.7" x2="284.8" y2="83.3" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="278.4,86.4 290.4,86.4 285.8,77" fill="#c92a2a"/><path d="M242 161.3 L247 160.1 L251.8 158.4 L256.3 156.5 L260.4 154.2 L264.3 151.7 L267.8 149 L271 146 L273.8 142.8 L276.3 139.6 L278.3 136.2 L280 132.7 L281.3 129.2 L282.2 125.6 L282.8 122.1 L282.9 118.7 L282.7 115.3 L282.2 112.1 L281.3 109 L280.1 106.1" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="281.3" y1="109" x2="281.7" y2="109.8" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="278.6,103.4 278.6,115.4 288,110.8" fill="#c92a2a"/><path d="M203.7 67 L204.9 72 L206.6 76.8 L208.5 81.3 L210.8 85.4 L213.3 89.3 L216 92.8 L219 96 L222.2 98.8 L225.4 101.3 L228.8 103.3 L232.3 105 L235.8 106.3 L239.4 107.2 L242.9 107.8 L246.3 107.9 L249.7 107.7 L252.9 107.2 L256 106.3 L258.9 105.1" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="256" y1="106.3" x2="255.2" y2="106.7" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="261.6,103.6 249.6,103.6 254.2,113" fill="#c92a2a"/><path d="M298 28.7 L293 29.9 L288.2 31.6 L283.7 33.5 L279.6 35.8 L275.7 38.3 L272.2 41 L269 44 L266.2 47.2 L263.7 50.4 L261.7 53.8 L260 57.3 L258.7 60.8 L257.8 64.4 L257.2 67.9 L257.1 71.3 L257.3 74.7 L257.8 77.9 L258.7 81 L259.9 83.9" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="258.7" y1="81" x2="258.3" y2="80.2" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="261.4,86.6 261.4,74.6 252,79.2" fill="#c92a2a"/><circle cx="90" cy="95" r="13" fill="#2f9e44"/><text x="90" y="100" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">A</text><circle cx="270" cy="95" r="13" fill="#2f9e44"/><text x="270" y="100" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">B</text><text x="180" y="190" font-size="11" text-anchor="middle" fill="#2b2a33" font-weight="normal">北半球・上から見た図</text>`),
+  c26_hl_side: svg(360, 200,
+    `<line x1="10" y1="170" x2="350" y2="170" stroke="#555" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="178" x2="22" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="26" y1="178" x2="34" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="38" y1="178" x2="46" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="50" y1="178" x2="58" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="62" y1="178" x2="70" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="74" y1="178" x2="82" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="86" y1="178" x2="94" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="98" y1="178" x2="106" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="110" y1="178" x2="118" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="122" y1="178" x2="130" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="134" y1="178" x2="142" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="146" y1="178" x2="154" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="158" y1="178" x2="166" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="170" y1="178" x2="178" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="182" y1="178" x2="190" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="194" y1="178" x2="202" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="206" y1="178" x2="214" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="218" y1="178" x2="226" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="230" y1="178" x2="238" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="242" y1="178" x2="250" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="254" y1="178" x2="262" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="266" y1="178" x2="274" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="278" y1="178" x2="286" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="290" y1="178" x2="298" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="302" y1="178" x2="310" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="314" y1="178" x2="322" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="326" y1="178" x2="334" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="338" y1="178" x2="346" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><path d="M81.0 30 Q81.0 130 42.0 155" fill="none" stroke="#364fc7" stroke-width="2.2"/><line x1="48" y1="148" x2="45.7" y2="151.8" stroke="#364fc7" stroke-width="2.2" stroke-linecap="round"/><polygon points="42,158 52,151.4 43.1,146" fill="#364fc7"/><path d="M90.0 30 Q90.0 130 90.0 155" fill="none" stroke="#364fc7" stroke-width="2.2"/><line x1="90" y1="148" x2="90" y2="150.8" stroke="#364fc7" stroke-width="2.2" stroke-linecap="round"/><polygon points="90,158 95.2,147.2 84.8,147.2" fill="#364fc7"/><path d="M99.0 30 Q99.0 130 138.0 155" fill="none" stroke="#364fc7" stroke-width="2.2"/><line x1="132" y1="148" x2="134.3" y2="151.8" stroke="#364fc7" stroke-width="2.2" stroke-linecap="round"/><polygon points="138,158 136.9,146 128,151.4" fill="#364fc7"/><path d="M222.0 160 Q261.0 130 261.0 45" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="261" y1="55" x2="261" y2="42.2" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="261,35 255.8,45.8 266.2,45.8" fill="#c92a2a"/><path d="M270.0 160 Q270.0 130 270.0 45" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="270" y1="55" x2="270" y2="42.2" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="270,35 264.8,45.8 275.2,45.8" fill="#c92a2a"/><path d="M318.0 160 Q279.0 130 279.0 45" fill="none" stroke="#c92a2a" stroke-width="2.2"/><line x1="279" y1="55" x2="279" y2="42.2" stroke="#c92a2a" stroke-width="2.2" stroke-linecap="round"/><polygon points="279,35 273.8,45.8 284.2,45.8" fill="#c92a2a"/><circle cx="90" cy="16" r="13" fill="#2f9e44"/><text x="90" y="21" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">A</text><circle cx="270" cy="16" r="13" fill="#2f9e44"/><text x="270" y="21" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">B</text><text x="345" y="190" font-size="11" text-anchor="end" fill="#2b2a33" font-weight="normal">地表</text>`),
+  c26_f_cold: svg(260, 80,
+    `<path d="M20 30 L240 30" fill="none" stroke="#1c7ed6" stroke-width="3"/><polygon points="38.5,30 56.5,30 47.5,42" fill="#1c7ed6"/><polygon points="93.5,30 111.5,30 102.5,42" fill="#1c7ed6"/><polygon points="148.5,30 166.5,30 157.5,42" fill="#1c7ed6"/><polygon points="203.5,30 221.5,30 212.5,42" fill="#1c7ed6"/>`),
+  c26_f_warm: svg(260, 80,
+    `<path d="M20 50 L240 50" fill="none" stroke="#e03131" stroke-width="3"/><polygon points="56.5,50 56.2,47.7 55.3,45.5 53.9,43.6 52,42.2 49.8,41.3 47.5,41 45.2,41.3 43,42.2 41.1,43.6 39.7,45.5 38.8,47.7 38.5,50" fill="#e03131"/><polygon points="111.5,50 111.2,47.7 110.3,45.5 108.9,43.6 107,42.2 104.8,41.3 102.5,41 100.2,41.3 98,42.2 96.1,43.6 94.7,45.5 93.8,47.7 93.5,50" fill="#e03131"/><polygon points="166.5,50 166.2,47.7 165.3,45.5 163.9,43.6 162,42.2 159.8,41.3 157.5,41 155.2,41.3 153,42.2 151.1,43.6 149.7,45.5 148.8,47.7 148.5,50" fill="#e03131"/><polygon points="221.5,50 221.2,47.7 220.3,45.5 218.9,43.6 217,42.2 214.8,41.3 212.5,41 210.2,41.3 208,42.2 206.1,43.6 204.7,45.5 203.8,47.7 203.5,50" fill="#e03131"/>`),
+  c26_f_stat: svg(260, 80,
+    `<path d="M20 40 L240 40" fill="none" stroke="#495057" stroke-width="3"/><polygon points="56.5,40 56.2,37.7 55.3,35.5 53.9,33.6 52,32.2 49.8,31.3 47.5,31 45.2,31.3 43,32.2 41.1,33.6 39.7,35.5 38.8,37.7 38.5,40" fill="#e03131"/><polygon points="93.5,40 111.5,40 102.5,52" fill="#1c7ed6"/><polygon points="166.5,40 166.2,37.7 165.3,35.5 163.9,33.6 162,32.2 159.8,31.3 157.5,31 155.2,31.3 153,32.2 151.1,33.6 149.7,35.5 148.8,37.7 148.5,40" fill="#e03131"/><polygon points="203.5,40 221.5,40 212.5,52" fill="#1c7ed6"/>`),
+  c26_f_occl: svg(260, 80,
+    `<path d="M20 30 L240 30" fill="none" stroke="#9c36b5" stroke-width="3"/><polygon points="38.5,30 56.5,30 47.5,42" fill="#9c36b5"/><polygon points="111.5,30 111.2,32.3 110.3,34.5 108.9,36.4 107,37.8 104.8,38.7 102.5,39 100.2,38.7 98,37.8 96.1,36.4 94.7,34.5 93.8,32.3 93.5,30" fill="#9c36b5"/><polygon points="148.5,30 166.5,30 157.5,42" fill="#9c36b5"/><polygon points="221.5,30 221.2,32.3 220.3,34.5 218.9,36.4 217,37.8 214.8,38.7 212.5,39 210.2,38.7 208,37.8 206.1,36.4 204.7,34.5 203.8,32.3 203.5,30" fill="#9c36b5"/>`),
+  c26_lowfront: svg(320, 240,
+    `<rect x="0" y="0" width="320" height="240" fill="#d0ebff"/><path d="M140 70 Q220 90 290 200 L290 240 L60 240 Q110 140 140 70 Z" fill="#ffe8cc"/><path d="M150 72 L200 82 L245 115 L275 160 L290 200" fill="none" stroke="#e03131" stroke-width="3"/><polygon points="178.8,77.8 178.9,75.4 178.5,73.1 177.5,71 175.9,69.2 174,67.9 171.7,67.2 169.4,67 167.1,67.5 165,68.5 163.2,70.1 161.9,72 161.1,74.2" fill="#e03131"/><polygon points="215.4,93.3 216.5,91.2 217.1,88.9 217,86.6 216.4,84.3 215.2,82.3 213.5,80.7 211.4,79.6 209.1,79 206.8,79.1 204.5,79.7 202.5,80.9 200.9,82.6" fill="#e03131"/><polygon points="248.2,117.4 249.4,115.3 249.9,113 249.9,110.7 249.2,108.4 248,106.4 246.3,104.8 244.2,103.7 242,103.1 239.6,103.2 237.3,103.8 235.3,105 233.7,106.7" fill="#e03131"/><polygon points="269.8,152.2 271.6,150.7 272.9,148.7 273.6,146.5 273.8,144.1 273.3,141.8 272.3,139.7 270.8,138 268.8,136.7 266.6,135.9 264.2,135.7 261.9,136.2 259.8,137.2" fill="#e03131"/><polygon points="286,189.4 288.1,188.3 289.8,186.7 291,184.7 291.7,182.4 291.8,180.1 291.3,177.8 290.2,175.7 288.6,174 286.6,172.7 284.3,172.1 282,172 279.7,172.5" fill="#e03131"/><path d="M132 78 L122 120 L100 165 L70 215 L60 238" fill="none" stroke="#1c7ed6" stroke-width="3"/><polygon points="130,86.4 125.8,103.9 139.6,98" fill="#1c7ed6"/><polygon points="121.6,120.7 113.7,136.9 128.5,134.1" fill="#1c7ed6"/><polygon points="106.1,152.5 98.2,168.6 112.9,165.8" fill="#1c7ed6"/><polygon points="89,183.3 79.7,198.8 94.7,197.2" fill="#1c7ed6"/><polygon points="70.6,213.5 63.5,230.1 78,226.6" fill="#1c7ed6"/><circle cx="140" cy="62" r="17" fill="#fff" stroke="#c92a2a" stroke-width="2"/><text x="140" y="68" font-size="16" text-anchor="middle" fill="#2b2a33" font-weight="bold">低</text><circle cx="282" cy="92" r="13" fill="#2f9e44"/><text x="282" y="97" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ア</text><circle cx="56" cy="150" r="13" fill="#2f9e44"/><text x="56" y="155" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">イ</text><circle cx="185" cy="190" r="13" fill="#2f9e44"/><text x="185" y="195" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">A</text><circle cx="60" cy="60" r="13" fill="#2f9e44"/><text x="60" y="65" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">B</text>`),
+  c26_coldsec: svg(320, 190,
+    `<rect x="0" y="0" width="320" height="200" fill="#ffe8cc"/><path d="M0 60 Q120 70 165 170 L0 170 Z" fill="#a5d8ff"/><path d="M150 60 q-8 -12 6 -18 q6 -14 20 -6 q14 -6 18 8 q12 6 2 20 q8 14 -6 22 q6 16 -10 22 q4 16 -14 18 q-14 2 -14 -14 q-14 -6 -4 -20 q-12 -12 2 -20 q-10 -10 0 -12 Z" fill="#fff" stroke="#868e96" stroke-width="1.5"/><path d="M210 165 Q190 120 178 80" fill="none" stroke="#c92a2a" stroke-width="3"/><line x1="181" y1="92" x2="178.6" y2="81" stroke="#c92a2a" stroke-width="3" stroke-linecap="round"/><polygon points="177,74 174.2,85.7 184.4,83.4" fill="#c92a2a"/><line x1="40" y1="135" x2="112.8" y2="135" stroke="#364fc7" stroke-width="3" stroke-linecap="round"/><polygon points="120,135 109.2,129.8 109.2,140.2" fill="#364fc7"/><text x="50" y="115" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">寒気</text><text x="260" y="110" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">暖気</text><line x1="0" y1="170" x2="320" y2="170" stroke="#555" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="178" x2="10" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="14" y1="178" x2="20" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="178" x2="30" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="34" y1="178" x2="40" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="178" x2="50" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="54" y1="178" x2="60" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="64" y1="178" x2="70" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="74" y1="178" x2="80" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="84" y1="178" x2="90" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="94" y1="178" x2="100" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="104" y1="178" x2="110" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="114" y1="178" x2="120" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="124" y1="178" x2="130" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="134" y1="178" x2="140" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="144" y1="178" x2="150" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="154" y1="178" x2="160" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="164" y1="178" x2="170" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="174" y1="178" x2="180" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="184" y1="178" x2="190" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="194" y1="178" x2="200" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="204" y1="178" x2="210" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="214" y1="178" x2="220" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="224" y1="178" x2="230" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="234" y1="178" x2="240" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="244" y1="178" x2="250" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="254" y1="178" x2="260" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="264" y1="178" x2="270" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="274" y1="178" x2="280" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="284" y1="178" x2="290" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="294" y1="178" x2="300" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="304" y1="178" x2="310" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="314" y1="178" x2="320" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><circle cx="228" cy="50" r="13" fill="#2f9e44"/><text x="228" y="55" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ア</text><line x1="215" y1="50" x2="200" y2="55" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/><circle cx="90" cy="40" r="13" fill="#2f9e44"/><text x="90" y="45" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">イ</text><line x1="100" y1="50" x2="118" y2="80" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/>`),
+  c26_warmsec: svg(320, 190,
+    `<rect x="0" y="0" width="320" height="200" fill="#ffe8cc"/><path d="M80 170 L320 40 L320 170 Z" fill="#a5d8ff"/><path d="M120 120 q-6 -14 10 -16 q6 -14 22 -8 q12 -10 26 0 q16 -4 20 8 q16 -2 16 10 q10 0 6 10 Z" fill="#fff" stroke="#868e96" stroke-width="1.5"/><path d="M195 85 q-4 -12 10 -12 q8 -10 20 -2 q14 -2 14 8 q10 4 2 10 Z" fill="#fff" stroke="#868e96" stroke-width="1.5"/><line x1="20" y1="160" x2="143.5" y2="103" stroke="#c92a2a" stroke-width="3" stroke-linecap="round"/><polygon points="150,100 138,99.8 142.4,109.3" fill="#c92a2a"/><text x="40" y="125" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">暖気</text><text x="270" y="150" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">寒気</text><line x1="0" y1="170" x2="320" y2="170" stroke="#555" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="178" x2="10" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="14" y1="178" x2="20" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="178" x2="30" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="34" y1="178" x2="40" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="178" x2="50" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="54" y1="178" x2="60" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="64" y1="178" x2="70" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="74" y1="178" x2="80" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="84" y1="178" x2="90" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="94" y1="178" x2="100" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="104" y1="178" x2="110" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="114" y1="178" x2="120" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="124" y1="178" x2="130" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="134" y1="178" x2="140" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="144" y1="178" x2="150" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="154" y1="178" x2="160" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="164" y1="178" x2="170" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="174" y1="178" x2="180" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="184" y1="178" x2="190" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="194" y1="178" x2="200" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="204" y1="178" x2="210" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="214" y1="178" x2="220" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="224" y1="178" x2="230" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="234" y1="178" x2="240" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="244" y1="178" x2="250" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="254" y1="178" x2="260" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="264" y1="178" x2="270" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="274" y1="178" x2="280" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="284" y1="178" x2="290" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="294" y1="178" x2="300" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="304" y1="178" x2="310" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="314" y1="178" x2="320" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><circle cx="160" cy="60" r="13" fill="#2f9e44"/><text x="160" y="65" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">ア</text><line x1="160" y1="73" x2="160" y2="100" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/>`),
+  c26_face: svg(320, 200,
+    `<rect x="0" y="0" width="320" height="200" fill="#ffe8cc"/><path d="M0 50 Q150 70 190 170 L0 170 Z" fill="#a5d8ff"/><text x="70" y="140" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">寒気</text><text x="260" y="130" font-size="14" text-anchor="middle" fill="#2b2a33" font-weight="bold">暖気</text><line x1="0" y1="170" x2="320" y2="170" stroke="#555" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="178" x2="10" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="14" y1="178" x2="20" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="178" x2="30" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="34" y1="178" x2="40" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="178" x2="50" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="54" y1="178" x2="60" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="64" y1="178" x2="70" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="74" y1="178" x2="80" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="84" y1="178" x2="90" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="94" y1="178" x2="100" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="104" y1="178" x2="110" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="114" y1="178" x2="120" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="124" y1="178" x2="130" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="134" y1="178" x2="140" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="144" y1="178" x2="150" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="154" y1="178" x2="160" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="164" y1="178" x2="170" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="174" y1="178" x2="180" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="184" y1="178" x2="190" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="194" y1="178" x2="200" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="204" y1="178" x2="210" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="214" y1="178" x2="220" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="224" y1="178" x2="230" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="234" y1="178" x2="240" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="244" y1="178" x2="250" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="254" y1="178" x2="260" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="264" y1="178" x2="270" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="274" y1="178" x2="280" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="284" y1="178" x2="290" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="294" y1="178" x2="300" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="304" y1="178" x2="310" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><line x1="314" y1="178" x2="320" y2="170" stroke="#999" stroke-width="1" stroke-linecap="round"/><circle cx="190" cy="170" r="5" fill="#222"/><circle cx="250" cy="40" r="13" fill="#2f9e44"/><text x="250" y="45" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">①</text><line x1="238" y1="46" x2="158" y2="115" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/><circle cx="260" cy="186" r="13" fill="#2f9e44"/><text x="260" y="190" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">②</text><line x1="247" y1="186" x2="196" y2="172" stroke="#2f9e44" stroke-width="1.5" stroke-linecap="round"/>`),
+  c26_statmap: svg(320, 200,
+    `<rect x="0" y="0" width="320" height="100" fill="#d0ebff"/><rect x="0" y="100" width="320" height="100" fill="#ffe8cc"/><path d="M10 100 L310 100" fill="none" stroke="#495057" stroke-width="3"/><polygon points="44,100 43.7,97.7 42.8,95.5 41.4,93.6 39.5,92.2 37.3,91.3 35,91 32.7,91.3 30.5,92.2 28.6,93.6 27.2,95.5 26.3,97.7 26,100" fill="#e03131"/><polygon points="76,100 94,100 85,112" fill="#1c7ed6"/><polygon points="144,100 143.7,97.7 142.8,95.5 141.4,93.6 139.5,92.2 137.3,91.3 135,91 132.7,91.3 130.5,92.2 128.6,93.6 127.2,95.5 126.3,97.7 126,100" fill="#e03131"/><polygon points="176,100 194,100 185,112" fill="#1c7ed6"/><polygon points="244,100 243.7,97.7 242.8,95.5 241.4,93.6 239.5,92.2 237.3,91.3 235,91 232.7,91.3 230.5,92.2 228.6,93.6 227.2,95.5 226.3,97.7 226,100" fill="#e03131"/><polygon points="276,100 294,100 285,112" fill="#1c7ed6"/><circle cx="160" cy="40" r="13" fill="#2f9e44"/><text x="160" y="45" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">A</text><circle cx="160" cy="160" r="13" fill="#2f9e44"/><text x="160" y="165" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">B</text>`),
+  c27_kidan: svg(320, 240,
+    `<rect x="0" y="0" width="320" height="240" fill="#d0ebff"/>`
+    + `<polygon points="0,0 215,0 205,25 175,45 150,70 140,95 125,100 120,130 100,160 80,190 60,240 0,240" fill="#b2f2bb" stroke="#69a96e"/>`
+    + `<polygon points="140,95 158,100 160,130 148,140 138,118" fill="#b2f2bb" stroke="#69a96e"/>`
+    + `<path d="M168 166 Q195 150 215 140 Q240 125 248 100 Q255 75 262 58" stroke="#8ce99a" stroke-width="10" fill="none" stroke-linecap="round"/>`
+    + `<ellipse cx="160" cy="174" rx="8" ry="11" fill="#8ce99a"/><ellipse cx="273" cy="40" rx="16" ry="12" fill="#8ce99a"/>`
+    + `<ellipse cx="95" cy="55" rx="60" ry="40" fill="#9775fa" fill-opacity=".45" stroke="#7048e8" stroke-dasharray="4 3"/>`
+    + `<ellipse cx="55" cy="165" rx="35" ry="48" fill="#ff922b" fill-opacity=".45" stroke="#e8590c" stroke-dasharray="4 3"/>`
+    + `<ellipse cx="303" cy="88" rx="15" ry="32" fill="#4dabf7" fill-opacity=".5" stroke="#1971c2" stroke-dasharray="4 3"/>`
+    + `<ellipse cx="255" cy="198" rx="45" ry="32" fill="#ff6b6b" fill-opacity=".45" stroke="#e03131" stroke-dasharray="4 3"/>`
+    + M(95, 55, "A") + M(55, 165, "B") + M(303, 88, "C") + M(255, 198, "D")),
+
+  c27_winter: svg(320, 222,
+    `<rect x="0" y="0" width="320" height="200" fill="#d0ebff"/>`
+    + `<polygon points="0,0 150,0 135,40 120,70 105,110 90,150 70,200 0,200" fill="#b2f2bb" stroke="#69a96e"/>`
+    + `<path d="M150 172 Q172 145 185 115 Q196 85 210 50" stroke="#8ce99a" stroke-width="10" fill="none" stroke-linecap="round"/>`
+    + [125, 155, 185, 215, 245].map(x => `<path d="M${x} 8 Q${x + 18} 100 ${x} 192" stroke="#868e96" stroke-width="1.5" fill="none"/>`).join("")
+    + M(50, 90, "ア") + M(285, 80, "イ")
+    + T(160, 216, "線は等圧線（気圧の等しいところを結んだ線）", { size: 10, w: "normal" })),
+
+  c27_kiken: svg(300, 240,
+    `<rect x="0" y="0" width="300" height="240" fill="#f8f9fa"/>`
+    + `<circle cx="150" cy="130" r="82" fill="#fff3bf" stroke="#adb5bd" stroke-dasharray="4 3"/>`
+    + A(150, 216, 150, 28, "#f08c00", 4) + T(205, 26, "進行方向", { size: 11 })
+    + A(228, 158, 228, 104, "#1971c2", 2.5) + A(72, 104, 72, 158, "#1971c2", 2.5)
+    + A(136, 50, 96, 64, "#1971c2", 2.5) + A(164, 210, 204, 196, "#1971c2", 2.5)
+    + `<circle cx="150" cy="130" r="14" fill="#fff" stroke="#333" stroke-width="2"/>` + T(150, 135, "台", { size: 13 })
+    + M(105, 130, "ア") + M(195, 130, "イ")
+    + T(150, 236, "青い矢印は台風にふきこむ風", { size: 10, w: "normal" })),
+
+  c27_yoho: svg(340, 262,
+    `<rect x="0" y="0" width="340" height="262" fill="#e7f5ff"/>`
+    + `<circle cx="100" cy="180" r="62" fill="#ffe066" fill-opacity=".7"/>`
+    + `<circle cx="100" cy="180" r="35" fill="#ffc9c9" stroke="#e03131" stroke-width="2"/>`
+    + `<path d="M183.6 37.4 A63 63 0 1 1 259.3 135.8 L116.3 211 A35 35 0 0 1 74.2 156.3 Z" fill="none" stroke="#c92a2a" stroke-width="2"/>`
+    + `<circle cx="230" cy="80" r="28" fill="none" stroke="#495057" stroke-width="2" stroke-dasharray="5 4"/>`
+    + L(100, 180, 230, 80, "#495057", 1.5) + T(100, 185, "×", { size: 14 }) + T(230, 85, "＋", { size: 12, c: "#495057" })
+    + L(36, 238, 80, 200, "#333", 1) + M(26, 246, "ア")
+    + L(188, 240, 140, 215, "#333", 1) + M(200, 246, "イ")
+    + L(303, 145, 254, 94, "#333", 1) + M(314, 155, "ウ")
+    + L(298, 26, 262, 26, "#333", 1) + M(311, 26, "エ")),
 };
 
 // ===== カードデータ =====
@@ -2863,6 +3129,406 @@ const ERAS = [
           { q: "【練習】30%の食塩水100gと10%の食塩水300gを混ぜると、何%？", a: "15%", n: "食塩＝30＋30＝60g。全体＝400g。60÷400×100＝15（%）" },
           { q: "【練習】15%の食塩水300gに水を何g加えると、10%になる？", a: "150g", n: "食塩は45g。10%で45gなら全体は450g。450−300＝150（g）" },
           { q: "【練習】8%の食塩水200gに食塩を何g加えると、20%になる？", a: "30g", long: true, n: "てんびん法：8%と100%、支点20%でつりあうきょりは12：80＝3：20。重さの比は20：3なので200×3/20＝30（g）。確かめ：（16＋30）÷230×100＝20（%）" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no24",
+    no: "No.24",
+    name: "🌡️ No.24 気温の変化と湿度",
+    source: "要点 p.20〜25",
+    decks: [
+      {
+        id: "s1", no: 1, title: "気温と地温の変化", page: "p.20〜22",
+        cards: [
+          { q: "気温とは、何の温度のこと？", a: "空気の温度", r: "きおん", n: "" },
+          { q: "気温は、どんなところではかる？", a: "直射日光の当たらない、風通しのよいところ", long: true, r: "ちょくしゃにっこう", n: "日光が直接当たると、温度計そのものがあたためられてしまう。" },
+          { q: "気温は、地面から何mの高さではかる？", a: "1.2〜1.5m", n: "地面の熱のえいきょうを受けにくい高さ。" },
+          { f: "c24_eye", q: "温度計の目もりを読むとき、目の位置はア〜ウのどれが正しい？", a: "イ", n: "液面と目の高さを同じにして読む。" },
+          { q: "温度計の目もりは、目の高さを何と同じにして読む？", a: "液面", r: "えきめん", n: "ななめから読むと正しい値にならない。" },
+          { q: "1日のうちで最も高い気温（最高気温）になるのは何時ごろ？", a: "午後2時（14時）ごろ", n: "太陽の南中（12時）より2時間ほどおくれる。" },
+          { q: "1日のうちで最も低い気温（最低気温）になるのはいつごろ？", a: "日の出前ごろ", n: "夜のあいだ熱がにげつづけ、日の出の直前がいちばん低い。" },
+          { q: "1日の最高気温と最低気温の差を何という？", a: "日較差", r: "にっかくさ", n: "" },
+          { q: "晴れの日の日較差は、大きい？小さい？", a: "大きい", n: "昼は日光でよくあたたまり、夜は熱がにげやすい。" },
+          { q: "くもりや雨の日の日較差は、大きい？小さい？", a: "小さい", n: "雲が日光をさえぎり、夜は雲が熱がにげるのをふせぐ。" },
+          { f: "c24_daily", q: "ア・イは、晴れの日とくもりや雨の日の気温の変化。晴れの日はどっち？", a: "ア", long: true, n: "晴れの日は日較差が大きく、山の形がはっきりしたグラフになる。" },
+          { q: "地温とは、何の温度のこと？", a: "地面や地中の温度", r: "ちおん", n: "" },
+          { q: "1日のうちで最も高い地温（最高地温）になるのは何時ごろ？", a: "午後1時（13時）ごろ", n: "南中（12時）の1時間後。" },
+          { q: "1日のうちで最も低い地温（最低地温）になるのはいつごろ？", a: "日の出前ごろ", n: "最低気温と同じころ。" },
+          { q: "地温のはかり方：温度計の液だめをどうする？", a: "日なたの地面をほって液だめをうめ、その上に土をうすくかける", long: true, r: "えきだめ", n: "" },
+          { q: "地温をはかるとき、液だめ以外の部分をおおうのはなぜ？", a: "温度計に直接日光が当たらないようにするため", long: true, n: "" },
+          { q: "地温の目もりを読むときは、温度計をどうする？", a: "おおいをはずして、そのまま（うめたまま）読む", long: true, n: "土から出すと温度が変わってしまう。" },
+          { f: "c24_graph", q: "グラフのAは、太陽の高さ・気温・地温のどれの変化？", a: "太陽の高さ（太陽高度）", n: "正午（12時）ごろに最も高くなる。" },
+          { f: "c24_graph", q: "グラフのBは、太陽の高さ・気温・地温のどれの変化？", a: "地温", n: "午後1時ごろに最も高くなる。" },
+          { f: "c24_graph", q: "グラフのCは、太陽の高さ・気温・地温のどれの変化？", a: "気温", n: "午後2時ごろに最も高くなる。" },
+          { q: "太陽が南中するのは何時？", a: "12時（正午）", r: "なんちゅう", n: "1日で太陽の高さが最も高くなる。" },
+          { q: "最高地温が南中より1時間ほどおくれるのはなぜ？", a: "日光が地面をあたためるのに少し時間がかかるから", long: true, n: "" },
+          { q: "最高気温が最高地温より1時間ほどおくれるのはなぜ？", a: "地面の熱が空気に伝わるのに少し時間がかかるから", long: true, n: "空気は日光で直接ではなく、あたためられた地面によってあたためられる。" },
+          { q: "太陽の熱が地面に伝わる伝わり方を何という？", a: "放射", r: "ほうしゃ", n: "放射では、とちゅうの空気はあたたまらない。" },
+          { q: "南中・最高気温・最高地温を、時刻の早い順にならべると？", a: "南中（12時）→最高地温（13時）→最高気温（14時）", long: true, n: "太陽→地面→空気の順にあたたまる。" },
+          { q: "最高気温が35℃以上の日を何という？", a: "猛暑日", r: "もうしょび", n: "" },
+          { q: "最高気温が30℃以上の日を何という？", a: "真夏日", r: "まなつび", n: "" },
+          { q: "最高気温が25℃以上の日を何という？", a: "夏日", r: "なつび", n: "" },
+          { q: "猛暑日・真夏日・夏日は、それぞれ最高気温が何℃以上の日？", a: "猛暑日35℃・真夏日30℃・夏日25℃", long: true, n: "5℃ずつちがう。" },
+          { q: "夕方から翌日の朝までの最低気温が25℃以上の夜を何という？", a: "熱帯夜", r: "ねったいや", n: "" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "百葉箱", page: "p.23",
+        cards: [
+          { q: "気温などをはかるための、白い箱の形をした装置を何という？", a: "百葉箱", r: "ひゃくようばこ", n: "" },
+          { q: "百葉箱の全体は何色？それはなぜ？", a: "白色・日光を反射させるため", r: "はんしゃ", n: "" },
+          { q: "百葉箱のかべやとびらは、何という戸になっている？", a: "よろい戸", n: "風通しをよくし、雨や直射日光が入るのを防ぐ。" },
+          { q: "百葉箱は、何の上に建てる？それはなぜ？", a: "しばふ・地面からの照り返しを防ぐため", long: true, n: "" },
+          { q: "百葉箱のとびらは、どの向きについている？", a: "北向き", n: "とびらを開けたときに直射日光が入らないようにするため。" },
+          { q: "百葉箱の中の測定器は、地上何mの高さに置く？", a: "1.2〜1.5m", r: "そくていき", n: "気温のはかり方と同じ高さ。" },
+          { q: "百葉箱の中に入っているものを3つ以上いうと？", a: "乾球温度計・湿球温度計・最高温度計・最低温度計・自記温度計など", long: true, r: "かんきゅう・しっきゅう・じき", n: "" },
+          { f: "c24_hyakuyo", q: "イのような、風通しをよくした戸を何という？", a: "よろい戸", n: "" },
+          { f: "c24_hyakuyo", q: "ウの地面には、何がはえている？", a: "しばふ", n: "照り返しを防ぐため。" },
+          { f: "c24_hyakuyo", q: "エのとびらは、東西南北のどの向き？", a: "北向き", n: "" },
+          { f: "c24_hyakuyo", q: "オの高さ（測定器の高さ）は何m？", a: "1.2〜1.5m", n: "" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "湿度", page: "p.23〜25",
+        cards: [
+          { q: "空気1m³中にふくまれる水蒸気量が、その温度での飽和水蒸気量に対してどれくらいの割合かを百分率で表したものを何という？", a: "湿度", long: true, r: "しつど", n: "単位は%。" },
+          { q: "ある温度で、空気1m³中にふくむことができる水蒸気の最大量を何という？", a: "飽和水蒸気量", long: true, r: "ほうわすいじょうきりょう", n: "単位はg。" },
+          { q: "気温が高くなると、飽和水蒸気量はどうなる？", a: "大きくなる", n: "あたたかい空気ほど、たくさんの水蒸気をふくむことができる。" },
+          { q: "湿度（%）を求める公式は？", a: "空気1m³中の水蒸気量÷その気温での飽和水蒸気量×100", long: true, n: "" },
+          { q: "空気1m³中にふくまれている水蒸気量（g）を求める公式は？", a: "その気温での飽和水蒸気量×湿度÷100", long: true, n: "" },
+          { f: "c24_satable", q: "【例1】気温15℃の空気1m³中に9.6gの水蒸気がふくまれるとき、湿度は何%？", a: "75%", n: "15℃の飽和水蒸気量は12.8g。9.6÷12.8×100＝75（%）" },
+          { f: "c24_satable", q: "【例2】気温10℃で湿度が40%のとき、空気1m³中にふくまれる水蒸気は何g？", a: "3.76g", n: "10℃の飽和水蒸気量は9.4g。9.4×40÷100＝3.76（g）" },
+          { f: "c24_satable", q: "【例3】気温30℃で湿度100%の空気が20℃になると、空気1m³あたり何gの水蒸気が水に変わる？", a: "13.1g", long: true, n: "30℃で30.4g、20℃で17.3g。30.4−17.3＝13.1（g）" },
+          { f: "c24_satable", q: "1m³中に約17gの水蒸気をふくんだ30℃の空気を10℃まで冷やすと、約何gの水てきができる？", a: "約8g", long: true, n: "10℃の飽和水蒸気量は9.4g。17−9.4＝7.6→約8g。約9gは水蒸気のまま残る。" },
+          { f: "c24_satable", q: "【練習】気温20℃の空気1m³中に8.65gの水蒸気がふくまれるとき、湿度は何%？", a: "50%", n: "8.65÷17.3×100＝50（%）" },
+          { f: "c24_satable", q: "【練習】気温25℃で湿度が60%のとき、空気1m³中にふくまれる水蒸気は何g？", a: "13.86g", n: "23.1×60÷100＝13.86（g）" },
+          { f: "c24_satable", q: "【練習】気温25℃で湿度100%の空気が10℃になると、空気1m³あたり何gの水蒸気が水に変わる？", a: "13.7g", long: true, n: "23.1−9.4＝13.7（g）" },
+          { f: "c24_satable", q: "【練習】1m³中に12.8gの水蒸気をふくむ30℃の空気を冷やすと、何℃で水てきができ始める？", a: "15℃", n: "飽和水蒸気量が12.8gになる15℃で湿度100%になる。" },
+          { q: "冷たい水の入ったペットボトルを暖かい部屋に置くと、外側に水てきがつく。この現象を何という？", a: "結露", long: true, r: "けつろ", n: "" },
+          { q: "ペットボトルの外側に水てきがつくのはなぜ？", a: "空気が冷やされて飽和水蒸気量が少なくなり、ふくみきれなくなった水蒸気が水になって現れるから", long: true, n: "" },
+          { q: "空気が冷やされて、水蒸気が水になって現れ始める温度を何という？", a: "露点", r: "ろてん", n: "" },
+          { q: "露点の温度のとき、湿度は何%？", a: "100%", n: "水蒸気量と飽和水蒸気量が等しくなる。" },
+          { q: "かわいた温度計と、しめった温度計を組み合わせて湿度をはかる道具を何という？", a: "乾湿計", long: true, r: "かんしつけい", n: "" },
+          { f: "c24_kanshitsu", q: "乾湿計のAの温度計を何という？何を表す？", a: "乾球温度計・気温", r: "かんきゅうおんどけい", n: "ふつうの温度計。" },
+          { f: "c24_kanshitsu", q: "乾湿計のBの、水でしめらせたガーゼが巻かれた温度計を何という？", a: "湿球温度計", long: true, r: "しっきゅうおんどけい", n: "" },
+          { q: "湿球温度計が、乾球温度計より低い温度を示すのはなぜ？", a: "ガーゼの水が蒸発するときに熱をうばうから", long: true, n: "" },
+          { q: "乾湿計で湿度を求める手順は？", a: "乾球と湿球の示度を読み、その差を計算し、湿度表で乾球の示度と差が交わったところを読む", long: true, r: "しど", n: "読んだ値が湿度（%）。" },
+          { f: "c24_table", q: "【例】乾球の示度が24℃、湿球の示度が21℃のとき、湿度は何%？", a: "75%", n: "示度の差は24−21＝3℃。乾球24℃と差3.0℃が交わるところ。" },
+          { f: "c24_table", q: "【練習】乾球が22℃、湿球が20℃のとき、湿度は何%？", a: "82%", n: "差は2℃。乾球22℃と2.0の交わるところ。" },
+          { f: "c24_table", q: "【練習】乾球が23℃、湿球が19℃のとき、湿度は何%？", a: "67%", n: "差は4℃。乾球23℃と4.0の交わるところ。" },
+          { f: "c24_table", q: "【練習】乾球と湿球の示度が同じ（差が0℃）とき、湿度は何%？", a: "100%", n: "水が蒸発できないほど空気がしめっている。" },
+          { f: "c24_table", q: "乾球と湿球の示度の差が大きいほど、湿度はどうなる？", a: "低くなる", n: "空気がかわいているほど水がよく蒸発し、湿球の温度が下がる。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no25",
+    no: "No.25",
+    name: "🌬️ No.25 風のふき方と雲のでき方",
+    source: "要点 p.26〜31",
+    decks: [
+      {
+        id: "s1", no: 1, title: "風のふき方", page: "p.26〜27",
+        cards: [
+          { q: "風とは何？", a: "空気の流れ", n: "" },
+          { q: "暖められた空気は、どうなる？", a: "ぼう張して軽くなり、上に上がる", n: "", long: true },
+          { f: "c25_conv", q: "図のように空気が流れるとき、ア・イのどちらが暖かいところ？", a: "ア", n: "アの上で空気が上がっている（上昇気流）。地上の風は、イ（寒い）からア（暖かい）へふく。" },
+          { f: "c25_conv", q: "図の①の空気の流れを何という？", a: "上昇気流", r: "じょうしょうきりゅう", n: "暖められた空気がぼう張して軽くなり上がる。" },
+          { f: "c25_conv", q: "図の③の空気の流れを何という？", a: "下降気流", r: "かこうきりゅう", n: "上空から冷たい空気が下りてくる。" },
+          { q: "上空では、地上と比べてどの向きに風がふく？", a: "地上と反対の向き", n: "空気がぐるっと回るように流れる。" },
+          { q: "空気が上昇・移動・下降して、ぐるぐる回るように動くことを何という？", a: "対流", r: "たいりゅう", n: "①〜④の結果、空気が対流する。" },
+          { q: "【まとめ】地上の風は、どんなところからどんなところへふく？", a: "寒いところから暖かいところへ", n: "暖かいところで空気が上がり、そこへまわりから冷たい空気が流れこむ。", long: true },
+          { q: "風向とは何？", a: "風がふいてくる向き", r: "ふうこう", n: "16方位で表す。風がふいていく向きではない。" },
+          { q: "風向は何方位で表す？", a: "16方位", n: "" },
+          { f: "c25_16dir", q: "16方位で、Aの方位は？", a: "北東", n: "" },
+          { f: "c25_16dir", q: "16方位で、Bの方位は？", a: "南東", n: "" },
+          { f: "c25_16dir", q: "16方位で、Cの方位は？", a: "南西", n: "" },
+          { f: "c25_16dir", q: "16方位で、アの方位は？", a: "北北西", n: "北と北西の間なので、北＋北西→北北西" },
+          { f: "c25_16dir", q: "16方位で、イの方位は？", a: "東南東", n: "東とB（南東）の間なので、東＋南東→東南東" },
+          { q: "【練習】南と南西の間の方位は？", a: "南南西", n: "南＋南西→南南西" },
+          { f: "c25_dirDE", q: "矢印の向きに風がふいた。Dは何の風？", a: "西の風", n: "西からふいてきて東へ向かう風。風向はふいてくる方位で表す。" },
+          { f: "c25_dirDE", q: "矢印の向きに風がふいた。Eは何の風？", a: "北東の風", n: "北東からふいてきて南西へ向かう風。" },
+          { q: "風向を調べる道具を何という？", a: "風向計", r: "ふうこうけい", n: "矢と矢ばねがついている。" },
+          { q: "風向計では、矢の先・矢ばねのどちらが風向を表す？", a: "矢の先", n: "矢の先は風がふいてくる方を向く。" },
+          { f: "c25_vane", q: "【練習】上から見た風向計の矢の先が図のように向いた。何の風？", a: "南の風", n: "矢の先が向いている方位（南）からふいてくる風。" },
+          { q: "風速とは何？", a: "空気が1秒間に進んだきょり（m）で表した風の速さ", r: "ふうそく", n: "例．秒速10m、8m/秒 など", long: true },
+          { q: "平均風速は、その時刻の前何分間の風速を平均したもの？", a: "10分間", r: "へいきんふうそく", n: "" },
+          { q: "瞬間風速は、何秒間の風速？", a: "3秒間", r: "しゅんかんふうそく", n: "ある瞬間（3秒間）の風速。" },
+          { q: "瞬間風速のうち、最大のものを何という？", a: "最大瞬間風速", r: "さいだいしゅんかんふうそく", n: "" },
+          { q: "風はい型の風速計は、何で風が進んだきょりを表す？", a: "風はいが何回回転したか", r: "ふうはい", n: "風はい＝ピンポン玉を半分にしたような形の部分。", long: true },
+          { q: "風力は、風の強さを何から何までの何段階で表す？", a: "0（最小）から12（最大）までの13段階", r: "ふうりょく", n: "0も入れるので13段階。", long: true },
+          { q: "顔に風を感じ、木の葉が動く。風力はいくつ？", a: "風力2", n: "" },
+          { q: "木全体がゆれ、風に向かっては歩きにくい。風力はいくつ？", a: "風力7", n: "" },
+          { q: "かわらがはがれたり、えんとつがたおれたりする。風力はいくつ？", a: "風力9", n: "" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "いろいろな風", page: "p.28〜30",
+        cards: [
+          { q: "陸は海と比べると、暖まりやすい？暖まりにくい？", a: "暖まりやすい", n: "陸は暖まりやすく、冷めやすい。" },
+          { q: "陸は海と比べると、冷めやすい？冷めにくい？", a: "冷めやすい", n: "海は暖まりにくく、冷めにくい。" },
+          { q: "昼、温度が高いのは陸・海のどちら？", a: "陸", n: "陸のほうが暖まりやすいから。" },
+          { q: "昼の風は、どこからどこへふく？", a: "海から陸へ", n: "陸で上昇気流ができ、海から空気が流れこむ。" },
+          { q: "昼に海から陸へふく風を何という？", a: "海風", r: "うみかぜ", n: "" },
+          { q: "夜、温度が高いのは陸・海のどちら？", a: "海", n: "陸のほうが冷めやすいので、夜は海のほうが暖かい。" },
+          { q: "夜の風は、どこからどこへふく？", a: "陸から海へ", n: "海で上昇気流ができ、陸から空気が流れこむ。" },
+          { q: "夜に陸から海へふく風を何という？", a: "陸風", r: "りくかぜ", n: "" },
+          { f: "c25_lsA", q: "地上の風が図のようにふくのは、昼・夜のどちら？またこの風を何という？", a: "昼・海風", n: "地上で海から陸へふいている。" },
+          { f: "c25_lsB", q: "地上の風が図のようにふくのは、昼・夜のどちら？またこの風を何という？", a: "夜・陸風", n: "地上で陸から海へふいている。" },
+          { q: "朝方と夕方、陸と海の温度が等しくなって風がふかない状態を何という？", a: "なぎ（凪）", r: "なぎ", n: "朝なぎ・夕なぎという。", long: true },
+          { q: "夏は、大陸・海洋のどちらのほうが温度が高い？", a: "大陸", n: "陸は暖まりやすい。" },
+          { q: "冬は、大陸・海洋のどちらのほうが温度が高い？", a: "海洋", r: "かいよう", n: "陸は冷めやすい。" },
+          { q: "日本では、夏は何の方位の風がふく？", a: "南東", n: "太平洋から大陸へ向かってふく。" },
+          { q: "日本では、冬は何の方位の風がふく？", a: "北西", n: "大陸から太平洋へ向かってふく。" },
+          { q: "季節に特ちょう的にふく風を何という？", a: "季節風", r: "きせつふう", n: "夏は南東、冬は北西の季節風。" },
+          { q: "空気のかたまりが山をこえ、風下側のふもとで空気が乾燥し、気温が上昇する現象を何という？", a: "フェーン現象", r: "ふぇーんげんしょう", n: "", long: true },
+          { q: "フェーン現象では、風下側のふもとの空気は乾燥する？しめる？気温は上昇？下降？", a: "乾燥し、気温が上昇する", r: "かんそう・じょうしょう", n: "", long: true },
+          { q: "空気のかたまりが100m上昇するとき、晴れていれば何℃下がる？雲が発生していれば？", a: "晴れ1℃・雲あり0.5℃", n: "下降するときは100mあたり1℃上がる。", long: true },
+          { f: "c25_foehn", q: "【例1】A地点で20℃の空気が、晴れたままB地点まで800m上昇した。B地点の気温は？", a: "12℃", n: "800mで1℃×8＝8℃下がる。20−8＝12（℃）" },
+          { f: "c25_foehn", q: "【例1】B（12℃）から雲が発生しながら頂上Cまで600m上昇した。C地点の気温は？", a: "9℃", n: "雲ありは100mで0.5℃。0.5×6＝3℃下がる。12−3＝9（℃）" },
+          { f: "c25_foehn", q: "【例1】C（9℃）から反対側のふもとDまで下降した。D地点の気温は？", a: "23℃", n: "Cの高さは800＋600＝1400m。1℃×14＝14℃上がる。9＋14＝23（℃）。Aの20℃より高くなる＝フェーン現象。" },
+          { q: "【練習】ふもとで25℃の空気が山をこえる。晴れたまま1000m上昇し、そこから雲ができて頂上まで800m上昇した。頂上の気温は？", a: "11℃", n: "25−1×10＝15℃。15−0.5×8＝11（℃）", long: true },
+          { q: "【練習】（前の問題のつづき）頂上（11℃・高さ1800m）から反対側のふもとまで下降した。ふもとの気温は？", a: "29℃", n: "1℃×18＝18℃上がる。11＋18＝29（℃）", long: true },
+          { q: "【練習】ふもとで18℃の空気が、600mまで晴れたまま上昇し、そこから雲ができて高さ1600mの頂上をこえた。反対側のふもとの気温は？", a: "23℃", n: "600mで18−6＝12℃。雲ありで1000m上昇して12−5＝7℃。1600m下降して7＋16＝23（℃）", long: true },
+          { q: "中緯度付近で、1年中西から東へふく風を何という？", a: "偏西風", r: "へんせいふう", n: "日本付近の上空にもふいている。" },
+          { q: "北半球の低緯度付近で、1年中北東から南西へふく風を何という？", a: "貿易風", r: "ぼうえきふう", n: "" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "雲のでき方", page: "p.30",
+        cards: [
+          { q: "雲とは何？", a: "水や氷の小さなつぶが集まって、大気中にうかんで見えるもの", n: "", long: true },
+          { q: "上昇気流が起こるのは、空気のかたまりがどうなったとき？（2つ）", a: "暖められたとき・山の斜面にそってのぼったとき", r: "しゃめん", n: "雲のでき方①", long: true },
+          { q: "上空の気圧は、地上と比べて高い？低い？", a: "低い", r: "きあつ", n: "気圧＝大気の圧力。" },
+          { q: "上昇した空気は、上空でどうなる？", a: "急にぼう張する", n: "上空は気圧が低いから。" },
+          { q: "空気が急にぼう張すると、空気の温度はどうなる？", a: "下がる", n: "" },
+          { q: "空気の温度が下がって、水蒸気が水に変わりはじめる温度を何という？", a: "露点", r: "ろてん", n: "空気の温度が下がると、やがて露点に達する。" },
+          { q: "露点に達すると、水蒸気は空気中の何について水に変化する？", a: "ちり", n: "ちりなどが水てきのしんになる。" },
+          { q: "さらに上昇を続けると、水はどうなることがある？", a: "氷になる", n: "水蒸気が水に変化する量も増加する。" },
+          { q: "雲ができるまでの順番を言おう。（上昇気流→？）", a: "上昇気流→ぼう張→温度が下がる→露点に達する→水蒸気が水（氷）に→雲", n: "", long: true },
+          { f: "c25_cform", q: "図のアの●は何のつぶ？", a: "水", n: "露点より上で、水蒸気が水に変わったもの。" },
+          { f: "c25_cform", q: "図のイの○は何？", a: "水蒸気", r: "すいじょうき", n: "目に見えない気体。" },
+          { f: "c25_cform", q: "図のウの点線は、空気の温度が何に達した高さ？", a: "露点", r: "ろてん", n: "ここから上で水蒸気が水に変わり、雲ができる。" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "雲の分類", page: "p.31",
+        cards: [
+          { f: "c25_cloud", q: "Aの雲の名前は？", a: "積乱雲", r: "せきらんうん", n: "空高く、むくむくした雲。かみなりをともなうことが多い。" },
+          { q: "積乱雲の別名を2つ答えよう。", a: "入道雲・かみなり雲", r: "にゅうどうぐも", n: "" },
+          { q: "積乱雲は、どんな雨を、どれくらいの時間降らせる？", a: "はげしい雨を短時間", n: "", long: true },
+          { f: "c25_cloud", q: "Bの雲の名前は？", a: "乱層雲", r: "らんそううん", n: "暗い灰色で、雨や雪を降らせる雲。" },
+          { q: "乱層雲の別名は？", a: "雨雲", r: "あまぐも", n: "" },
+          { q: "乱層雲は、どんな雨を、どれくらいの時間降らせる？", a: "おだやかな雨を長時間", n: "", long: true },
+          { q: "うろこ雲の正式な名前は？", a: "巻積雲", r: "けんせきうん", n: "空の高いところにできる。" },
+          { q: "すじ雲の正式な名前は？", a: "巻雲", r: "けんうん", n: "空のいちばん高いところにできる。" },
+          { q: "ひつじ雲の正式な名前は？", a: "高積雲", r: "こうせきうん", n: "" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no26",
+    no: "No.26",
+    name: "🌦️ No.26 天気記号・気団と前線",
+    source: "要点 p.32〜39",
+    decks: [
+      {
+        id: "s1", no: 1, title: "天気記号", page: "p.32〜33",
+        cards: [
+          { q: "天気は、何によって決まる？", a: "雲量（空全体を10としたときに、雲が空をしめる割合）", r: "うんりょう", n: "雨や雪が降っていないときは、雲量で天気を決める。", long: true },
+          { q: "雲量が0〜1のときの天気は？", a: "快晴", r: "かいせい", n: "" },
+          { q: "雲量が2〜8のときの天気は？", a: "晴れ", n: "雲が少しあっても、8までなら晴れ。" },
+          { q: "雲量が9〜10のときの天気は？", a: "くもり", n: "" },
+          { f: "c26_wx_kaisei", q: "この天気記号が表す天気は？", a: "快晴", n: "中に何もかかない円。" },
+          { f: "c26_wx_hare", q: "この天気記号が表す天気は？", a: "晴れ", n: "円の中にたてに1本の線。" },
+          { f: "c26_wx_kumori", q: "この天気記号が表す天気は？", a: "くもり", n: "二重の円。" },
+          { f: "c26_wx_ame", q: "この天気記号が表す天気は？", a: "雨", n: "黒くぬりつぶした円。" },
+          { f: "c26_wx_yuki", q: "この天気記号が表す天気は？", a: "雪", n: "円を6つに分ける線。" },
+          { q: "風力は、何段階で表す？", a: "0〜12の13段階", n: "風力0は無風。" },
+          { f: "c26_wind1", q: "この天気図記号の風力はいくつ？", a: "風力1", n: "矢羽根1本。" },
+          { f: "c26_wind2", q: "この天気図記号の風力はいくつ？", a: "風力2", n: "矢羽根2本。" },
+          { f: "c26_wind6", q: "この天気図記号の風力はいくつ？", a: "風力6", n: "矢羽根6本。片側には6本までかく。" },
+          { f: "c26_wind7", q: "この天気図記号の風力はいくつ？", a: "風力7", n: "片側6本＋反対側1本＝7。" },
+          { f: "c26_wind12", q: "この天気図記号の風力はいくつ？", a: "風力12", n: "片側6本＋反対側6本＝12。" },
+          { q: "天気図記号で、風力が7以上のとき、矢羽根はどうかく？", a: "片側に6本かき、残りを反対側にかく", n: "例：風力8は片側6本＋反対側2本。", long: true },
+          { q: "風向とは、何を表したもの？", a: "風がふいてくる向き", r: "ふうこう", n: "北風は、北からふいてくる風。" },
+          { q: "風向は、何方位で表す？", a: "16方位", r: "ほうい", n: "" },
+          { f: "c26_compass", q: "16方位で、アの方位は？", a: "北北東", n: "北・東・南・西の間を、さらに2つずつに分けて考える。" },
+          { f: "c26_compass", q: "16方位で、イの方位は？", a: "南東", n: "北・東・南・西の間を、さらに2つずつに分けて考える。" },
+          { f: "c26_compass", q: "16方位で、ウの方位は？", a: "西南西", n: "北・東・南・西の間を、さらに2つずつに分けて考える。" },
+          { f: "c26_compass", q: "16方位で、エの方位は？", a: "北北西", n: "北・東・南・西の間を、さらに2つずつに分けて考える。" },
+          { q: "風向が北の風は、どちらからどちらへふく？", a: "北から南へふく", n: "風向は、風がふいてくる向き。" },
+          { f: "c26_blow1", q: "矢印のように風がふいている。風向は？", a: "西南西", n: "風がふいてくる向き（矢印の根もと側）で答える。" },
+          { f: "c26_blow2", q: "矢印のように風がふいている。風向は？", a: "南東", n: "風がふいてくる向き（矢印の根もと側）で答える。" },
+          { q: "天気図記号で、風向は何で表す？", a: "円からのびる矢の向き", n: "矢は、風がふいてくる方位にのばしてかく。" },
+          { q: "天気図記号で、風力は何で表す？", a: "矢羽根の数", r: "やばね", n: "" },
+          { f: "c26_stA", q: "天気図記号（A）の風向・風力・天気は？", a: "北東・風力4・晴れ", n: "矢が北東にのび、矢羽根4本、円の中にたて線1本。" },
+          { f: "c26_stB", q: "天気図記号（B）の風向・風力・天気は？", a: "東・風力8・くもり", n: "矢が東にのび、矢羽根は片側6本＋反対側2本、二重の円。" },
+          { f: "c26_stC", q: "この天気図記号の風向・風力・天気は？", a: "南西・風力3・雨", n: "【練習】矢が南西にのび、矢羽根3本、黒くぬった円。" },
+          { f: "c26_stD", q: "この天気図記号の風向・風力・天気は？", a: "北北西・風力2・快晴", n: "【練習】矢が北北西にのび、矢羽根2本、何もない円。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "天気図", page: "p.33〜34",
+        cards: [
+          { q: "気圧とは何のこと？", a: "空気がものをおす力（空気の圧力）", r: "きあつ", n: "" },
+          { q: "気圧の単位は？", a: "ヘクトパスカル（hPa）", n: "" },
+          { q: "標高0mのところの気圧は、約何hPa？", a: "1013hPa", n: "" },
+          { q: "山のふもとから山頂へ移動すると、気圧はどうなる？", a: "小さくなる", n: "上にある大気の重さが減るから。" },
+          { f: "c26_isobar", q: "天気図のアのように、気圧の等しいところをなめらかに結んだ線を何という？", a: "等圧線", r: "とうあつせん", n: "" },
+          { q: "まわりより気圧の高いところを何という？", a: "高気圧", r: "こうきあつ", n: "天気図では「高」で表す。" },
+          { q: "まわりより気圧の低いところを何という？", a: "低気圧", r: "ていきあつ", n: "天気図では「低」で表す。" },
+          { q: "高気圧の中心付近では、どんな空気の流れがある？", a: "下降気流", r: "かこうきりゅう", n: "上から下へ向かう空気の流れ。" },
+          { q: "高気圧では、雲はできる？できない？", a: "できない", n: "下降気流があるため。" },
+          { q: "高気圧におおわれると、天気はどうなる？", a: "よくなる", n: "" },
+          { q: "低気圧の中心付近では、どんな空気の流れがある？", a: "上昇気流", r: "じょうしょうきりゅう", n: "下から上へ向かう空気の流れ。" },
+          { q: "低気圧では、雲はできる？できない？", a: "できる", n: "上昇気流があるため。" },
+          { q: "低気圧が近づくと、天気はどうなる？", a: "わるくなる", n: "" },
+          { f: "c26_hl_side", q: "横から見た図で、A・Bのうち高気圧はどちら？", a: "A", n: "Aは下降気流、Bは上昇気流。" },
+          { q: "地表では、風はどちらからどちらの向きにふく？", a: "高気圧から低気圧へ", n: "" },
+          { f: "c26_hl_top", q: "北半球で上から見た図。A・Bのうち低気圧はどちら？", a: "B", n: "Bは風がまわりから反時計回りにふきこんでいる。" },
+          { q: "北半球の高気圧で、地表の風はどうふく？（上から見て）", a: "時計回りにふき出す", n: "", long: true },
+          { q: "北半球の低気圧で、地表の風はどうふく？（上から見て）", a: "反時計回りにふきこむ", n: "", long: true },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "気団と前線", page: "p.35〜39",
+        cards: [
+          { q: "同じ性質をもつ空気のかたまりを何という？", a: "気団", r: "きだん", n: "" },
+          { q: "寒気団とは、どんな空気のかたまり？", a: "まわりの空気より冷たい空気のかたまり", r: "かんきだん", n: "", long: true },
+          { q: "暖気団とは、どんな空気のかたまり？", a: "まわりの空気よりあたたかい空気のかたまり", r: "だんきだん", n: "", long: true },
+          { f: "c26_face", q: "①：寒気団と暖気団の境界面を何という？", a: "前線面", r: "ぜんせんめん", n: "この付近で雲ができやすい。" },
+          { f: "c26_face", q: "②：前線面が地面と交わってできる線を何という？", a: "前線", r: "ぜんせん", n: "" },
+          { q: "前線の付近で降りやすいものは？", a: "雨", n: "前線付近では雲ができやすいから。" },
+          { q: "寒冷前線は、どんなときにできる？", a: "寒気が暖気にぶつかったとき", r: "かんれいぜんせん", n: "寒気のほうが重いため、暖気の下へもぐりこみ、暖気をおし上げるように進む。", long: true },
+          { q: "寒冷前線の前線面のかたむきは、急？ゆるやか？", a: "急", n: "" },
+          { f: "c26_coldsec", q: "この前線（寒冷前線）の付近にできる、アの雲を何という？", a: "積乱雲", r: "せきらんうん", n: "たてに大きくのびる雲。高さ約6kmにもなる。" },
+          { f: "c26_f_cold", q: "この天気記号の前線を何という？", a: "寒冷前線", n: "三角形の記号（青）。三角の向きに進む。" },
+          { q: "寒冷前線の雨のようすは？", a: "はげしい雨が短時間降る", n: "雨域（雨が降る範囲）はせまい。", long: true },
+          { q: "寒冷前線が通過した直後、気温はどうなる？", a: "下がる", n: "寒気におおわれるから。" },
+          { q: "寒冷前線が通過した直後、風向はどうなる？", a: "北よりに変わる", n: "" },
+          { q: "寒冷前線が通過した直後、気圧はどうなる？", a: "上がる", n: "" },
+          { q: "温暖前線は、どんなときにできる？", a: "暖気が寒気にぶつかったとき", r: "おんだんぜんせん", n: "暖気のほうが軽いため、寒気の上へのり上げるように進む。", long: true },
+          { q: "温暖前線の前線面のかたむきは、急？ゆるやか？", a: "ゆるやか", n: "" },
+          { f: "c26_warmsec", q: "この前線（温暖前線）の付近にできる、アの雲を何という？", a: "乱層雲", r: "らんそううん", n: "横に広がる雲。" },
+          { f: "c26_f_warm", q: "この天気記号の前線を何という？", a: "温暖前線", n: "半円の記号（赤）。半円の向きに進む。" },
+          { q: "温暖前線の雨のようすは？", a: "おだやかな雨が長時間降る", n: "雨域は広い。", long: true },
+          { q: "温暖前線が通過した直後、気温はどうなる？", a: "上がる", n: "暖気におおわれるから。" },
+          { q: "温暖前線が通過した直後、風向はどうなる？", a: "南よりに変わる", n: "" },
+          { q: "日本付近で見られる、前線をともなった低気圧を何という？", a: "温帯低気圧", r: "おんたいていきあつ", n: "東側に温暖前線、南西側に寒冷前線をともなうことが多い。" },
+          { f: "c26_lowfront", q: "温帯低気圧の図で、ア・イの前線をそれぞれ何という？", a: "ア温暖前線・イ寒冷前線", n: "" },
+          { f: "c26_lowfront", q: "温帯低気圧の図で、暖気があるのはA・Bのどちら？", a: "A", n: "寒冷前線と温暖前線にはさまれたところに暖気がある。" },
+          { q: "低気圧が西から東へ進むのは、何の風のえいきょう？", a: "偏西風", r: "へんせいふう", n: "日本の上空には、西から東へ偏西風がふいている。" },
+          { q: "寒冷前線が温暖前線に追いついてできる前線を何という？", a: "閉そく前線", r: "へいそくぜんせん", n: "寒冷前線の進み方は温暖前線より速いことが多いから。" },
+          { f: "c26_f_occl", q: "この天気記号の前線を何という？", a: "閉そく前線", n: "三角形と半円が同じ側に交互にならぶ（むらさき）。" },
+          { q: "停滞前線は、どんなときにできる？", a: "寒気と暖気の勢力が同じくらいで、ほとんど動かないとき", r: "ていたいぜんせん", n: "", long: true },
+          { f: "c26_f_stat", q: "この天気記号の前線を何という？", a: "停滞前線", n: "半円（赤）と三角形（青）が反対側に交互にならぶ。" },
+          { f: "c26_statmap", q: "停滞前線の図で、寒気があるのはA・Bのどちら？", a: "A", n: "北側に寒気、南側に暖気がある。" },
+          { q: "6〜7月ごろに日本列島にそってできる停滞前線を何という？", a: "梅雨前線", r: "ばいうぜんせん", n: "" },
+          { q: "9〜10月ごろに日本列島にそってできる停滞前線を何という？", a: "秋雨前線", r: "あきさめぜんせん", n: "" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no27",
+    no: "No.27",
+    name: "🌀 No.27 四大気団と日本の天気",
+    source: "要点 p.40〜45",
+    decks: [
+      {
+        id: "s1", no: 1, title: "日本付近の気団と日本の天気", page: "p.40〜42",
+        cards: [
+          { q: "日本の天気は、どの方位からどの方位へ変化していく？", a: "西から東へ", n: "天気は西から東へ移り変わる。" },
+          { q: "日本の天気が西から東へ変化するのは、上空をふく何という風のえいきょう？", a: "偏西風", r: "へんせいふう", n: "西から東へふく強い風。雲も西から東へ運ばれる。" },
+          { f: "c27_kidan", q: "Aの気団の名前は？", a: "シベリア気団", n: "冬に大陸の北のほうで発達する。" },
+          { f: "c27_kidan", q: "Bの気団の名前は？", a: "揚子江気団", r: "ようすこうきだん", n: "長江気団ともいう。春や秋に日本へやってくる。" },
+          { f: "c27_kidan", q: "Cの気団の名前は？", a: "オホーツク海気団", n: "日本の北東の海の上にできる。" },
+          { f: "c27_kidan", q: "Dの気団の名前は？", a: "小笠原気団", r: "おがさわらきだん", n: "日本の南東の太平洋の上にできる。" },
+          { q: "シベリア気団の性質は？", a: "寒冷・かわいている", r: "かんれい", n: "大陸の上でできるので、冷たくかわいている。" },
+          { q: "揚子江気団の性質は？", a: "温暖・かわいている", r: "おんだん", n: "大陸の南のほうでできるので、あたたかくかわいている。" },
+          { q: "オホーツク海気団の性質は？", a: "寒冷・しめっている", n: "北の海の上でできるので、冷たくしめっている。" },
+          { q: "小笠原気団の性質は？", a: "温暖・しめっている", n: "南の海の上でできるので、あたたかくしめっている。" },
+          { q: "シベリア気団がえいきょうする季節は？", a: "冬", n: "" },
+          { q: "揚子江気団がえいきょうする季節は？", a: "春・秋", n: "" },
+          { q: "オホーツク海気団がえいきょうする季節は？", a: "梅雨・秋雨", r: "つゆ・あきさめ", n: "梅雨（つゆ）は6〜7月、秋雨（あきさめ）は9〜10月ごろ。" },
+          { q: "小笠原気団がえいきょうする季節は？", a: "夏", n: "" },
+          { q: "大陸でできる気団の性質は「かわいている」「しめっている」のどちら？", a: "かわいている", n: "海の上でできる気団（オホーツク海・小笠原）はしめっている。" },
+          { q: "気団のことを、何と表現する場合もある？", a: "高気圧", r: "こうきあつ", n: "例：シベリア気団→シベリア高気圧" },
+          { q: "小笠原気団をつくる高気圧を何という？", a: "太平洋高気圧", n: "" },
+          { q: "揚子江気団が、気団にふくまれない場合もあるのはなぜ？", a: "移動性高気圧だから", r: "いどうせいこうきあつ", n: "同じ場所にとどまらず、西から東へ移動していく高気圧。" },
+          { q: "冬に発達する気団は？", a: "シベリア気団", n: "" },
+          { q: "冬の気圧配置を何型という？", a: "西高東低型", r: "せいこうとうてい", n: "西（大陸）に高気圧、東（太平洋）に低気圧がある。" },
+          { f: "c27_winter", q: "冬の天気図（模式図）で、アとイはそれぞれ高気圧・低気圧のどちら？", a: "ア 高気圧・イ 低気圧", n: "西が高く東が低い「西高東低型」。等圧線がたてにこみあう。" },
+          { q: "冬にふく季節風の向きは？", a: "北西", n: "北西の季節風という。日本海側に雪をふらせる。" },
+          { q: "冬の雲画像で、日本付近に見られる雲のようすは？", a: "すじ状の雲", r: "すじじょう", n: "北西の季節風にそって、日本海の上にすじのような雲がならぶ。" },
+          { q: "冬にフェーン現象がおもに見られるのは、日本海側・太平洋側のどちら？", a: "太平洋側", r: "げんしょう", n: "北西の季節風が山をこえ、かわいた風になって太平洋側にふき下りる。" },
+          { q: "春や秋に発達する気団は？", a: "揚子江（長江）気団", r: "ようすこう（ちょうこう）", n: "" },
+          { q: "春や秋に日本を通過する高気圧を何という？", a: "移動性高気圧", r: "いどうせいこうきあつ", n: "" },
+          { q: "春や秋に天気が変化しやすいのはなぜ？", a: "高気圧と低気圧が交互にくるから", long: true, r: "こうご", n: "移動性高気圧と低気圧が、西から東へ交互に通る。" },
+          { q: "冬から春にかけてふく、南よりの強い風を何という？", a: "春一番", r: "はるいちばん", n: "" },
+          { q: "秋によく日本に接近するのは何？", a: "台風", r: "せっきん", n: "" },
+          { q: "梅雨や秋雨のころ、日本付近でぶつかる2つの気団は？", a: "北のオホーツク海気団と南の小笠原気団", long: true, n: "" },
+          { q: "2つの気団がぶつかってできる、長雨をふらせる前線を何という？", a: "停滞前線", r: "ていたいぜんせん", n: "ほとんど動かないので、長雨が続く。" },
+          { q: "6〜7月ごろの停滞前線を何という？", a: "梅雨前線", r: "ばいうぜんせん", n: "" },
+          { q: "9〜10月ごろの停滞前線を何という？", a: "秋雨前線", r: "あきさめぜんせん", n: "" },
+          { q: "夏に発達する高気圧は？", a: "太平洋高気圧", n: "" },
+          { q: "夏、日本列島は何気団におおわれる？", a: "小笠原気団", r: "おがさわらきだん", n: "" },
+          { q: "夏の気圧配置を何型という？", a: "南高北低型", r: "なんこうほくてい", n: "南（太平洋）に高気圧、北に低気圧がある。" },
+          { q: "夏にふく季節風の向きは？", a: "南東", n: "南東の季節風という。" },
+          { q: "夏に発生して、夕立をふらせる雲は？", a: "積乱雲", r: "せきらんうん", n: "入道雲ともいう。" },
+          { q: "夏の午後によく降る、短い時間のはげしい雨を何という？", a: "夕立", r: "ゆうだち", n: "" },
+          { q: "夏にフェーン現象がおもに見られるのは、日本海側・太平洋側のどちら？", a: "日本海側", n: "南東の季節風が山をこえ、かわいた高温の風になって日本海側にふき下りる。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "台風", page: "p.43〜44",
+        cards: [
+          { q: "台風とは、中心付近の最大風速が毎秒何m以上の低気圧のこと？", a: "17.2m", n: "風力8以上。" },
+          { q: "台風は、何という低気圧が発達したもの？", a: "熱帯低気圧", r: "ねったいていきあつ", n: "南の熱帯の海の上で発生する。" },
+          { q: "台風の中心の、雲のないところを何という？", a: "台風の目", n: "これがはっきり見えているほど強い台風といわれている。" },
+          { q: "台風は、何気団のふちを通って進む？", a: "小笠原気団", r: "おがさわらきだん", n: "季節によって小笠原気団の大きさが変わるので、台風の経路も月ごとに変わる。" },
+          { q: "台風の風は、どちら回りにふきこむ？", a: "反時計回り", r: "はんとけいまわり", n: "低気圧と同じ。" },
+          { q: "台風の進行方向に対して、右側・左側のどちらの風が強くなる？", a: "右側", n: "" },
+          { q: "台風の進行方向の右側の風が強くなるのはなぜ？", a: "台風の進行方向と風向が同じになるから", long: true, n: "台風を動かす風と、台風にふきこむ風の向きが重なるので強くなる。" },
+          { q: "台風の進行方向の右側の、風が強いところを何という？", a: "危険半円", r: "きけんはんえん", n: "" },
+          { f: "c27_kiken", q: "図で、風が強くなるのはア・イのどちら？（台風は矢印の向きに進む）", a: "イ", n: "進行方向の右側（危険半円）。右側では、反時計回りにふきこむ風の向きと進行方向が同じになる。" },
+          { q: "暴風域とは、風速何m/秒以上の風がふく範囲？", a: "25m/秒以上", r: "ぼうふういき", n: "" },
+          { q: "強風域とは、風速何m/秒以上の風がふく範囲？", a: "15m/秒以上", r: "きょうふういき", n: "" },
+          { q: "予報円とは、どんな範囲？", a: "台風の中心が到達すると予想される範囲", long: true, r: "よほうえん", n: "" },
+          { q: "暴風警戒域とは、どんな範囲？", a: "暴風域に入る可能性のある範囲", long: true, r: "ぼうふうけいかいいき", n: "" },
+          { f: "c27_yoho", q: "台風の予報図で、アの範囲を何という？", a: "暴風域", n: "風速25m/秒以上の風がふく範囲。" },
+          { f: "c27_yoho", q: "台風の予報図で、イの範囲を何という？", a: "強風域", n: "風速15m/秒以上の風がふく範囲。" },
+          { f: "c27_yoho", q: "台風の予報図で、ウの点線の円を何という？", a: "予報円", n: "台風の中心が到達すると予想される範囲。" },
+          { f: "c27_yoho", q: "台風の予報図で、エの線で囲まれた範囲を何という？", a: "暴風警戒域", n: "暴風域に入る可能性のある範囲。" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "天気の予測", page: "p.44〜45",
+        cards: [
+          { q: "日本の気象衛星の名前は？", a: "ひまわり", r: "きしょうえいせい", n: "2022年からは、ひまわり9号が使われている。" },
+          { q: "ひまわりは、どこを回っている？", a: "東経140度の赤道上空36000kmのところ", long: true, n: "" },
+          { q: "地球の自転周期と同じ周期で公転し、いつも同じ場所の上にあるように見える衛星を何という？", a: "静止衛星", r: "せいしえいせい", n: "" },
+          { q: "ひまわりは、何の写真などを地上に送っている？", a: "雲", r: "くも", n: "" },
+          { q: "地域気象観測システムを何という？", a: "アメダス", r: "ちいききしょうかんそくシステム", n: "" },
+          { q: "アメダスは、全国に約何か所ある？", a: "約1300か所", n: "" },
+          { q: "アメダスでは、どんなものをはかっている？", a: "降水量・気温・風向・風速・湿度など", long: true, r: "こうすいりょう・しつど", n: "" },
+          { q: "夕焼けが西の空に見えると、次の日は晴れ・雨のどちら？", a: "晴れ", r: "ゆうやけ", n: "" },
+          { q: "夕焼けが西の空に見えると次の日が晴れになるのは、東・西のどちらの空が晴れているから？", a: "西", n: "天気は西から東へ変化するので、西の空が晴れていると次の日は晴れる。" },
+          { q: "朝に虹が見られると、晴れ・雨のどちら？", a: "雨", r: "にじ", n: "" },
+          { q: "朝に虹が見えるとき、太陽は東・西のどちらにある？", a: "東", n: "" },
+          { q: "朝に虹が見えるとき、虹は東・西のどちらの空に見える？", a: "西", n: "虹は太陽と反対側の空に見える。" },
+          { q: "朝に虹が見えると雨になるのは、虹をつくる雨雲が東・西のどちらにあるから？", a: "西", n: "西の雨雲が、天気の変化とともに東へ移ってくる。" },
+          { q: "太陽や月にうすい雲がかかって光の輪（かさ）が現れると、晴れ・雨のどちら？", a: "雨", n: "" },
+          { q: "山の頂上付近に笠のような雲がかかると、晴れ・雨のどちら？", a: "雨", r: "かさ", n: "" },
+          { q: "遠くを走る電車の音がふだんよりよく聞こえると、晴れ・雨のどちら？", a: "雨", n: "" },
+          { q: "飛行機雲がすぐに消えると、晴れ・雨のどちら？", a: "晴れ", n: "" },
+          { q: "朝つゆがおりると、晴れ・雨のどちら？", a: "晴れ", n: "" },
+          { q: "つばめが低く飛ぶと、晴れ・雨のどちら？", a: "雨", n: "えさとなるこん虫が低く飛ぶから。" },
         ]
       },
     ]

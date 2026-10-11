@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>理科フラッシュカード</title>
+<style>
+  :root {
+    --bg: #f3faf3;
+    --ink: #2b2a33;
+    --muted: #6f7a72;
+    --card: #ffffff;
+    --front: #2f9e44;
+    --back: #f08c00;
+    --ok: #2f9e44;
+    --ng: #e03131;
+    --line: #dde8dd;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  button { -webkit-appearance: none; appearance: none; outline: none; font: inherit; cursor: pointer; border: none; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    padding: max(20px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom));
+    min-height: 100vh;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; text-align: center; }
+  .sub { text-align: center; color: var(--muted); margin: 0 0 24px; font-size: .9rem; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* 単元選択 */
+  .deck-btn {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; background: var(--card); border: 2px solid var(--line);
+    border-radius: 16px; padding: 16px 18px; margin-bottom: 12px; text-align: left;
+    color: var(--ink); transition: transform .1s;
+  }
+  .deck-btn:active { transform: scale(.98); }
+  .deck-btn .name { font-weight: bold; font-size: 1.1rem; }
+  .deck-btn .info { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  .deck-btn .badge { font-size: .85rem; font-weight: bold; color: var(--ok); white-space: nowrap; margin-left: 8px; }
+  .deck-btn.all { border-color: var(--front); }
+  .opts { display: flex; gap: 10px; justify-content: center; margin: 20px 0 8px; flex-wrap: wrap; }
+  .toggle {
+    background: var(--card); border: 2px solid var(--line); border-radius: 999px;
+    padding: 8px 16px; font-size: .9rem; color: var(--ink);
+  }
+  .toggle.on { background: var(--front); border-color: var(--front); color: #fff; }
+  .reset { display: block; margin: 24px auto 0; background: none; color: var(--muted); font-size: .85rem; text-decoration: underline; }
+
+  /* カード */
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .back-link { background: none; color: var(--muted); font-size: .95rem; padding: 6px 0; }
+  .count { font-weight: bold; color: var(--muted); }
+  .bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 20px; }
+  .bar > div { height: 100%; background: var(--front); width: 0; transition: width .3s; }
+
+  .scene { perspective: 1200px; }
+  /* 表と裏を同じマスに重ねて、高いほうに合わせてカードが伸びるようにする */
+  .card {
+    display: grid; width: 100%; min-height: 320px;
+    transform-style: preserve-3d; transition: transform .5s; cursor: pointer;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .face {
+    grid-area: 1 / 1; position: relative;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 22px; padding: 44px 20px 24px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  }
+  .face .tag {
+    position: absolute; top: 14px; left: 16px; font-size: .75rem; font-weight: bold;
+    padding: 4px 10px; border-radius: 99px;
+  }
+  .fig { width: 100%; display: flex; justify-content: center; }
+  .fig:empty { display: none; }
+  .fig svg { width: 100%; max-width: 360px; height: auto; }
+  .front { background: var(--card); border: 3px solid var(--front); }
+  .front .tag { background: #e3f5e6; color: var(--front); }
+  .front .fig { margin-bottom: 14px; }
+  .front .q { font-size: 1.2rem; line-height: 1.7; }
+  .front .hint { color: var(--muted); font-size: .85rem; margin-top: 20px; }
+  .backface { background: #fff9ef; border: 3px solid var(--back); transform: rotateY(180deg); }
+  .backface .tag { background: #fff0d6; color: #c46a00; }
+  .backface .fig { margin-bottom: 10px; }
+  .backface .fig svg { max-width: 220px; }
+  .backface .a { font-size: 1.8rem; font-weight: bold; color: #c46a00; line-height: 1.4; }
+  .backface .ruby { font-size: .95rem; color: var(--muted); margin-top: 4px; }
+  .backface .goro { margin-top: 14px; background: #fff0d6; color: #a85a00; border-radius: 12px; padding: 8px 14px; font-weight: bold; font-size: 1rem; }
+  .backface .note { font-size: .95rem; line-height: 1.7; margin-top: 18px; color: var(--ink); text-align: left; }
+
+  .judge { display: flex; gap: 12px; margin-top: 20px; visibility: hidden; }
+  .judge.show { visibility: visible; }
+  .judge button { flex: 1; padding: 18px 0; border-radius: 16px; font-size: 1.1rem; font-weight: bold; color: #fff; }
+  .judge .ng { background: var(--ng); }
+  .judge .ok { background: var(--ok); }
+  .flip-btn { display: block; width: 100%; margin-top: 20px; padding: 18px 0; border-radius: 16px; background: var(--front); color: #fff; font-size: 1.1rem; font-weight: bold; }
+  .flip-btn.hide { display: none; }
+
+  /* 結果 */
+  .result-box { background: var(--card); border-radius: 22px; padding: 28px 20px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+  .score { font-size: 3rem; font-weight: bold; color: var(--front); margin: 8px 0; }
+  .msg { font-size: 1.1rem; margin-bottom: 4px; }
+  .review { margin-top: 24px; }
+  .review h2 { font-size: 1.1rem; margin: 0 0 10px; }
+  .review-item { background: var(--card); border-left: 5px solid var(--ng); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+  .review-item .rq { font-size: .95rem; line-height: 1.6; }
+  .review-item .ra { font-weight: bold; color: #c46a00; margin-top: 4px; }
+  .btn-row { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .btn { padding: 16px 0; border-radius: 16px; font-size: 1.05rem; font-weight: bold; }
+  .btn.primary { background: var(--ng); color: #fff; }
+  .btn.secondary { background: var(--front); color: #fff; }
+  .btn.plain { background: var(--card); color: var(--ink); border: 2px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 単元選択 -->
+  <section id="eraScreen" class="screen active">
+    <h1>🔬 理科 フラッシュカード</h1>
+    <p class="sub">勉強する単元をえらぼう</p>
+    <div id="eras"></div>
+  </section>
+
+  <!-- デッキ選択 -->
+  <section id="home" class="screen">
+    <button class="back-link" id="eraBackBtn">← 単元をえらぶ</button>
+    <h1 id="eraTitle" style="font-size:1.2rem"></h1>
+    <p class="sub">カードをタップして答えを確認しよう</p>
+    <div id="decks"></div>
+    <div class="opts">
+      <button class="toggle on" id="shuffleToggle">🔀 シャッフル</button>
+      <button class="toggle" id="reverseToggle">🔁 答え→問題</button>
+    </div>
+    <button class="reset" id="resetBtn">覚えた記録をリセット</button>
+  </section>
+
+  <!-- カード画面 -->
+  <section id="study" class="screen">
+    <div class="top">
+      <button class="back-link" id="quitBtn">← もどる</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bar"><div id="barFill"></div></div>
+    <div class="scene">
+      <div class="card" id="card">
+        <div class="face front">
+          <span class="tag" id="frontTag"></span>
+          <div class="fig" id="frontFig"></div>
+          <div class="q" id="frontText"></div>
+          <div class="hint">タップでうら返す</div>
+        </div>
+        <div class="face backface">
+          <span class="tag">こたえ</span>
+          <div class="fig" id="backFig"></div>
+          <div class="a" id="backText"></div>
+          <div class="ruby" id="backRuby"></div>
+          <div class="goro" id="backGoro"></div>
+          <div class="note" id="backNote"></div>
+        </div>
+      </div>
+    </div>
+    <button class="flip-btn" id="flipBtn">答えを見る</button>
+    <div class="judge" id="judge">
+      <button class="ng" id="ngBtn">😣 まだ</button>
+      <button class="ok" id="okBtn">😊 覚えた</button>
+    </div>
+  </section>
+
+  <!-- 結果 -->
+  <section id="result" class="screen">
+    <div class="result-box">
+      <div class="msg" id="resultMsg"></div>
+      <div class="score" id="resultScore"></div>
+      <div id="resultSub" style="color:var(--muted)"></div>
+    </div>
+    <div class="review" id="review"></div>
+    <div class="btn-row">
+      <button class="btn primary" id="retryNgBtn">😣「まだ」のカードだけもう一度</button>
+      <button class="btn secondary" id="retryAllBtn">🔀 全部もう一度</button>
+      <button class="btn plain" id="homeBtn">単元選択にもどる</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ===== 図（SVG） =====
+// カードに f: "図の名前" をつけると、問題の上に図が出る。
+// 表と裏で同じ図を2回使うので、SVGの中では id を使わないこと。
+const svg = (w, h, body) => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, sans-serif">${body}</svg>`;
+const T = (x, y, s, o = {}) => `<text x="${x}" y="${y}" font-size="${o.size || 14}" text-anchor="${o.a || "middle"}" fill="${o.c || "#2b2a33"}" font-weight="${o.w || "bold"}">${s}</text>`;
+const L = (x1, y1, x2, y2, c = "#555", w = 1.5) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}"/>`;
+const M = (x, y, s) => `<circle cx="${x}" cy="${y}" r="13" fill="#2f9e44"/>` + T(x, y + 5, s, { c: "#fff", size: 15 });
+function A(x1, y1, x2, y2, c = "#333", w = 3) {
+  const a = Math.atan2(y2 - y1, x2 - x1), h = 11;
+  const p = d => `${(x2 - h * Math.cos(a + d)).toFixed(1)},${(y2 - h * Math.sin(a + d)).toFixed(1)}`;
+  return L(x1, y1, (x2 - h * .6 * Math.cos(a)).toFixed(1), (y2 - h * .6 * Math.sin(a)).toFixed(1), c, w)
+    + `<polygon points="${x2},${y2} ${p(.45)} ${p(-.45)}" fill="${c}"/>`;
+}
+
+function dish(x, y, letter, o) {
+  let s = T(x + 45, y + 14, letter, { size: 15 });
+  if (o.dark) s += `<rect x="${x + 2}" y="${y + 20}" width="86" height="52" rx="4" fill="#333" fill-opacity=".18" stroke="#333" stroke-width="2.5"/>` + T(x + 45, y + 33, "暗箱", { size: 10, c: "#333" });
+  if (o.cotton) s += `<rect x="${x + 9}" y="${y + 54}" width="72" height="14" fill="${o.cotton === "wet" ? "#a5d8ff" : "#fff"}" stroke="#999"/>` + T(x + 45, y + 65, o.cotton === "wet" ? "しめった綿" : "かわいた綿", { size: 9, w: "normal" });
+  const sy = o.water ? y + 60 : y + 49;
+  [27, 45, 63].forEach(cx => s += `<ellipse cx="${x + cx}" cy="${sy}" rx="8" ry="5.5" fill="#a0522d"/>`);
+  if (o.water) s += `<rect x="${x + 8}" y="${y + 44}" width="74" height="24" fill="#74c0fc" fill-opacity=".6"/>` + T(x + 45, y + 52, "水", { size: 9, c: "#1864ab" });
+  s += `<path d="M${x + 7} ${y + 40} V${y + 69} H${x + 83} V${y + 40}" fill="none" stroke="#555" stroke-width="2"/>`;
+  s += T(x + 45, y + 88, o.temp, { size: 12 });
+  return s;
+}
+
+const LEAF = "M150 215 C120 185 60 190 35 150 C20 120 50 95 75 100 C60 70 90 35 150 25 C210 35 240 70 225 100 C250 95 280 120 265 150 C240 190 180 185 150 215Z";
+
+const FIG = {
+  sprouts: svg(320, 175,
+    `<rect x="0" y="130" width="320" height="45" fill="#d2b48c"/>`
+    + `<path d="M88 130 C84 100 92 70 104 38" stroke="#4caf50" stroke-width="7" fill="none" stroke-linecap="round"/>`
+    + `<path d="M230 130 V88" stroke="#4caf50" stroke-width="5"/>`
+    + `<ellipse cx="206" cy="82" rx="27" ry="12" transform="rotate(-18 206 82)" fill="#66bb6a"/>`
+    + `<ellipse cx="254" cy="82" rx="27" ry="12" transform="rotate(18 254 82)" fill="#66bb6a"/>`
+    + M(90, 155, "ア") + M(230, 155, "イ")),
+
+  kaki: svg(300, 250,
+    `<ellipse cx="110" cy="125" rx="60" ry="100" fill="#fffaf0" stroke="#a0522d" stroke-width="7"/>`
+    + `<path d="M110 150 C98 130 100 105 106 92 C112 108 112 132 110 150Z" fill="#e8f5e9" stroke="#555"/>`
+    + `<path d="M110 150 C122 130 120 105 114 92 C108 108 108 132 110 150Z" fill="#e8f5e9" stroke="#555"/>`
+    + `<rect x="107" y="150" width="6" height="40" fill="#e8f5e9" stroke="#555"/>`
+    + `<path d="M106 190 L114 190 L110 208Z" fill="#e8f5e9" stroke="#555"/>`
+    + L(140, 65, 215, 45) + M(232, 45, "ア")
+    + L(113, 115, 215, 105) + M(232, 105, "イ")
+    + L(113, 170, 215, 165) + M(232, 165, "ウ")
+    + L(110, 203, 215, 220) + M(232, 220, "エ")
+    + L(54, 92, 28, 60) + M(20, 48, "オ")
+    + T(110, 245, "カキの種子（切ったところ）", { size: 11, w: "normal" })),
+
+  ine: svg(300, 240,
+    `<ellipse cx="110" cy="115" rx="55" ry="95" fill="#fff6d6" stroke="#b8963c" stroke-width="6"/>`
+    + `<ellipse cx="138" cy="180" rx="16" ry="20" fill="#f2c94c" stroke="#8a6d1c"/>`
+    + L(100, 80, 215, 60) + M(232, 60, "ア")
+    + L(150, 186, 215, 196) + M(232, 196, "イ")
+    + L(58, 88, 30, 60) + M(20, 48, "ウ")
+    + T(110, 232, "イネの種子（切ったところ）", { size: 11, w: "normal" })),
+
+  daizu: svg(340, 240,
+    `<ellipse cx="80" cy="120" rx="50" ry="85" fill="#fff8dc" stroke="#a0522d" stroke-width="5"/>`
+    + `<ellipse cx="190" cy="120" rx="50" ry="85" fill="#fff8dc" stroke="#a0522d" stroke-width="5"/>`
+    + `<path d="M158 68 C148 56 154 46 166 48 C167 58 163 64 158 68Z" fill="#c5e1a5" stroke="#555"/>`
+    + `<path d="M158 68 C150 88 150 108 154 124" stroke="#8d6e63" stroke-width="6" fill="none" stroke-linecap="round"/>`
+    + `<path d="M154 124 L156 142" stroke="#8d6e63" stroke-width="4" stroke-linecap="round"/>`
+    + L(205, 112, 285, 100) + M(302, 100, "ア")
+    + L(164, 54, 285, 42) + M(302, 42, "イ")
+    + L(152, 100, 285, 158) + M(302, 158, "ウ")
+    + L(156, 140, 285, 210) + M(302, 210, "エ")
+    + T(135, 232, "ダイズの種子（2つにわったところ）", { size: 11, w: "normal" })),
+
+  hatsuga: svg(370, 205,
+    dish(5, 0, "A", { cotton: "wet", temp: "25℃" })
+    + dish(95, 0, "B", { cotton: "dry", temp: "25℃" })
+    + dish(185, 0, "C", { water: true, temp: "25℃" })
+    + dish(275, 0, "D", { cotton: "wet", temp: "5℃" })
+    + dish(50, 105, "E", { cotton: "wet", dark: true, temp: "25℃" })
+    + dish(140, 105, "F", { cotton: "dry", dark: true, temp: "25℃" })
+    + dish(230, 105, "G", { cotton: "wet", temp: "45℃" })),
+
+  flask: svg(330, 210,
+    `<path d="M10 110 V195 H180 V110" fill="#d0ebff" stroke="#555" stroke-width="2"/>`
+    + `<path d="M80 34 L110 34 L110 72 L160 185 L30 185 L80 72Z" fill="#fff" fill-opacity=".7" stroke="#333" stroke-width="2"/>`
+    + `<rect x="77" y="20" width="36" height="15" rx="2" fill="#8d6e63"/>`
+    + [50, 68, 86, 104, 122, 140, 60, 80, 100, 120].map((cx, i) => `<ellipse cx="${cx}" cy="${i < 6 ? 177 : 166}" rx="9" ry="6" fill="#c8875a" stroke="#8d5a3a"/>`).join("")
+    + T(95, 14, "三角フラスコ", { size: 12 }) + T(30, 128, "水", { size: 12, c: "#1864ab" })
+    + `<rect x="230" y="60" width="62" height="135" rx="14" fill="#eee" stroke="#333" stroke-width="2"/>`
+    + `<rect x="250" y="48" width="22" height="14" fill="#333"/>`
+    + L(261, 26, 261, 160, "#c62828", 3)
+    + [244, 261, 278, 252, 270].map((cx, i) => `<ellipse cx="${cx}" cy="${i < 3 ? 182 : 171}" rx="9" ry="6" fill="#c8875a" stroke="#8d5a3a"/>`).join("")
+    + T(261, 18, "温度計", { size: 12 }) + T(261, 207, "まほうびん", { size: 12 })),
+
+  shiyou: svg(330, 175,
+    `<rect x="0" y="130" width="330" height="8" fill="#a1887f"/>`
+    + [55, 165, 275].map((x, i) => {
+      let s = `<path d="M${x} 130 V40" stroke="#9ccc65" stroke-width="5"/>`
+        + `<ellipse cx="${x - 8}" cy="38" rx="10" ry="5" transform="rotate(-30 ${x - 8} 38)" fill="#7cb342"/>`
+        + `<ellipse cx="${x + 8}" cy="38" rx="10" ry="5" transform="rotate(30 ${x + 8} 38)" fill="#7cb342"/>`;
+      const cx = x + 22, cy = 92;
+      if (i === 0) s += `<ellipse cx="${cx}" cy="${cy}" rx="22" ry="16" fill="#c8875a"/>`;
+      if (i === 1) s += `<ellipse cx="${cx}" cy="${cy}" rx="22" ry="16" fill="none" stroke="#888" stroke-dasharray="4 3"/>`
+        + `<path d="M${cx} ${cy - 16} A22 16 0 0 0 ${cx} ${cy + 16}Z" fill="#c8875a"/>`;
+      if (i === 2) s += `<ellipse cx="${cx}" cy="${cy}" rx="22" ry="16" fill="none" stroke="#888" stroke-dasharray="4 3"/>`
+        + `<ellipse cx="${x + 5}" cy="${cy}" rx="5" ry="9" fill="#c8875a"/>`;
+      return s + T(x + 10, 162, ["①そのまま", "②半分切る", "③ほとんど切る"][i], { size: 12 });
+    }).join("")),
+
+  omosa: svg(320, 205,
+    A(40, 170, 305, 170, "#333", 2) + A(40, 170, 40, 12, "#333", 2)
+    + T(22, 95, "重", { size: 13 }) + T(22, 112, "さ", { size: 13 }) + T(305, 160, "日数", { size: 12, a: "end" })
+    + `<path d="M40 60 C80 115 140 150 190 140 C235 130 270 90 300 30" stroke="#2f9e44" stroke-width="3" fill="none"/>`
+    + `<circle cx="92" cy="110" r="5" fill="#333"/>` + `<line x1="92" y1="110" x2="92" y2="170" stroke="#333" stroke-dasharray="4 3"/>`
+    + T(92, 192, "発芽", { size: 13 }) + T(245, 192, "光合成がさかん", { size: 13 })
+    + `<path d="M190 178 Q245 186 300 178" stroke="#333" fill="none"/>`),
+
+  fuiri_before: svg(310, 235,
+    `<path d="M150 215 V232" stroke="#2e7d32" stroke-width="4"/>`
+    + `<path d="${LEAF}" fill="#66bb6a" stroke="#2e7d32" stroke-width="2"/>`
+    + `<ellipse cx="55" cy="140" rx="22" ry="14" fill="#f1f8e9"/>`
+    + `<ellipse cx="245" cy="140" rx="22" ry="14" fill="#f1f8e9"/>`
+    + `<rect x="85" y="110" width="130" height="26" fill="#bdbdbd" stroke="#757575"/>`
+    + L(45, 150, 22, 200) + T(16, 218, "ふ", { size: 15 })
+    + L(255, 150, 280, 200) + T(286, 218, "ふ", { size: 15 })
+    + L(200, 112, 270, 60) + M(284, 52, "P")),
+
+  fuiri_after: svg(310, 235,
+    `<path d="M150 215 V232" stroke="#2e7d32" stroke-width="4"/>`
+    + `<path d="${LEAF}" fill="#5e3a6e" stroke="#3b2147" stroke-width="2"/>`
+    + `<ellipse cx="55" cy="140" rx="22" ry="14" fill="#f3e3a0"/>`
+    + `<ellipse cx="245" cy="140" rx="22" ry="14" fill="#f3e3a0"/>`
+    + `<rect x="85" y="110" width="130" height="26" fill="#f3e3a0"/>`
+    + L(45, 150, 22, 200, "#333") + M(20, 212, "A")
+    + L(255, 150, 280, 200, "#333") + M(288, 212, "A")
+    + L(140, 70, 70, 25, "#333") + M(58, 22, "B")
+    + L(200, 112, 270, 60, "#333") + M(284, 52, "C")),
+
+  kougousei: svg(340, 285,
+    `<rect x="318" y="40" width="12" height="225" fill="#9ccc65"/>`
+    + `<ellipse cx="165" cy="145" rx="150" ry="88" fill="#c5e1a5" stroke="#558b2f" stroke-width="2"/>`
+    + `<ellipse cx="240" cy="115" rx="42" ry="18" fill="#2e7d32"/>` + T(240, 120, "葉緑体", { size: 12, c: "#fff" })
+    + `<rect x="55" y="80" width="120" height="30" fill="#fff" stroke="#555"/>` + T(115, 101, "ウ ＋ エ", { size: 15 })
+    + `<rect x="120" y="165" width="120" height="30" fill="#fff" stroke="#555"/>` + T(180, 186, "ア ＋ イ", { size: 15 })
+    + A(178, 165, 140, 113, "#666", 3)
+    + A(200, 8, 192, 160, "#e03131", 4) + `<rect x="206" y="4" width="26" height="22" fill="#fff" stroke="#e03131"/>` + T(219, 21, "光", { size: 14, c: "#e03131" })
+    + A(80, 110, 30, 50, "#e03131", 4) + T(40, 40, "空気中へ", { size: 12 })
+    + A(70, 262, 118, 192, "#1e66d0", 4) + T(70, 278, "空気中から", { size: 12 })
+    + A(324, 262, 244, 192, "#1e66d0", 4) + T(300, 278, "根から", { size: 12 })),
+
+  yoko: svg(320, 200,
+    T(60, 24, "暗い部屋", { size: 12, c: "#555" })
+    + `<path d="M50 55 L150 75 L150 145 L50 165Z" fill="#d2691e" stroke="#8b4513" stroke-width="2"/>`
+    + `<path d="M150 75 L150 145" stroke="#5d4037" stroke-width="8"/>`
+    + `<path d="M150 110 H228" stroke="#9ccc65" stroke-width="6"/>`
+    + `<ellipse cx="236" cy="110" rx="12" ry="8" fill="#c8875a"/>`
+    + `<rect x="30" y="165" width="140" height="8" fill="#a1887f"/>`
+    + A(262, 96, 262, 36, "#2b2a33", 3) + M(286, 42, "ア")
+    + A(262, 124, 262, 184, "#2b2a33", 3) + M(286, 178, "イ")),
+
+  hikari: svg(300, 175,
+    A(15, 65, 92, 65, "#f59f00", 4) + A(15, 100, 92, 100, "#f59f00", 4) + T(40, 50, "光", { size: 15, c: "#e67700" })
+    + `<rect x="112" y="25" width="18" height="125" rx="9" fill="#9ccc65" stroke="#689f38"/>`
+    + `<rect x="0" y="150" width="300" height="8" fill="#a1887f"/>`
+    + L(112, 125, 85, 135) + M(72, 138, "ア")
+    + L(130, 125, 160, 135) + M(173, 138, "イ")),
+};
+
+// ===== カードデータ =====
+// 新しい単元は ERAS に1ブロック追加するだけでOK
+// q:問題 a:答え r:読み n:解説 g:語呂 f:図 long:答えが長い（逆向きモードで出さない）
+const ERAS = [
+  {
+    id: "no1",
+    name: "🌱 No.1 種子のつくりと発芽",
+    source: "要点 p.2〜7",
+    decks: [
+      {
+        id: "goku",
+        name: "🔑 重要語句",
+        cards: [
+          { q: "子葉が1枚の植物のなかまを何という？", a: "単子葉類", r: "たんしようるい", n: "イネ科（イネ・ムギ・トウモロコシ）、ユリ、アヤメ、ツユクサ、ヒガンバナなど。" },
+          { q: "子葉が2枚の植物のなかまを何という？", a: "双子葉類", r: "そうしようるい", n: "アサガオ、アブラナ、タンポポ、エンドウ、サクラ、ヘチマなど。" },
+          { q: "単子葉類のうち、イネ科の植物を3つ答えよう。", a: "イネ・ムギ・トウモロコシ", n: "イネ科はすべて単子葉類。" },
+          { q: "イネ科以外の単子葉類を4つ答えよう。", a: "ユリ・アヤメ・ツユクサ・ヒガンバナ", n: "花びらが3の倍数、葉のすじ（葉脈）が平行なのが単子葉類のとくちょう。" },
+          { q: "双子葉類の植物を6つ答えよう。", a: "アサガオ・アブラナ・タンポポ・エンドウ・サクラ・ヘチマ", long: true, n: "ヘチマの発芽は子葉が2枚ひらく写真でおぼえよう。" },
+          { q: "次のうち単子葉類はどれ？\nヘチマ・ツユクサ・アサガオ・サクラ", a: "ツユクサ", n: "ほかの3つは子葉が2枚の双子葉類。" },
+          { q: "多くの植物では、発芽のとき先に出るのは「芽」と「根」のどっち？", a: "根", n: "まず根を出して水を吸い、からだを支える。" },
+          { q: "イネを水中で発芽させると、先に出るのは「芽」と「根」のどっち？", a: "芽", n: "水中では空気が少ないので、先に芽を出す。多くの植物とは逆なのでよく出る！" },
+          { q: "発芽のとき、子葉が地上に出る植物を図A〜Dから4つ答えよう。", a: "アサガオ・イネ・ダイズ・カキ", n: "カキは胚乳（はいにゅう）が地中に残り、子葉は地上に出る。" },
+          { q: "発芽のとき、子葉が地中に残る植物を4つ答えよう。", a: "アズキ・エンドウ・ソラマメ・クリ", g: "エ・ソ・ク に アズキ もっていく", n: "子葉は地中に残り、そこにたくわえた養分を使って育つ。" },
+          { q: "養分を胚乳にたくわえている種子を何という？", a: "有胚乳種子", r: "ゆうはいにゅうしゅし", n: "単子葉類と、カキ・ゴマ・オシロイバナ（一部の双子葉類）。" },
+          { q: "養分を子葉にたくわえている種子を何という？", a: "無胚乳種子", r: "むはいにゅうしゅし", n: "ほとんどの双子葉類がこれ。ダイズ・インゲンマメ・アサガオなど。" },
+          { q: "有胚乳種子の植物を答えよう。（単子葉類のほかに双子葉類で3つ）", a: "カキ・ゴマ・オシロイバナ", n: "双子葉類なのに有胚乳種子。よく出るひっかけ！" },
+          { q: "カキは双子葉類。では有胚乳種子？無胚乳種子？", a: "有胚乳種子", n: "ほとんどの双子葉類は無胚乳種子だが、カキ・ゴマ・オシロイバナは例外。" },
+          { q: "子葉・幼芽・胚じく・幼根をあわせて何という？", a: "胚", r: "はい", n: "発芽して植物のからだになる部分。" },
+          { q: "種皮のはたらきは？", a: "中身を守っている", n: "種子のいちばん外側のかわ。" },
+          { q: "幼芽は、発芽したあと何になる？", a: "本葉や茎", r: "ようが", n: "「芽」→ 葉や茎。" },
+          { q: "胚じくは、発芽したあと何になる？", a: "茎", r: "はいじく", n: "幼芽と幼根の間の部分。" },
+          { q: "幼根は、発芽したあと何になる？", a: "根", r: "ようこん", n: "発芽でいちばん先に出てくることが多い。" },
+          { q: "子葉とはどんな葉？（無胚乳種子での役わりも）", a: "最初に出る葉。無胚乳種子は子葉に養分をたくわえている", long: true, n: "インゲンマメやダイズの子葉が厚いのは養分がつまっているから。" },
+          { q: "種子の養分は、いつ使われる？", a: "発芽するときや、発芽後しばらく育つとき", long: true, n: "植物が自分で養分をつくる光合成が始まると、だんだん使われなくなる。" },
+          { q: "でんぷんを多くふくむ「でんぷん種子」の例を5つ答えよう。", a: "イネ・ムギ・トウモロコシ・エンドウ・インゲンマメ", long: true, n: "主食になる穀物（こくもつ）が多い。" },
+          { q: "でんぷんがあるかを調べるには、何という液をつける？", a: "ヨウ素液", r: "ようそえき", n: "でんぷんがあると青むらさき色になる。" },
+          { q: "でんぷんにヨウ素液をつけると、何色になる？", a: "青むらさき色", n: "この反応を「ヨウ素でんぷん反応」という。" },
+          { q: "ヨウ素液のもとの色は？", a: "黄かっ色", r: "おうかっしょく", n: "でんぷんがなければ色は変わらず黄かっ色のまま。" },
+          { q: "しぼうを多くふくむ「しぼう種子」の例を4つ答えよう。", a: "アブラナ・ダイズ・ゴマ・ヒマワリ", n: "なたね油・ごま油・ひまわり油など、油をとるのに使われる。" },
+          { q: "しぼう種子からは何がとれる？", a: "油（あぶら）", n: "アブラナ（なたね油）、ゴマ（ごま油）など。" },
+          { q: "たんぱく質を比較的多くふくむ種子は？", a: "ダイズ", n: "「畑の肉」とよばれる。とうふ・みそ・しょうゆの原料。" },
+          { q: "動物のからだにくっついて運ばれる種子（実）を2つ答えよう。", a: "オナモミ・センダングサ", n: "とげやかぎがあって、毛や服にくっつく。" },
+          { q: "動物に食べられて運ばれ、ふんといっしょに出される種子を3つ答えよう。", a: "ミカン・ブドウ・リンゴ", n: "おいしい実で動物をひきつける。" },
+          { q: "風で運ばれる種子を3つ答えよう。", a: "タンポポ・マツ・カエデ", n: "わた毛やつばさのようなつくりで風に乗る。" },
+          { q: "実がはじけて飛ばされる種子を2つ答えよう。", a: "ホウセンカ・カタバミ", n: "熟した実がはじけて、種子を遠くへ飛ばす。" },
+        ]
+      },
+      {
+        id: "zu",
+        name: "🖼️ 図の問題",
+        cards: [
+          { f: "sprouts", q: "子葉が1枚なのはア・イのどっち？\nそのなかまを何という？", a: "ア・単子葉類", n: "アはユリ、イはヘチマのような発芽のようす。" },
+          { f: "sprouts", q: "イのように子葉が2枚の植物のなかまを何という？", a: "双子葉類", r: "そうしようるい", n: "アサガオ・ヘチマ・エンドウなど。" },
+          { f: "kaki", q: "カキの種子で、養分をたくわえているアの部分は？", a: "胚乳", r: "はいにゅう", n: "カキは有胚乳種子なので、養分は胚乳にある。" },
+          { f: "kaki", q: "カキの種子のイの部分は？", a: "子葉", r: "しよう", n: "発芽して最初に出る葉。" },
+          { f: "kaki", q: "カキの種子のウの部分は？", a: "胚じく", r: "はいじく", n: "発芽したあと茎になる。" },
+          { f: "kaki", q: "カキの種子のエの部分は？", a: "幼根", r: "ようこん", n: "発芽したあと根になる。" },
+          { f: "kaki", q: "カキの種子のオ（いちばん外側）は？", a: "種皮", r: "しゅひ", n: "中身を守っている。" },
+          { f: "kaki", q: "カキの種子のイ・ウ・エをあわせて何という？", a: "胚", r: "はい", n: "胚が育って植物のからだになる。" },
+          { f: "ine", q: "イネの種子のアの部分は？", a: "胚乳", r: "はいにゅう", n: "イネ（単子葉類）は有胚乳種子。お米として食べているのはこの部分。" },
+          { f: "ine", q: "イネの種子のイの部分は？", a: "胚", r: "はい", n: "発芽して芽や根になる部分。" },
+          { f: "daizu", q: "ダイズの種子で、養分をたくわえているアの部分は？", a: "子葉", r: "しよう", n: "ダイズは無胚乳種子なので、養分は子葉にある。" },
+          { f: "daizu", q: "ダイズの種子のイの部分は？", a: "幼芽", r: "ようが", n: "発芽したあと本葉や茎になる。" },
+          { f: "daizu", q: "ダイズの種子のウの部分は？", a: "胚じく", r: "はいじく", n: "発芽したあと茎になる。" },
+          { f: "daizu", q: "ダイズの種子のエの部分は？", a: "幼根", r: "ようこん", n: "発芽したあと根になる。" },
+          { f: "daizu", q: "ダイズの種子には胚乳がある？ない？", a: "ない（無胚乳種子）", n: "ほとんどの双子葉類は無胚乳種子。カキとくらべておぼえよう。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no2",
+    name: "💧 No.2 種子の発芽とその条件",
+    source: "要点 p.8〜12",
+    decks: [
+      {
+        id: "joken",
+        name: "🧪 発芽の条件（実験A〜G）",
+        cards: [
+          { q: "調べたい条件だけを変え、その他の条件はすべて同じにして行う実験を何という？", a: "対照実験", r: "たいしょうじっけん", n: "条件を1つだけ変えるから、結果のちがいの原因がわかる。" },
+          { f: "hatsuga", q: "この実験で発芽したのはA〜Gのどれ？（2つ）", a: "AとE", n: "どちらも水・空気・適温がそろっている。Eは暗箱で光がないのに発芽した。" },
+          { f: "hatsuga", q: "AとBを比べてわかることは？", a: "発芽には水が必要", n: "ちがう条件は「水」だけ。Bはかわいた綿なので発芽しなかった。" },
+          { f: "hatsuga", q: "AとBのほかに、水が必要かどうかを調べられる組み合わせは？", a: "EとF", n: "どちらも暗箱の中で、ちがうのは綿がしめっているかどうかだけ。" },
+          { f: "hatsuga", q: "AとCを比べてわかることは？", a: "発芽には空気が必要", n: "Cは種子が水にしずんでいて、空気にふれていない。" },
+          { f: "hatsuga", q: "AとDとGを比べてわかることは？", a: "発芽には適温が必要", n: "Dは5℃で低すぎ、Gは45℃で高すぎて発芽しなかった。" },
+          { f: "hatsuga", q: "AとEを比べてわかることは？", a: "発芽に光は必要ではない", n: "暗箱の中のEも発芽した。光は「成長」には必要だが「発芽」には不要。" },
+          { f: "hatsuga", q: "Cが発芽しなかった理由は？", a: "空気がなかったから", n: "水にしずめると種子が空気にふれられない。" },
+          { f: "hatsuga", q: "Gが発芽しなかった理由は？", a: "温度が高すぎた（適温ではない）から", long: true, n: "45℃は適温（15〜35℃くらい）より高い。" },
+          { q: "発芽の3条件は？", a: "水・空気・適温", n: "ただし光は入らない！" },
+          { q: "種子の発芽に光は必要？", a: "必要ではない", n: "発芽の3条件は水・空気・適温。" },
+          { q: "種子の発芽時の適温は何℃くらい？", a: "15〜35℃くらい", n: "実験のDの5℃、Gの45℃はどちらも適温ではない。" },
+          { q: "インゲンマメの対照実験で、種子の大きさと数をどうそろえる？", a: "同じ大きさの種子を同じ数だけ使う", long: true, n: "調べたい条件以外をすべて同じにするのが対照実験。" },
+        ]
+      },
+      {
+        id: "kitai",
+        name: "🌬️ 発芽と気体・養分・重さ",
+        cards: [
+          { f: "flask", q: "発芽しかけたダイズを三角フラスコに入れておくと、内側が白くくもった。何が発生した？", a: "水", n: "呼吸ででんぷんを分解すると、二酸化炭素と水ができる。" },
+          { f: "flask", q: "フラスコ内の気体に石灰水を入れると白くにごった。何が発生した？", a: "二酸化炭素", r: "にさんかたんそ", n: "石灰水には二酸化炭素を通すと白くにごる性質がある。" },
+          { f: "flask", q: "フラスコ内の気体に火のついたろうそくを入れると火が消えた。何が少なくなった？", a: "酸素", r: "さんそ", n: "種子が呼吸で酸素を使ったから。" },
+          { f: "flask", q: "まほうびんに発芽しかけたダイズを入れると、温度が高くなった。何が発生した？", a: "熱", n: "呼吸でエネルギーを取り出すときに熱も出る。" },
+          { q: "これらの実験から、種子は発芽するときに何をしているとわかる？", a: "呼吸", r: "こきゅう", n: "酸素を取り入れて二酸化炭素を出している。" },
+          { q: "石灰水にはどんな性質がある？", a: "二酸化炭素を通すと白くにごる", long: true, n: "二酸化炭素を調べるときの定番。" },
+          { f: "shiyou", q: "発芽したインゲンマメの子葉を①〜③のようにして育てた。最もよく育ったのは？", a: "①（子葉をそのまま残した）", n: "子葉の養分を全部使えるから。" },
+          { f: "shiyou", q: "①〜③で、最も育ちが悪かったのは？", a: "③（子葉をほとんど切り取った）", n: "使える養分がほとんどないから。②は①と③の間。" },
+          { f: "shiyou", q: "この実験から、インゲンマメの子葉には何がふくまれているとわかる？", a: "発芽とそのあとしばらく育つための養分", long: true, n: "インゲンマメは無胚乳種子なので、養分は子葉にある。" },
+          { f: "omosa", q: "発芽するまで、植物全体の重さはどうなる？", a: "軽くなる", n: "発芽するときに種子にふくまれている養分を使うから。" },
+          { f: "omosa", q: "発芽してしばらくすると、重さはどうなる？", a: "重くなる", n: "養分をつくるはたらき（光合成）がさかんになるから。" },
+          { f: "omosa", q: "発芽してしばらくすると重くなるのは、何というはたらきがさかんになるから？", a: "光合成", r: "こうごうせい", n: "植物が自分で養分（でんぷん）をつくるはたらき。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no3",
+    name: "☀️ No.3 光合成と呼吸・植物の成長",
+    source: "要点 p.14〜19",
+    decks: [
+      {
+        id: "jikken",
+        name: "🧪 光合成の実験",
+        cards: [
+          { f: "fuiri_before", q: "葉の色がぬけ落ちた部分を何という？", a: "ふ", n: "ふ入りのアサガオを使う。ふの部分には葉緑体がない。" },
+          { f: "fuiri_before", q: "前日までに葉の一部をPでおおっておく。Pは何？", a: "アルミはく（黒い紙でもよい）", n: "光をさえぎるもので包む。" },
+          { f: "fuiri_before", q: "葉の一部をアルミはくでおおう理由は？", a: "日光が当たらない部分をつくるため", long: true, n: "光が当たる部分と当たらない部分を比べるため。" },
+          { q: "葉をよく晴れた日の午後につみとる理由は？", a: "葉にじゅうぶん日光を当てるため", long: true, n: "光合成でじゅうぶんでんぷんをつくらせるため。" },
+          { q: "つみとった葉を熱湯につける理由は？", a: "葉をやわらかくするため", n: "このあとアルコールで色をぬきやすくなる。" },
+          { q: "葉をあたためたアルコールにつける理由は？", a: "葉の緑色をぬく（とかし出す）ため", long: true, n: "緑色が残っているとヨウ素液の色の変化が見えにくい。" },
+          { q: "アルコールは直接火であたためると危険。何という方法であたためる？", a: "湯せん", r: "ゆせん", n: "熱湯の入ったビーカーにアルコールの入った容器を入れてあたためる。" },
+          { q: "アルコールにつけたあと、葉は何色、アルコールは何色になっている？", a: "葉は白色、アルコールは緑色", long: true, n: "葉の緑色がアルコールにとけ出したから。" },
+          { q: "アルコールにつけた葉を水で洗う理由は？", a: "アルコールを洗い流し、葉に水分をあたえるため", long: true, n: "アルコールで葉がかたくなるので、水でやわらかくする。" },
+          { q: "最後に葉を何という液につけて色の変化を調べる？", a: "ヨウ素液", r: "ようそえき", n: "でんぷんがあれば青むらさき色になる。" },
+          { f: "fuiri_after", q: "ヨウ素液につけたとき、Aの部分（ふの部分）は何色？", a: "黄かっ色", n: "色が変わらない＝でんぷんができていない。" },
+          { f: "fuiri_after", q: "ヨウ素液につけたとき、Bの部分は何色？", a: "青むらさき色", n: "でんぷんができている。" },
+          { f: "fuiri_after", q: "ヨウ素液につけたとき、Cの部分（アルミはくでおおった部分）は何色？", a: "黄かっ色", n: "光が当たらないので、でんぷんができていない。" },
+          { f: "fuiri_after", q: "A〜Cのうち、でんぷんができていたのはどこ？", a: "Bだけ", n: "Aは葉緑体がない、Cは光がない。" },
+          { f: "fuiri_after", q: "AとBを比べてわかることは？", a: "光合成には葉緑体が必要", n: "ちがう条件は「葉緑体があるかどうか」だけ。" },
+          { f: "fuiri_after", q: "BとCを比べてわかることは？", a: "光合成には光が必要", n: "ちがう条件は「光が当たったかどうか」だけ。" },
+          { q: "ヨウ素でんぷん反応とは？", a: "でんぷんにヨウ素液をつけると青むらさき色になること", long: true, n: "ヨウ素液のもとの色は黄かっ色。" },
+        ]
+      },
+      {
+        id: "kokyu",
+        name: "🍃 光合成と呼吸",
+        cards: [
+          { q: "光合成とはどんなはたらき？", a: "葉緑体が光を受けて、水と二酸化炭素から、でんぷんと酸素をつくるはたらき", long: true, n: "植物が自分で養分をつくるはたらき。" },
+          { q: "光合成は、植物の細胞の中にある何で行われる？", a: "葉緑体", r: "ようりょくたい", n: "緑色のつぶ。ふの部分にはない。" },
+          { q: "光合成の材料になる2つのものは？", a: "水と二酸化炭素", n: "水は根から、二酸化炭素は空気中から取り入れる。" },
+          { q: "光合成でできる2つのものは？", a: "でんぷんと酸素", n: "酸素は空気中へ出される。" },
+          { f: "kougousei", q: "光合成で、空気中から取り入れるア は？", a: "二酸化炭素", r: "にさんかたんそ", n: "葉の気こうから取り入れる。" },
+          { f: "kougousei", q: "光合成で、根から取り入れるイ は？", a: "水", n: "根から吸い上げて茎を通って葉へ運ばれる。" },
+          { f: "kougousei", q: "光合成でできて、空気中へ出されるウ は？", a: "酸素", r: "さんそ", n: "わたしたちが吸う酸素は植物がつくっている。" },
+          { f: "kougousei", q: "光合成でできる養分エ は？", a: "でんぷん", n: "ヨウ素液で青むらさき色になる。" },
+          { q: "呼吸とは？", a: "でんぷんを分解して、活動するためのエネルギーを取り出すこと", long: true, n: "植物も動物も、一日中呼吸している。" },
+          { q: "呼吸のとき、植物は何を取り入れて何を出している？", a: "酸素を取り入れて、二酸化炭素を出している", long: true, n: "光合成とちょうど反対。" },
+          { q: "呼吸のしくみ：でんぷん ＋ 酸素 → ？ ＋ ？", a: "二酸化炭素 ＋ 水", n: "このとき活動するためのエネルギーが取り出される。" },
+          { q: "呼吸でできた水はどうなる？", a: "気体になって空気中へ出る", n: "二酸化炭素も空気中へ出る。" },
+          { q: "夜、葉は酸素を「吸収」「放出」のどっちをしている？", a: "吸収", n: "光合成はなし、呼吸だけしているから。" },
+          { q: "朝と夕方、葉の酸素の出入りはどうなっている？", a: "出入りがない（見かけ上）", n: "光合成（弱）と呼吸が同じくらいなので、つり合っている。" },
+          { q: "昼、葉は酸素を「吸収」「放出」のどっちをしている？", a: "放出", n: "光合成（強）が呼吸より大きいから。" },
+          { q: "呼吸のはたらきは、1日の中でどう変わる？", a: "一定（変わらない）", n: "光合成は光の強さで変わるが、呼吸は一日中同じようにしている。" },
+          { q: "夜の状態（光合成なし・呼吸だけ）が長く続くと、植物はどうなる？", a: "かれる", n: "呼吸ででんぷんを分解するばかりで、つくれないから。" },
+          { q: "昼に植物が成長できるのはなぜ？", a: "光合成でつくるでんぷんのほうが、呼吸で分解するでんぷんよりも多いから", long: true, n: "昼は光合成 ＞ 呼吸。" },
+        ]
+      },
+      {
+        id: "seicho",
+        name: "🌿 植物の成長",
+        cards: [
+          { q: "植物が成長するための5条件は？", a: "水・空気・適温・光・肥料", n: "水・空気・適温は発芽の3条件と同じ。" },
+          { q: "発芽の3条件に、どの2つを加えると「成長の5条件」になる？", a: "光・肥料", r: "ひりょう", n: "発芽には光はいらないが、成長には光が必要。" },
+          { q: "肥料の3要素は？", a: "ちっ素・リン・カリウム", n: "植物の成長に多く必要となるもの。" },
+          { q: "光を当てて育てたインゲンマメの茎は、太い？細い？長い？短い？", a: "太くて短い", n: "葉の色はこい緑色。" },
+          { q: "光を当てずに育てたインゲンマメの茎は、太い？細い？長い？短い？", a: "細くて長い", n: "葉の色はうすい緑色や黄色。光を求めてひょろひょろのびる。" },
+          { q: "光を当てずに育てたインゲンマメの葉は何色？", a: "うすい緑色や黄色", n: "光を当てて育てると、こい緑色になる。" },
+          { f: "yoko", q: "発芽したインゲンマメのはちを暗い部屋で横にたおしておくと、茎はア・イのどちらにのびる？", a: "ア（重力と逆の向き）", n: "茎は重力と逆の向き（上）へのびる。" },
+          { f: "yoko", q: "横にたおしたはちで、根はア・イのどちらにのびる？", a: "イ（重力の向き）", n: "根は重力の向き（下）へのびる。" },
+          { f: "hikari", q: "茎に光が当たると、ア・イのどちら側がよくのびる？", a: "イ（光の当たっていない側）", n: "光の当たっていない側がよくのびるので、茎が曲がる。" },
+          { f: "hikari", q: "その結果、茎はどちらへのびていく？", a: "光のほう", n: "光の当たらない側がよくのびる → 光のほうへ曲がる。" },
+        ]
+      },
+    ]
+  },
+];
+
+// ===== 状態 =====
+const STORE_KEY = "rika_flashcards";
+let era = null;
+let DECKS = [];
+let mastered = loadMastered();
+let shuffle = true;
+let reverse = false;
+let currentDeckIds = [];
+let queue = [];
+let idx = 0;
+let ngList = [];
+let okCount = 0;
+
+function loadMastered() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; }
+}
+function saveMastered() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(mastered)); } catch (e) {}
+}
+function cardKey(deckId, i, eraId) { return (eraId || era.id) + ":" + deckId + ":" + i; }
+
+const $ = id => document.getElementById(id);
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+// ===== 単元選択 =====
+function renderEras() {
+  const box = $("eras");
+  box.innerHTML = "";
+  ERAS.forEach(e => {
+    const total = e.decks.reduce((s, d) => s + d.cards.length, 0);
+    const done = e.decks.reduce((s, d) => s + d.cards.filter((_, i) => mastered[cardKey(d.id, i, e.id)]).length, 0);
+    const b = document.createElement("button");
+    b.className = "deck-btn";
+    const badge = done === total ? "✅ 全部覚えた" : `覚えた ${done}/${total}`;
+    b.innerHTML = `<div><div class="name">${e.name}</div><div class="info">${total}枚・${e.source}</div></div><div class="badge">${badge}</div>`;
+    b.onclick = () => selectEra(e);
+    box.appendChild(b);
+  });
+}
+function selectEra(e) {
+  era = e;
+  DECKS = e.decks;
+  $("eraTitle").textContent = e.name;
+  renderHome();
+  show("home");
+}
+
+// ===== デッキ選択 =====
+function renderHome() {
+  const box = $("decks");
+  box.innerHTML = "";
+  const allCount = DECKS.reduce((s, d) => s + d.cards.length, 0);
+  const allDone = DECKS.reduce((s, d) => s + d.cards.filter((_, i) => mastered[cardKey(d.id, i)]).length, 0);
+  box.appendChild(deckButton("🌟 ぜんぶ", allCount + "枚", allDone, allCount, DECKS.map(d => d.id), true));
+  DECKS.forEach(d => {
+    const done = d.cards.filter((_, i) => mastered[cardKey(d.id, i)]).length;
+    box.appendChild(deckButton(d.name, d.cards.length + "枚", done, d.cards.length, [d.id]));
+  });
+}
+function deckButton(name, info, done, total, ids, isAll) {
+  const b = document.createElement("button");
+  b.className = "deck-btn" + (isAll ? " all" : "");
+  const badge = done === total ? "✅ 全部覚えた" : `覚えた ${done}/${total}`;
+  b.innerHTML = `<div><div class="name">${name}</div><div class="info">${info}</div></div><div class="badge">${badge}</div>`;
+  b.onclick = () => start(ids);
+  return b;
+}
+
+// ===== 学習 =====
+function start(deckIds, onlyCards) {
+  currentDeckIds = deckIds;
+  queue = onlyCards || deckIds.flatMap(id => {
+    const d = DECKS.find(x => x.id === id);
+    return d.cards.map((c, i) => ({ ...c, key: cardKey(id, i), deck: d.name }));
+  });
+  if (shuffle) queue = shuffled(queue);
+  idx = 0; ngList = []; okCount = 0;
+  show("study");
+  renderCard();
+}
+function shuffled(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function renderCard() {
+  const c = queue[idx];
+  const card = $("card");
+  card.classList.remove("flipped");
+  $("judge").classList.remove("show");
+  $("flipBtn").classList.remove("hide");
+  $("count").textContent = `${idx + 1} / ${queue.length}`;
+  $("barFill").style.width = (idx / queue.length * 100) + "%";
+  $("frontTag").textContent = c.deck;
+
+  // 図つき・長い答えのカードは逆向きにしない
+  const useReverse = reverse && !c.long && !c.f;
+  // うら返しアニメ中に中身が見えないよう少し待って差しかえ
+  setTimeout(() => {
+    const fig = c.f ? FIG[c.f] : "";
+    $("frontFig").innerHTML = fig;
+    $("backFig").innerHTML = fig;
+    $("frontText").innerHTML = esc(useReverse ? c.a : c.q).replace(/\n/g, "<br>");
+    $("frontText").style.fontSize = useReverse ? "2rem" : "";
+    $("frontText").style.fontWeight = useReverse ? "bold" : "";
+    $("backText").innerHTML = esc(useReverse ? c.q : c.a).replace(/\n/g, "<br>");
+    $("backText").style.fontSize = (useReverse || c.long) ? "1.15rem" : "";
+    $("backRuby").textContent = useReverse ? "" : (c.r || "");
+    $("backNote").textContent = c.n ? "📖 " + c.n : "";
+    $("backGoro").textContent = c.g ? "🎵 語呂：" + c.g : "";
+    $("backGoro").style.display = c.g ? "" : "none";
+    if (useReverse) $("backNote").textContent = "（" + c.a + (c.r ? "：" + c.r : "") + "）  📖 " + c.n;
+  }, card.classList.contains("flipped") ? 250 : 0);
+}
+function esc(s) {
+  return s.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+}
+function flip() {
+  const card = $("card");
+  card.classList.toggle("flipped");
+  if (card.classList.contains("flipped")) {
+    $("judge").classList.add("show");
+    $("flipBtn").classList.add("hide");
+  }
+}
+function judge(ok) {
+  const c = queue[idx];
+  if (ok) { okCount++; mastered[c.key] = true; }
+  else { ngList.push(c); delete mastered[c.key]; }
+  saveMastered();
+  idx++;
+  if (idx >= queue.length) showResult();
+  else {
+    $("card").classList.remove("flipped");
+    setTimeout(renderCard, 250);
+  }
+}
+
+// ===== 結果 =====
+function showResult() {
+  const total = queue.length;
+  const rate = Math.round(okCount / total * 100);
+  $("resultScore").textContent = `${okCount} / ${total}`;
+  $("resultSub").textContent = `覚えた率 ${rate}%`;
+  $("resultMsg").textContent =
+    rate === 100 ? "🎉 パーフェクト！すごい！" :
+    rate >= 80 ? "👏 よくできました！あと少し！" :
+    rate >= 50 ? "💪 いい調子！「まだ」をもう一度やろう" :
+    "📚 くり返して覚えよう！";
+  const rv = $("review");
+  if (ngList.length) {
+    rv.innerHTML = "<h2>😣 まだのカード</h2>" + ngList.map(c =>
+      `<div class="review-item"><div class="rq">${esc(c.q).replace(/\n/g, "<br>")}</div><div class="ra">→ ${esc(c.a)}</div>${c.g ? `<div style="color:#a85a00;font-size:.9rem;margin-top:2px">🎵 ${esc(c.g)}</div>` : ""}</div>`
+    ).join("");
+  } else rv.innerHTML = "";
+  $("retryNgBtn").style.display = ngList.length ? "" : "none";
+  show("result");
+}
+
+// ===== イベント =====
+$("card").onclick = flip;
+$("flipBtn").onclick = flip;
+$("okBtn").onclick = () => judge(true);
+$("ngBtn").onclick = () => judge(false);
+$("quitBtn").onclick = () => { renderHome(); show("home"); };
+$("homeBtn").onclick = () => { renderHome(); show("home"); };
+$("retryAllBtn").onclick = () => start(currentDeckIds);
+$("retryNgBtn").onclick = () => start(currentDeckIds, ngList.slice());
+$("shuffleToggle").onclick = e => { shuffle = !shuffle; e.currentTarget.classList.toggle("on", shuffle); };
+$("reverseToggle").onclick = e => { reverse = !reverse; e.currentTarget.classList.toggle("on", reverse); };
+$("eraBackBtn").onclick = () => { renderEras(); show("eraScreen"); };
+$("resetBtn").onclick = () => {
+  if (!confirm(era.name + "の覚えた記録をリセットしますか？")) return;
+  Object.keys(mastered).forEach(k => { if (k.startsWith(era.id + ":")) delete mastered[k]; });
+  saveMastered();
+  renderHome();
+};
+
+renderEras();
+</script>
+</body>
+</html>

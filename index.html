@@ -1324,6 +1324,451 @@ const FIG = {
     + L(188, 240, 140, 215, "#333", 1) + M(200, 246, "イ")
     + L(303, 145, 254, 94, "#333", 1) + M(314, 155, "ウ")
     + L(298, 26, 262, 26, "#333", 1) + M(311, 26, "エ")),
+
+  c28_tenbin: svg(360, 215,
+    `<polygon points="45,182 315,182 332,204 28,204" fill="#a5d8ff" stroke="#1971c2"/>`
+    + `<line x1="95" y1="136" x2="95" y2="182" stroke="#868e96" stroke-width="5"/><line x1="265" y1="136" x2="265" y2="182" stroke="#868e96" stroke-width="5"/>`
+    + `<polygon points="166,182 194,182 190,140 170,140" fill="#adb5bd" stroke="#495057"/>`
+    + `<rect x="172" y="58" width="16" height="72" fill="#e9ecef" stroke="#868e96"/>`
+    + `<path d="M148 34 L212 34 L202 58 L158 58 Z" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + `<line x1="156" y1="35" x2="156" y2="41" stroke="#333"/><line x1="164" y1="35" x2="164" y2="41" stroke="#333"/><line x1="172" y1="35" x2="172" y2="41" stroke="#333"/><line x1="180" y1="35" x2="180" y2="45" stroke="#333"/><line x1="188" y1="35" x2="188" y2="41" stroke="#333"/><line x1="196" y1="35" x2="196" y2="41" stroke="#333"/><line x1="204" y1="35" x2="204" y2="41" stroke="#333"/>`
+    + `<line x1="180" y1="131" x2="180" y2="40" stroke="#333" stroke-width="2"/>`
+    + `<rect x="70" y="126" width="220" height="10" rx="3" fill="#ced4da" stroke="#495057"/>`
+    + `<rect x="50" y="128" width="20" height="6" fill="#adb5bd" stroke="#495057"/><rect x="290" y="128" width="20" height="6" fill="#adb5bd" stroke="#495057"/>`
+    + `<line x1="54" y1="127" x2="54" y2="135" stroke="#495057"/><line x1="58" y1="127" x2="58" y2="135" stroke="#495057"/><line x1="62" y1="127" x2="62" y2="135" stroke="#495057"/><line x1="66" y1="127" x2="66" y2="135" stroke="#495057"/><line x1="294" y1="127" x2="294" y2="135" stroke="#495057"/><line x1="298" y1="127" x2="298" y2="135" stroke="#495057"/><line x1="302" y1="127" x2="302" y2="135" stroke="#495057"/><line x1="306" y1="127" x2="306" y2="135" stroke="#495057"/>`
+    + `<line x1="95" y1="126" x2="95" y2="106" stroke="#495057" stroke-width="3"/><line x1="265" y1="126" x2="265" y2="106" stroke="#495057" stroke-width="3"/>`
+    + `<path d="M58 100 Q95 122 132 100 Z" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/><path d="M228 100 Q265 122 302 100 Z" fill="#e9ecef" stroke="#495057" stroke-width="1.5"/>`
+    + `<circle cx="180" cy="131" r="6" fill="#fff" stroke="#333"/><line x1="176" y1="131" x2="184" y2="131" stroke="#333"/><line x1="180" y1="127" x2="180" y2="135" stroke="#333"/>`
+    + M(28, 82, "A")
+    + L(40, 88, 66, 102)
+    + M(128, 164, "B")
+    + L(128, 151, 128, 137)
+    + M(250, 30, "C")
+    + L(237, 32, 208, 40)
+    + M(240, 72, "D")
+    + L(227, 72, 182, 72)
+    + M(222, 164, "E")
+    + L(212, 156, 186, 135)
+    + M(334, 156, "F")
+    + L(326, 145, 307, 135)),
+
+  c28_muki: svg(320, 190,
+    `<rect x="30" y="66" width="260" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="160,74 150,92 170,92" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="40" y1="74" x2="40" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="150" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(40, 182, "ア", { size: 14 })
+    + `<line x1="100" y1="74" x2="100" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="100" cy="150" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(100, 182, "イ", { size: 14 })
+    + `<line x1="220" y1="74" x2="220" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="220" cy="150" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(220, 182, "ウ", { size: 14 })
+    + `<line x1="280" y1="74" x2="280" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="280" cy="150" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(280, 182, "エ", { size: 14 })
+    + T(160, 30, "支点をおさえておもりをつるす", { size: 12 })),
+
+  c28_kousiki: svg(320, 200,
+    `<rect x="50" y="76" width="248" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="170,84 160,102 180,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="50" y1="84" x2="50" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="50" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(50, 192, "Ag", { size: 14 })
+    + `<line x1="298" y1="84" x2="298" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="298" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(298, 192, "Cg", { size: 14 })
+    + `<path d="M50 72 Q110 56 170 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(110, 58, "Bcm", { size: 13 })
+    + `<path d="M170 72 Q234 56 298 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(234, 58, "Dcm", { size: 13 })),
+
+  c28_rei1: svg(320, 200,
+    `<rect x="35" y="76" width="250" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="135,84 125,102 145,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="35" y1="84" x2="35" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="35" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(35, 192, "150g", { size: 14 })
+    + `<line x1="285" y1="84" x2="285" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="285" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(285, 192, "Ag", { size: 14 })
+    + `<path d="M35 72 Q85 56 135 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(85, 58, "20cm", { size: 13 })
+    + `<path d="M135 72 Q210 56 285 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(210, 58, "30cm", { size: 13 })),
+
+  c28_rei2: svg(320, 200,
+    `<rect x="40" y="76" width="240" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="240,84 230,102 250,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="40" y1="84" x2="40" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(40, 192, "10g", { size: 14 })
+    + `<line x1="280" y1="84" x2="280" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="280" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(280, 192, "50g", { size: 14 })
+    + `<path d="M40 72 Q140 56 240 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(140, 58, "50cm", { size: 13 })
+    + `<path d="M240 72 Q260 56 280 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(260, 58, "Bcm", { size: 13 })),
+
+  c28_rei3: svg(320, 210,
+    `<rect x="20" y="76" width="260" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="220,84 210,102 230,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="20" y1="84" x2="20" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="20" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(20, 192, "10g", { size: 14 })
+    + `<line x1="120" y1="84" x2="120" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="120" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(120, 192, "40g", { size: 14 })
+    + `<line x1="280" y1="84" x2="280" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="280" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(280, 192, "Cg", { size: 14 })
+    + `<path d="M20 72 Q120 56 220 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(120, 58, "40cm", { size: 13 })
+    + `<path d="M220 72 Q250 56 280 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(250, 58, "12cm", { size: 13 })
+    + `<path d="M120 88 Q170 104 220 88" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(170, 114, "20cm", { size: 13 })),
+
+  c28_rei4: svg(340, 225,
+    `<rect x="40" y="96" width="250" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="40,104 30,122 50,122" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="240" y1="104" x2="240" y2="168" stroke="#333" stroke-width="1.5"/><circle cx="240" cy="180" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(240, 212, "40g", { size: 14 })
+    + `<path d="M40 92 Q165 76 290 92" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(165, 78, "50cm", { size: 13 })
+    + `<path d="M40 108 Q140 124 240 108" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(140, 134, "Dcm", { size: 13 })
+    + `<line x1="290" y1="96" x2="290" y2="62" stroke="#333" stroke-width="1.5"/><rect x="283" y="18" width="14" height="44" rx="3" fill="#fff" stroke="#333" stroke-width="1.5"/><line x1="286" y1="26" x2="294" y2="26" stroke="#333"/><line x1="286" y1="32" x2="294" y2="32" stroke="#333"/><line x1="286" y1="38" x2="294" y2="38" stroke="#333"/><line x1="286" y1="44" x2="294" y2="44" stroke="#333"/><line x1="286" y1="50" x2="294" y2="50" stroke="#333"/><line x1="286" y1="56" x2="294" y2="56" stroke="#333"/>`
+    + T(276, 30, "ばねはかり", { size: 11, a: "end" })
+    + T(276, 48, "32g", { size: 14, a: "end" })),
+
+  c28_gyaku: svg(320, 200,
+    `<rect x="40" y="76" width="240" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="120,84 110,102 130,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="40" y1="84" x2="40" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="40" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(40, 192, "200g", { size: 14 })
+    + `<line x1="280" y1="84" x2="280" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="280" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(280, 192, "100g", { size: 14 })
+    + `<path d="M40 72 Q80 56 120 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(80, 58, "10cm", { size: 13 })
+    + `<path d="M120 72 Q200 56 280 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(200, 58, "20cm", { size: 13 })),
+
+  c28_rei5: svg(320, 200,
+    `<rect x="39" y="76" width="256" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="135,84 125,102 145,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="39" y1="84" x2="39" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="39" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(39, 192, "100g", { size: 14 })
+    + `<line x1="295" y1="84" x2="295" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="295" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(295, 192, "Ag", { size: 14 })
+    + `<path d="M39 72 Q87 56 135 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(87, 58, "30cm", { size: 13 })
+    + `<path d="M135 72 Q215 56 295 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(215, 58, "50cm", { size: 13 })),
+
+  c28_rei6: svg(320, 200,
+    `<rect x="35" y="76" width="250" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="235,84 225,102 245,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="35" y1="84" x2="35" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="35" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(35, 192, "20g", { size: 14 })
+    + `<line x1="285" y1="84" x2="285" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="285" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(285, 192, "80g", { size: 14 })
+    + `<path d="M35 72 Q135 56 235 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(135, 58, "20cm", { size: 13 })
+    + `<path d="M235 72 Q260 56 285 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(260, 58, "Bcm", { size: 13 })),
+
+  c28_ren1: svg(320, 200,
+    `<rect x="37.5" y="76" width="247.5" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="150,84 140,102 160,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="37.5" y1="84" x2="37.5" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="37.5" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(37.5, 192, "60g", { size: 14 })
+    + `<line x1="285" y1="84" x2="285" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="285" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(285, 192, "?g", { size: 14 })
+    + `<path d="M37.5 72 Q93.75 56 150 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(93.75, 58, "25cm", { size: 13 })
+    + `<path d="M150 72 Q217.5 56 285 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(217.5, 58, "30cm", { size: 13 })),
+
+  c28_ren2: svg(320, 200,
+    `<rect x="45" y="76" width="220" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="210,84 200,102 220,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="45" y1="84" x2="45" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="45" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(45, 192, "40g", { size: 14 })
+    + `<line x1="265" y1="84" x2="265" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="265" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(265, 192, "120g", { size: 14 })
+    + `<path d="M45 72 Q127.5 56 210 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(127.5, 58, "30cm", { size: 13 })
+    + `<path d="M210 72 Q237.5 56 265 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(237.5, 58, "?cm", { size: 13 })),
+
+  c28_ren3: svg(320, 210,
+    `<rect x="35" y="76" width="250" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<polygon points="185,84 175,102 195,102" fill="#fff" stroke="#333" stroke-width="2"/>`
+    + `<line x1="35" y1="84" x2="35" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="35" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(35, 192, "20g", { size: 14 })
+    + `<line x1="135" y1="84" x2="135" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="135" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(135, 192, "30g", { size: 14 })
+    + `<line x1="285" y1="84" x2="285" y2="148" stroke="#333" stroke-width="1.5"/><circle cx="285" cy="160" r="12" fill="#868e96" stroke="#495057"/>`
+    + T(285, 192, "?g", { size: 14 })
+    + `<path d="M35 72 Q110 56 185 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(110, 58, "30cm", { size: 13 })
+    + `<path d="M185 72 Q235 56 285 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(235, 58, "20cm", { size: 13 })
+    + `<path d="M135 88 Q160 104 185 88" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(160, 114, "10cm", { size: 13 })),
+
+  c28_sao: svg(320, 200,
+    `<rect x="38" y="76" width="252" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<ellipse cx="110" cy="56" rx="3" ry="24" fill="none" stroke="#333" stroke-width="2"/>`
+    + `<line x1="38" y1="84" x2="16" y2="150" stroke="#333" stroke-width="1.5"/><line x1="38" y1="84" x2="60" y2="150" stroke="#333" stroke-width="1.5"/><path d="M12 150 Q38 164 64 150 Z" fill="#ced4da" stroke="#495057"/>`
+    + T(38, 184, "皿", { size: 14 })
+    + `<line x1="230" y1="84" x2="230" y2="140" stroke="#333" stroke-width="1.5"/><polygon points="223,140 237,140 241,164 219,164" fill="#868e96" stroke="#495057"/>`
+    + T(230, 184, "おもり", { size: 14 })
+    + M(150, 40, "ア")
+    + L(137, 42, 118, 50)),
+
+  c28_rei7: svg(320, 210,
+    `<rect x="51" y="76" width="245" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<ellipse cx="100" cy="56" rx="3" ry="24" fill="none" stroke="#333" stroke-width="2"/>`
+    + `<line x1="65" y1="84" x2="43" y2="150" stroke="#333" stroke-width="1.5"/><line x1="65" y1="84" x2="87" y2="150" stroke="#333" stroke-width="1.5"/><path d="M39 150 Q65 164 91 150 Z" fill="#ced4da" stroke="#495057"/>`
+    + `<circle cx="65" cy="142" r="9" fill="#74c0fc" stroke="#1971c2"/>`
+    + T(65, 184, "皿10g＋もの", { size: 14 })
+    + `<line x1="275" y1="84" x2="275" y2="140" stroke="#333" stroke-width="1.5"/><polygon points="268,140 282,140 286,164 264,164" fill="#868e96" stroke="#495057"/>`
+    + T(275, 184, "おもり100g", { size: 14 })
+    + `<path d="M65 72 Q82.5 56 100 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(77.5, 58, "5cm", { size: 13 })
+    + `<path d="M100 72 Q187.5 56 275 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(187.5, 58, "25cm", { size: 13 })
+    + `<circle cx="275" cy="80" r="3.5" fill="#333"/>`
+    + T(290, 102, "A", { size: 15 })),
+
+  c28_ren4: svg(320, 210,
+    `<rect x="51" y="76" width="245" height="8" rx="2" fill="#e9c46a" stroke="#a07c2c"/>`
+    + `<ellipse cx="100" cy="56" rx="3" ry="24" fill="none" stroke="#333" stroke-width="2"/>`
+    + `<line x1="65" y1="84" x2="43" y2="150" stroke="#333" stroke-width="1.5"/><line x1="65" y1="84" x2="87" y2="150" stroke="#333" stroke-width="1.5"/><path d="M39 150 Q65 164 91 150 Z" fill="#ced4da" stroke="#495057"/>`
+    + `<circle cx="65" cy="142" r="9" fill="#74c0fc" stroke="#1971c2"/>`
+    + T(65, 184, "皿10g＋もの", { size: 14 })
+    + `<line x1="205" y1="84" x2="205" y2="140" stroke="#333" stroke-width="1.5"/><polygon points="198,140 212,140 216,164 194,164" fill="#868e96" stroke="#495057"/>`
+    + T(205, 184, "おもり100g", { size: 14 })
+    + `<path d="M65 72 Q82.5 56 100 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(77.5, 58, "5cm", { size: 13 })
+    + `<path d="M100 72 Q152.5 56 205 72" stroke="#555" stroke-dasharray="4 3" fill="none"/>`
+    + T(152.5, 58, "15cm", { size: 13 })),
+  c29_3pt: svg(340, 200,
+    `<rect x="40" y="90" width="260" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="120,98 110,114 130,114" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + `<ellipse cx="48" cy="72" rx="24" ry="17" fill="#ced4da" stroke="#555"/>`
+    + T(48,77,"石",{size:13})
+    + A(292,28,292,86,"#e03131",3)
+    + T(246,40,"手でおす",{size:12})
+    + L(120,116,120,124)
+    + M(120,138,"ア")
+    + M(320,94,"イ")
+    + L(48,100,48,110)
+    + M(48,124,"ウ")),
+  c29_typeA: svg(300, 165,
+    `<rect x="40" y="80" width="220" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="120,88 110,104 130,104" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + T(120,128,"支点",{size:13})
+    + A(40,76,40,34,"#1971c2",2.5)
+    + T(40,24,"作用点",{size:13})
+    + A(260,88,260,130,"#e03131",2.5)
+    + T(260,150,"力点",{size:13})),
+  c29_typeB: svg(300, 165,
+    `<rect x="40" y="80" width="220" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="40,88 30,104 50,104" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + T(40,128,"支点",{size:13})
+    + A(150,88,150,130,"#1971c2",2.5)
+    + T(150,150,"作用点",{size:13})
+    + A(260,88,260,130,"#e03131",2.5)
+    + T(260,150,"力点",{size:13})),
+  c29_typeC: svg(300, 165,
+    `<rect x="40" y="80" width="220" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="40,88 30,104 50,104" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + T(40,128,"支点",{size:13})
+    + A(130,88,130,130,"#e03131",2.5)
+    + T(130,150,"力点",{size:13})
+    + A(260,88,260,130,"#1971c2",2.5)
+    + T(260,150,"作用点",{size:13})),
+  c29_moment: svg(340, 210,
+    `<rect x="40" y="70" width="260" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="150,78 140,94 160,94" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(40,48,150,48,"#868e96",1.2)+L(40,43,40,53,"#868e96",1.2)+L(150,43,150,53,"#868e96",1.2)+`<rect x="73.0" y="29" width="44" height="17" fill="#fff"/>`+T(95.0,42,"Bcm",{size:13})
+    + L(150,48,300,48,"#868e96",1.2)+L(150,43,150,53,"#868e96",1.2)+L(300,43,300,53,"#868e96",1.2)+`<rect x="203.0" y="29" width="44" height="17" fill="#fff"/>`+T(225.0,42,"Dcm",{size:13})
+    + L(40,78,40,128,"#555",1.5)+`<circle cx="40" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,172,"Ag",{size:14})
+    + L(300,78,300,128,"#555",1.5)+`<circle cx="300" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(300,172,"Cg",{size:14})),
+  c29_m1: svg(340, 200,
+    `<rect x="40" y="70" width="250" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="140,78 130,94 150,94" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(40,48,140,48,"#868e96",1.2)+L(40,43,40,53,"#868e96",1.2)+L(140,43,140,53,"#868e96",1.2)+`<rect x="68.0" y="29" width="44" height="17" fill="#fff"/>`+T(90.0,42,"20cm",{size:13})
+    + L(140,48,290,48,"#868e96",1.2)+L(140,43,140,53,"#868e96",1.2)+L(290,43,290,53,"#868e96",1.2)+`<rect x="193.0" y="29" width="44" height="17" fill="#fff"/>`+T(215.0,42,"30cm",{size:13})
+    + L(40,78,40,128,"#555",1.5)+`<circle cx="40" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,172,"60g",{size:14})
+    + L(290,78,290,128,"#555",1.5)+`<circle cx="290" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(290,172,"?g",{size:14})),
+  c29_m2: svg(340, 200,
+    `<rect x="40" y="70" width="250" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="160,78 150,94 170,94" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(40,48,160,48,"#868e96",1.2)+L(40,43,40,53,"#868e96",1.2)+L(160,43,160,53,"#868e96",1.2)+`<rect x="78.0" y="29" width="44" height="17" fill="#fff"/>`+T(100.0,42,"30cm",{size:13})
+    + L(160,48,290,48,"#868e96",1.2)+L(160,43,160,53,"#868e96",1.2)+L(290,43,290,53,"#868e96",1.2)+`<rect x="203.0" y="29" width="44" height="17" fill="#fff"/>`+T(225.0,42,"?cm",{size:13})
+    + L(40,78,40,128,"#555",1.5)+`<circle cx="40" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,172,"40g",{size:14})
+    + L(290,78,290,128,"#555",1.5)+`<circle cx="290" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(290,172,"60g",{size:14})),
+  c29_updown: svg(340, 210,
+    `<rect x="40" y="90" width="260" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="213,98 203,114 223,114" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(40,98,40,148,"#555",1.5)+`<circle cx="40" cy="160" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,192,"100g",{size:14})
+    + L(300,98,300,148,"#555",1.5)+`<circle cx="300" cy="160" r="12" fill="#adb5bd" stroke="#555"/>`+T(300,192,"200g",{size:14})
+    + A(213,90,213,34,"#e03131",2.5)+T(250,40,"?g",{size:14,c:"#c92a2a"})),
+  c29_rei1: svg(340, 210,
+    `<rect x="139" y="14" width="14" height="30" rx="2" fill="#fff" stroke="#333" stroke-width="1.5"/>`+L(142,20,150,20,"#333",1)+L(142,25,150,25,"#333",1)+L(142,30,150,30,"#333",1)+L(142,35,150,35,"#333",1)+L(146,2,146,14,"#333",1.5)+L(146,44,146,70,"#333",1.5)+T(186,34,"180g",{size:14})
+    + `<rect x="40" y="70" width="260" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + L(40,78,40,128,"#555",1.5)+`<circle cx="40" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,172,"100g",{size:14})
+    + L(210,78,210,128,"#555",1.5)+`<circle cx="210" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(210,172,"Ag",{size:14})
+    + L(300,78,300,128,"#555",1.5)+`<circle cx="300" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(300,172,"60g",{size:14})),
+  c29_p_rei1: svg(340, 210,
+    `<rect x="181" y="14" width="14" height="30" rx="2" fill="#fff" stroke="#333" stroke-width="1.5"/>`+L(184,20,192,20,"#333",1)+L(184,25,192,25,"#333",1)+L(184,30,192,30,"#333",1)+L(184,35,192,35,"#333",1)+L(188,2,188,14,"#333",1.5)+L(188,44,188,70,"#333",1.5)+T(228,34,"250g",{size:14})
+    + `<rect x="40" y="70" width="260" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + L(40,78,40,128,"#555",1.5)+`<circle cx="40" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(40,172,"80g",{size:14})
+    + L(210,78,210,128,"#555",1.5)+`<circle cx="210" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(210,172,"Ag",{size:14})
+    + L(300,78,300,128,"#555",1.5)+`<circle cx="300" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(300,172,"90g",{size:14})),
+  c29_uni: svg(340, 200,
+    `<rect x="35" y="70" width="270" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + L(80.0,70,80.0,78,"#b08900",1)+L(125.0,70,125.0,78,"#b08900",1)+L(170.0,70,170.0,78,"#b08900",1)+L(215.0,70,215.0,78,"#b08900",1)+L(260.0,70,260.0,78,"#b08900",1)
+    + `<polygon points="125,78 115,94 135,94" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(35,48,125,48,"#868e96",1.2)+L(35,43,35,53,"#868e96",1.2)+L(125,43,125,53,"#868e96",1.2)+`<rect x="58.0" y="29" width="44" height="17" fill="#fff"/>`+T(80.0,42,"20cm",{size:13})
+    + L(125,48,305,48,"#868e96",1.2)+L(125,43,125,53,"#868e96",1.2)+L(305,43,305,53,"#868e96",1.2)+`<rect x="193.0" y="29" width="44" height="17" fill="#fff"/>`+T(215.0,42,"40cm",{size:13})
+    + L(35,78,35,128,"#555",1.5)+`<circle cx="35" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(35,172,"50g",{size:14})
+    + L(305,78,305,128,"#555",1.5)+`<circle cx="305" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(305,172,"Ag",{size:14})
+    + `<rect x="160" y="112" width="110" height="22" fill="#fff" stroke="#555"/>`
+    + T(215,128,"棒の重さ＝20g",{size:12})),
+  c29_rei2: svg(340, 210,
+    `<rect x="293" y="22" width="14" height="30" rx="2" fill="#fff" stroke="#333" stroke-width="1.5"/>`+L(296,28,304,28,"#333",1)+L(296,33,304,33,"#333",1)+L(296,38,304,38,"#333",1)+L(296,43,304,43,"#333",1)+L(300,10,300,22,"#333",1.5)+L(300,52,300,100,"#333",1.5)+T(322,42,"Ag",{size:14})
+    + `<rect x="50" y="100" width="250" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="50,108 40,124 60,124" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(50,82,300,82,"#868e96",1.2)+L(50,77,50,87,"#868e96",1.2)+L(300,77,300,87,"#868e96",1.2)+`<rect x="153.0" y="63" width="44" height="17" fill="#fff"/>`+T(175.0,76,"50cm",{size:13})
+    + L(50,134,150,134,"#868e96",1.2)+L(50,129,50,139,"#868e96",1.2)+L(150,129,150,139,"#868e96",1.2)+`<rect x="78.0" y="137" width="44" height="17" fill="#fff"/>`+T(100.0,150,"20cm",{size:13})
+    + L(150,108,150,160,"#555",1.5)+`<circle cx="150" cy="172" r="12" fill="#adb5bd" stroke="#555"/>`+T(150,204,"25g",{size:14})
+    + T(240,160,"棒の重さ＝60g",{size:12})),
+  c29_p_rei2: svg(340, 210,
+    `<rect x="283" y="22" width="14" height="30" rx="2" fill="#fff" stroke="#333" stroke-width="1.5"/>`+L(286,28,294,28,"#333",1)+L(286,33,294,33,"#333",1)+L(286,38,294,38,"#333",1)+L(286,43,294,43,"#333",1)+L(290,10,290,22,"#333",1.5)+L(290,52,290,100,"#333",1.5)+T(314,42,"?g",{size:14})
+    + `<rect x="50" y="100" width="240" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="50,108 40,124 60,124" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(50,82,290,82,"#868e96",1.2)+L(50,77,50,87,"#868e96",1.2)+L(290,77,290,87,"#868e96",1.2)+`<rect x="148.0" y="63" width="44" height="17" fill="#fff"/>`+T(170.0,76,"60cm",{size:13})
+    + L(50,134,210,134,"#868e96",1.2)+L(50,129,50,139,"#868e96",1.2)+L(210,129,210,139,"#868e96",1.2)+`<rect x="108.0" y="137" width="44" height="17" fill="#fff"/>`+T(130.0,150,"40cm",{size:13})
+    + L(210,108,210,160,"#555",1.5)+`<circle cx="210" cy="172" r="12" fill="#adb5bd" stroke="#555"/>`+T(210,204,"30g",{size:14})
+    + T(120,175,"棒の重さ＝40g",{size:12})),
+  c29_p_uni: svg(340, 200,
+    `<rect x="35" y="70" width="270" height="8" fill="#f5d88a" stroke="#b08900"/>`
+    + `<polygon points="116,78 106,94 126,94" fill="#fff" stroke="#333" stroke-width="1.5"/>`
+    + L(35,48,116,48,"#868e96",1.2)+L(35,43,35,53,"#868e96",1.2)+L(116,43,116,53,"#868e96",1.2)+`<rect x="53.5" y="29" width="44" height="17" fill="#fff"/>`+T(75.5,42,"30cm",{size:13})
+    + L(116,48,305,48,"#868e96",1.2)+L(116,43,116,53,"#868e96",1.2)+L(305,43,305,53,"#868e96",1.2)+`<rect x="188.5" y="29" width="44" height="17" fill="#fff"/>`+T(210.5,42,"70cm",{size:13})
+    + L(35,78,35,128,"#555",1.5)+`<circle cx="35" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(35,172,"50g",{size:14})
+    + L(305,78,305,128,"#555",1.5)+`<circle cx="305" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(305,172,"?g",{size:14})
+    + `<rect x="160" y="112" width="110" height="22" fill="#fff" stroke="#555"/>`
+    + T(215,128,"棒の重さ＝40g",{size:12})),
+  c29_taper: svg(340, 200,
+    L(170,10,170,70,"#333",1.5)
+    + `<polygon points="40,70 300,70 300,78 40,96" fill="#f5d88a" stroke="#b08900"/>`
+    + L(40,50,170,50,"#868e96",1.2)+L(40,45,40,55,"#868e96",1.2)+L(170,45,170,55,"#868e96",1.2)+`<rect x="83.0" y="31" width="44" height="17" fill="#fff"/>`+T(105.0,44,"40cm",{size:13})
+    + L(170,50,300,50,"#868e96",1.2)+L(170,45,170,55,"#868e96",1.2)+L(300,45,300,55,"#868e96",1.2)+`<rect x="213.0" y="31" width="44" height="17" fill="#fff"/>`+T(235.0,44,"40cm",{size:13})
+    + L(300,78,300,128,"#555",1.5)+`<circle cx="300" cy="140" r="12" fill="#adb5bd" stroke="#555"/>`+T(300,172,"20g",{size:14})
+    + T(120,140,"棒の重さ＝80g",{size:12})),
+  c29_rei3: svg(340, 190,
+    `<polygon points="40,100 300,100 300,108 40,126" fill="#f5d88a" stroke="#b08900"/>`
+    + A(40,100,40,44,"#e03131",2.5)+T(40,34,"60g",{size:14,c:"#c92a2a"})
+    + A(300,100,300,44,"#e03131",2.5)+T(300,34,"40g",{size:14,c:"#c92a2a"})
+    + L(40,72,300,72,"#868e96",1.2)+L(40,67,40,77,"#868e96",1.2)+L(300,67,300,77,"#868e96",1.2)+`<rect x="148.0" y="53" width="44" height="17" fill="#fff"/>`+T(170.0,66,"100cm",{size:13})
+    + T(40,150,"A（太い）",{size:13})
+    + T(300,135,"B（細い）",{size:13})),
+  c29_p_rei3: svg(340, 190,
+    `<polygon points="40,100 300,100 300,108 40,126" fill="#f5d88a" stroke="#b08900"/>`
+    + A(40,100,40,44,"#e03131",2.5)+T(40,34,"75g",{size:14,c:"#c92a2a"})
+    + A(300,100,300,44,"#e03131",2.5)+T(300,34,"45g",{size:14,c:"#c92a2a"})
+    + L(40,72,300,72,"#868e96",1.2)+L(40,67,40,77,"#868e96",1.2)+L(300,67,300,77,"#868e96",1.2)+`<rect x="148.0" y="53" width="44" height="17" fill="#fff"/>`+T(170.0,66,"120cm",{size:13})
+    + T(40,150,"太いはし",{size:13})
+    + T(300,135,"細いはし",{size:13})),
+  c30_len: svg(330, 220,
+    `<rect x="40" y="22" width="60" height="8" fill="#d9c48f" stroke="#8a6d3b"/><rect x="150" y="22" width="60" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M70 30 V37 L79 41.7 L61 46.4 L79 51.1 L61 55.9 L79 60.6 L61 65.3 L79 70.0 L61 74.7 L79 79.4 L61 84.1 L79 88.9 L61 93.6 L79 98.3 L70 103.0 V110" fill="none" stroke="#333" stroke-width="2"/><path d="M180 30 V37 L189 45.3 L171 53.6 L189 61.9 L171 70.1 L189 78.4 L171 86.7 L189 95.0 L171 103.3 L189 111.6 L171 119.9 L189 128.1 L171 136.4 L189 144.7 L180 153.0 V160" fill="none" stroke="#333" stroke-width="2"/><circle cx="180" cy="172" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="60" y1="110" x2="290" y2="110" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="150" y1="160" x2="290" y2="160" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="100" y1="30" x2="290" y2="30" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="230" y1="30" x2="230" y2="110" stroke="#1c7ed6" stroke-width="1.5"/><line x1="225" y1="30" x2="235" y2="30" stroke="#1c7ed6" stroke-width="1.5"/><line x1="225" y1="110" x2="235" y2="110" stroke="#1c7ed6" stroke-width="1.5"/><line x1="230" y1="110" x2="230" y2="160" stroke="#1c7ed6" stroke-width="1.5"/><line x1="225" y1="110" x2="235" y2="110" stroke="#1c7ed6" stroke-width="1.5"/><line x1="225" y1="160" x2="235" y2="160" stroke="#1c7ed6" stroke-width="1.5"/><line x1="275" y1="30" x2="275" y2="160" stroke="#1c7ed6" stroke-width="1.5"/><line x1="270" y1="30" x2="280" y2="30" stroke="#1c7ed6" stroke-width="1.5"/><line x1="270" y1="160" x2="280" y2="160" stroke="#1c7ed6" stroke-width="1.5"/>`
+    + A(108, 95, 140, 95, "#555", 3)
+    + M(212, 70, "ア")
+    + M(212, 135, "イ")
+    + M(300, 95, "ウ")
+    + T(180, 205, "おもり", { size: 12, w: "normal" })
+    + T(70, 205, "何もつるさない", { size: 12, w: "normal" })),
+
+  c30_ex1: svg(360, 232,
+    `<rect x="25" y="14" width="275" height="8" fill="#d9c48f" stroke="#8a6d3b"/><line x1="25" y1="22" x2="350" y2="22" stroke="#888" stroke-width="1.2" stroke-dasharray="4 3"/><path d="M45 22 V29 L54 33.6 L36 38.2 L54 42.9 L36 47.5 L54 52.1 L36 56.8 L54 61.4 L36 66.0 L54 70.6 L36 75.2 L54 79.9 L36 84.5 L54 89.1 L36 93.8 L54 98.4 L45 103.0 V110" fill="none" stroke="#333" stroke-width="2"/><circle cx="45" cy="120" r="9" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><path d="M165 22 V29 L174 34.6 L156 40.2 L174 45.9 L156 51.5 L174 57.1 L156 62.8 L174 68.4 L156 74.0 L174 79.6 L156 85.2 L174 90.9 L156 96.5 L174 102.1 L156 107.8 L174 113.4 L165 119.0 V126" fill="none" stroke="#333" stroke-width="2"/><circle cx="165" cy="137" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><path d="M285 22 V29 L294 37.6 L276 46.2 L294 54.9 L276 63.5 L294 72.1 L276 80.8 L294 89.4 L276 98.0 L294 106.6 L276 115.2 L294 123.9 L276 132.5 L294 141.1 L276 149.8 L294 158.4 L285 167.0 V174" fill="none" stroke="#333" stroke-width="2"/><circle cx="285" cy="188" r="14" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="72" y1="22" x2="72" y2="110" stroke="#1c7ed6" stroke-width="1.5"/><line x1="67" y1="22" x2="77" y2="22" stroke="#1c7ed6" stroke-width="1.5"/><line x1="67" y1="110" x2="77" y2="110" stroke="#1c7ed6" stroke-width="1.5"/><line x1="192" y1="22" x2="192" y2="126" stroke="#1c7ed6" stroke-width="1.5"/><line x1="187" y1="22" x2="197" y2="22" stroke="#1c7ed6" stroke-width="1.5"/><line x1="187" y1="126" x2="197" y2="126" stroke="#1c7ed6" stroke-width="1.5"/><line x1="312" y1="22" x2="312" y2="174" stroke="#1c7ed6" stroke-width="1.5"/><line x1="307" y1="22" x2="317" y2="22" stroke="#1c7ed6" stroke-width="1.5"/><line x1="307" y1="174" x2="317" y2="174" stroke="#1c7ed6" stroke-width="1.5"/>`
+    + T(78, 70, "22cm", { size: 12, a: "start" })
+    + T(198, 80, "26cm", { size: 12, a: "start" })
+    + T(318, 104, "?cm", { size: 14, a: "start" })
+    + T(45, 150, "10g", { size: 13 })
+    + T(165, 170, "20g", { size: 13 })
+    + T(285, 222, "50g", { size: 13 })),
+
+  c30_graph: svg(330, 244,
+    `<line x1="50" y1="40" x2="50" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="90" y1="40" x2="90" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="130" y1="40" x2="130" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="170" y1="40" x2="170" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="210" y1="40" x2="210" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="250" y1="40" x2="250" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="290" y1="40" x2="290" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="200" x2="290" y2="200" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="180" x2="290" y2="180" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="160" x2="290" y2="160" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="140" x2="290" y2="140" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="120" x2="290" y2="120" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="100" x2="290" y2="100" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="80" x2="290" y2="80" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="60" x2="290" y2="60" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="40" x2="290" y2="40" stroke="#ced4da" stroke-width="1"/><line x1="50" y1="200" x2="290" y2="200" stroke="#333" stroke-width="1.5"/><line x1="50" y1="40" x2="50" y2="200" stroke="#333" stroke-width="1.5"/><line x1="50" y1="160" x2="290" y2="40" stroke="#e03131" stroke-width="2.5"/><line x1="50" y1="140" x2="290" y2="80" stroke="#1c7ed6" stroke-width="2.5"/>`
+    + T(50, 216, "0", { size: 11 })
+    + T(90, 216, "10", { size: 11 })
+    + T(130, 216, "20", { size: 11 })
+    + T(170, 216, "30", { size: 11 })
+    + T(210, 216, "40", { size: 11 })
+    + T(250, 216, "50", { size: 11 })
+    + T(290, 216, "60", { size: 11 })
+    + T(44, 204, "0", { size: 11, a: "end" })
+    + T(44, 184, "20", { size: 11, a: "end" })
+    + T(44, 164, "40", { size: 11, a: "end" })
+    + T(44, 144, "60", { size: 11, a: "end" })
+    + T(44, 124, "80", { size: 11, a: "end" })
+    + T(44, 104, "100", { size: 11, a: "end" })
+    + T(44, 84, "120", { size: 11, a: "end" })
+    + T(44, 64, "140", { size: 11, a: "end" })
+    + T(44, 44, "160", { size: 11, a: "end" })
+    + M(310, 40, "A")
+    + M(310, 80, "B")
+    + T(26, 24, "ばねの長さ(cm)", { size: 11, a: "start" })
+    + T(170, 236, "おもりの重さ(g)", { size: 11 })),
+
+  c30_series: svg(320, 244,
+    `<rect x="40" y="22" width="80" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M80 30 V37 L89 41.7 L71 46.4 L89 51.1 L71 55.9 L89 60.6 L71 65.3 L89 70.0 L71 74.7 L89 79.4 L71 84.1 L89 88.9 L71 93.6 L89 98.3 L80 103.0 V110" fill="none" stroke="#333" stroke-width="2"/><circle cx="80" cy="110" r="3" fill="#333"/><path d="M80 110 V117 L89 121.7 L71 126.4 L89 131.1 L71 135.9 L89 140.6 L71 145.3 L89 150.0 L71 154.7 L89 159.4 L71 164.1 L89 168.9 L71 173.6 L89 178.3 L80 183.0 V190" fill="none" stroke="#333" stroke-width="2"/><circle cx="80" cy="201" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><rect x="200" y="22" width="80" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M240 30 V37 L249 41.7 L231 46.3 L249 51.0 L231 55.7 L249 60.3 L231 65.0 L249 69.7 L231 74.3 L249 79.0 L231 83.7 L249 88.3 L240 93.0 V100" fill="none" stroke="#333" stroke-width="2"/><circle cx="240" cy="110" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><path d="M240 121 V128 L249 132.6 L231 137.2 L249 141.8 L231 146.3 L249 150.9 L231 155.5 L249 160.1 L231 164.7 L249 169.3 L231 173.8 L249 178.4 L240 183.0 V190" fill="none" stroke="#333" stroke-width="2"/><circle cx="240" cy="201" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="160" y1="20" x2="160" y2="240" stroke="#ccc" stroke-width="1"/>`
+    + M(112, 70, "ア")
+    + M(112, 150, "イ")
+    + T(80, 232, "10g", { size: 13 })
+    + M(272, 65, "ウ")
+    + M(272, 155, "エ")
+    + T(212, 114, "10g", { size: 12, a: "end" })
+    + T(240, 232, "10g", { size: 13 })
+    + T(80, 14, "パターン1", { size: 12 })
+    + T(240, 14, "パターン2", { size: 12 })),
+
+  c30_horiAB: svg(330, 296,
+    `<rect x="30" y="50" width="190" height="34" fill="#d9c48f" stroke="#8a6d3b"/><rect x="20" y="10" width="10" height="74" fill="#d9c48f" stroke="#8a6d3b"/><path d="M30 40 H37 L45.3 32 L53.6 48 L61.9 32 L70.1 48 L78.4 32 L86.7 48 L95.0 32 L103.3 48 L111.6 32 L119.9 48 L128.1 32 L136.4 48 L144.7 32 L153.0 40 H160" fill="none" stroke="#333" stroke-width="2"/><line x1="160" y1="40" x2="220" y2="40" stroke="#333" stroke-width="1.5"/><circle cx="220" cy="49" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="220" cy="49" r="2" fill="#333"/><line x1="229" y1="49" x2="229" y2="96" stroke="#333" stroke-width="1.5"/><circle cx="229" cy="107" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/>`
+    + M(95, 14, "A")
+    + T(229, 138, "10g", { size: 13 })
+    + `<rect x="70" y="200" width="200" height="34" fill="#d9c48f" stroke="#8a6d3b"/><circle cx="70" cy="199" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="70" cy="199" r="2" fill="#333"/><line x1="61" y1="199" x2="61" y2="246" stroke="#333" stroke-width="1.5"/><circle cx="61" cy="257" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="70" y1="190" x2="95" y2="190" stroke="#333" stroke-width="1.5"/><path d="M95 190 H102 L111.7 182 L121.4 198 L131.1 182 L140.9 198 L150.6 182 L160.3 198 L170.0 182 L179.7 198 L189.4 182 L199.1 198 L208.9 182 L218.6 198 L228.3 182 L238.0 190 H245" fill="none" stroke="#333" stroke-width="2"/><line x1="245" y1="190" x2="270" y2="190" stroke="#333" stroke-width="1.5"/><circle cx="270" cy="199" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="270" cy="199" r="2" fill="#333"/><line x1="279" y1="199" x2="279" y2="246" stroke="#333" stroke-width="1.5"/><circle cx="279" cy="257" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/>`
+    + M(170, 164, "B")
+    + T(279, 288, "10g", { size: 13 })
+    + T(61, 288, "10g", { size: 13 })
+    + `<line x1="0" y1="145" x2="330" y2="145" stroke="#ddd" stroke-width="1"/>`),
+
+  c30_horiCDEF: svg(330, 296,
+    `<rect x="30" y="50" width="260" height="34" fill="#d9c48f" stroke="#8a6d3b"/><rect x="20" y="10" width="10" height="74" fill="#d9c48f" stroke="#8a6d3b"/><path d="M30 40 H37 L43.1 32 L49.3 48 L55.4 32 L61.6 48 L67.7 32 L73.9 48 L80.0 32 L86.1 48 L92.3 32 L98.4 48 L104.6 32 L110.7 48 L116.9 32 L123.0 40 H130" fill="none" stroke="#333" stroke-width="2"/><line x1="130" y1="40" x2="150" y2="40" stroke="#333" stroke-width="1.5"/><path d="M150 40 H157 L163.1 32 L169.3 48 L175.4 32 L181.6 48 L187.7 32 L193.9 48 L200.0 32 L206.1 48 L212.3 32 L218.4 48 L224.6 32 L230.7 48 L236.9 32 L243.0 40 H250" fill="none" stroke="#333" stroke-width="2"/><line x1="250" y1="40" x2="290" y2="40" stroke="#333" stroke-width="1.5"/><circle cx="290" cy="49" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="290" cy="49" r="2" fill="#333"/><line x1="299" y1="49" x2="299" y2="96" stroke="#333" stroke-width="1.5"/><circle cx="299" cy="107" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/>`
+    + M(80, 14, "C")
+    + M(200, 14, "D")
+    + T(299, 138, "40g", { size: 13 })
+    + `<rect x="70" y="200" width="220" height="34" fill="#d9c48f" stroke="#8a6d3b"/><circle cx="70" cy="199" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="70" cy="199" r="2" fill="#333"/><line x1="61" y1="199" x2="61" y2="246" stroke="#333" stroke-width="1.5"/><circle cx="61" cy="257" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="70" y1="190" x2="90" y2="190" stroke="#333" stroke-width="1.5"/><path d="M90 190 H97 L101.7 182 L106.4 198 L111.1 182 L115.9 198 L120.6 182 L125.3 198 L130.0 182 L134.7 198 L139.4 182 L144.1 198 L148.9 182 L153.6 198 L158.3 182 L163.0 190 H170" fill="none" stroke="#333" stroke-width="2"/><line x1="170" y1="190" x2="190" y2="190" stroke="#333" stroke-width="1.5"/><path d="M190 190 H197 L201.7 182 L206.4 198 L211.1 182 L215.9 198 L220.6 182 L225.3 198 L230.0 182 L234.7 198 L239.4 182 L244.1 198 L248.9 182 L253.6 198 L258.3 182 L263.0 190 H270" fill="none" stroke="#333" stroke-width="2"/><line x1="270" y1="190" x2="290" y2="190" stroke="#333" stroke-width="1.5"/><circle cx="290" cy="199" r="9" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="290" cy="199" r="2" fill="#333"/><line x1="299" y1="199" x2="299" y2="246" stroke="#333" stroke-width="1.5"/><circle cx="299" cy="257" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/>`
+    + M(130, 164, "E")
+    + M(230, 164, "F")
+    + T(299, 288, "40g", { size: 13 })
+    + T(61, 288, "40g", { size: 13 })
+    + `<line x1="0" y1="145" x2="330" y2="145" stroke="#ddd" stroke-width="1"/>`),
+
+  c30_ex2: svg(220, 226,
+    `<rect x="50" y="12" width="80" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M90 20 V27 L99 32.1 L81 37.1 L99 42.2 L81 47.3 L99 52.4 L81 57.4 L99 62.5 L81 67.6 L99 72.6 L81 77.7 L99 82.8 L81 87.9 L99 92.9 L90 98.0 V105" fill="none" stroke="#333" stroke-width="2"/><circle cx="90" cy="105" r="3" fill="#333"/><path d="M90 105 V112 L99 117.1 L81 122.1 L99 127.2 L81 132.3 L99 137.4 L81 142.4 L99 147.5 L81 152.6 L99 157.6 L81 162.7 L99 167.8 L81 172.9 L99 177.9 L90 183.0 V190" fill="none" stroke="#333" stroke-width="2"/><rect x="50" y="190" width="80" height="8" fill="#d9c48f" stroke="#8a6d3b"/><line x1="150" y1="20" x2="150" y2="190" stroke="#1c7ed6" stroke-width="1.5"/><line x1="145" y1="20" x2="155" y2="20" stroke="#1c7ed6" stroke-width="1.5"/><line x1="145" y1="190" x2="155" y2="190" stroke="#1c7ed6" stroke-width="1.5"/>`
+    + T(20, 66, "ばねA", { size: 12, a: "start" })
+    + T(20, 152, "ばねB", { size: 12, a: "start" })
+    + T(160, 110, "50cm", { size: 13, a: "start" })
+    + T(90, 216, "天井とゆかに固定", { size: 11, w: "normal" })),
+
+  c30_par: svg(330, 200,
+    `<rect x="40" y="14" width="100" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M70 22 V29 L78 35.0 L62 41.0 L78 47.0 L62 53.0 L78 59.0 L62 65.0 L78 71.0 L62 77.0 L78 83.0 L62 89.0 L78 95.0 L62 101.0 L78 107.0 L70 113.0 V120" fill="none" stroke="#333" stroke-width="2"/><path d="M110 22 V29 L118 35.0 L102 41.0 L118 47.0 L102 53.0 L118 59.0 L102 65.0 L118 71.0 L102 77.0 L118 83.0 L102 89.0 L118 95.0 L102 101.0 L118 107.0 L110 113.0 V120" fill="none" stroke="#333" stroke-width="2"/><line x1="70" y1="120" x2="110" y2="120" stroke="#333" stroke-width="2.5"/><line x1="90" y1="120" x2="90" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="90" cy="150" r="11" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><rect x="180" y="14" width="120" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M195 22 V29 L203 35.0 L187 41.0 L203 47.0 L187 53.0 L203 59.0 L187 65.0 L203 71.0 L187 77.0 L203 83.0 L187 89.0 L203 95.0 L187 101.0 L203 107.0 L195 113.0 V120" fill="none" stroke="#333" stroke-width="2"/><path d="M240 22 V29 L248 35.0 L232 41.0 L248 47.0 L232 53.0 L248 59.0 L232 65.0 L248 71.0 L232 77.0 L248 83.0 L232 89.0 L248 95.0 L232 101.0 L248 107.0 L240 113.0 V120" fill="none" stroke="#333" stroke-width="2"/><path d="M285 22 V29 L293 35.0 L277 41.0 L293 47.0 L277 53.0 L293 59.0 L277 65.0 L293 71.0 L277 77.0 L293 83.0 L277 89.0 L293 95.0 L277 101.0 L293 107.0 L285 113.0 V120" fill="none" stroke="#333" stroke-width="2"/><line x1="195" y1="120" x2="285" y2="120" stroke="#333" stroke-width="2.5"/><line x1="240" y1="120" x2="240" y2="138" stroke="#333" stroke-width="1.5"/><circle cx="240" cy="152" r="13" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><line x1="160" y1="10" x2="160" y2="200" stroke="#ccc" stroke-width="1"/>`
+    + T(90, 182, "20g", { size: 13 })
+    + T(240, 186, "60g", { size: 13 })
+    + M(22, 70, "ア")
+    + M(314, 70, "イ")),
+
+  c30_parAB: svg(200, 222,
+    `<rect x="40" y="14" width="120" height="8" fill="#d9c48f" stroke="#8a6d3b"/><path d="M75 22 V29 L82 34.2 L68 39.4 L82 44.7 L68 49.9 L82 55.1 L68 60.3 L82 65.6 L68 70.8 L82 76.0 L68 81.2 L82 86.4 L68 91.7 L82 96.9 L68 102.1 L82 107.3 L68 112.6 L82 117.8 L75 123.0 V130" fill="none" stroke="#333" stroke-width="2"/><path d="M125 22 V29 L136 38.4 L114 47.8 L136 57.2 L114 66.6 L136 76.0 L114 85.4 L136 94.8 L114 104.2 L136 113.6 L125 123.0 V130" fill="none" stroke="#333" stroke-width="2"/><line x1="75" y1="130" x2="125" y2="130" stroke="#333" stroke-width="2.5"/><line x1="100" y1="130" x2="100" y2="146" stroke="#333" stroke-width="1.5"/><circle cx="100" cy="159" r="13" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/>`
+    + T(60, 80, "ばねA", { size: 12, a: "end" })
+    + T(142, 80, "ばねB", { size: 12, a: "start" })
+    + T(100, 194, "60g", { size: 13 })
+    + T(100, 214, "自然長は同じ", { size: 11, w: "normal" })),
 };
 
 // ===== カードデータ =====
@@ -3529,6 +3974,237 @@ const ERAS = [
           { q: "飛行機雲がすぐに消えると、晴れ・雨のどちら？", a: "晴れ", n: "" },
           { q: "朝つゆがおりると、晴れ・雨のどちら？", a: "晴れ", n: "" },
           { q: "つばめが低く飛ぶと、晴れ・雨のどちら？", a: "雨", n: "えさとなるこん虫が低く飛ぶから。" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no28",
+    no: "No.28",
+    name: "⚖️ No.28 てんびんとてこ",
+    source: "要点 p.46〜51",
+    decks: [
+      {
+        id: "s1", no: 1, title: "上皿てんびんのつくりと使い方", page: "p.46〜47",
+        cards: [
+          { f: "c28_tenbin", q: "上皿てんびんのAの部分の名前は？", a: "皿", r: "さら", n: "左右に1まいずつある。はかるものや分銅をのせる。" },
+          { f: "c28_tenbin", q: "上皿てんびんのBの部分の名前は？", a: "うで", n: "皿をのせる横にのびた部分。" },
+          { f: "c28_tenbin", q: "上皿てんびんのCの部分の名前は？", a: "目もり板", r: "めもりばん", n: "針のふれを見るための板。" },
+          { f: "c28_tenbin", q: "上皿てんびんのDの部分の名前は？", a: "針", r: "はり", n: "うでのかたむきにあわせて左右にふれる。" },
+          { f: "c28_tenbin", q: "上皿てんびんのEの部分の名前は？", a: "支点", r: "してん", n: "うでをささえている中心の部分。いためないように注意する。" },
+          { f: "c28_tenbin", q: "上皿てんびんのFの部分の名前は？", a: "調節ねじ", r: "ちょうせつねじ", n: "うでの両はしにある。まわしてつりあいを調節する。" },
+          { q: "100g用分銅セットの分銅の重さを合計すると何g？", a: "101g", r: "ふんどう", n: "50＋20＋10×2＋5＋2×2＋1＋0.5＋0.2×2＋0.1＝101g" },
+          { q: "100g用分銅セットで、2個ずつ入っている分銅はどれ？", a: "10g・2g・0.2g", n: "ほかの50g・20g・5g・1g・0.5g・0.1gは1個ずつ。" },
+          { q: "分銅は手で直接持たず、何を使って持つ？", a: "ピンセット", n: "" },
+          { q: "分銅をピンセットで持つのはなぜ？", a: "分銅がさびて、重さが変わってしまうのを防ぐため", n: "手のあせや油がつくと、さびて重さが変わる。", long: true },
+          { q: "0.5g〜0.1gの分銅は、どんな形をしている？", a: "うすい板の形", n: "50g〜1gの分銅は、つまみのついた円柱の形。" },
+          { q: "上皿てんびんは、どんな場所に置く？", a: "水平な場所", r: "すいへい", n: "かたむいた場所ではつりあいが正しくわからない。" },
+          { q: "皿をのせたあと、針のふれはばがどうなるように調節ねじをまわす？", a: "目もり板の中央から左右に等しくなるように", n: "針のふれが止まるまで待つ必要はない。", long: true },
+          { q: "右ききの人がものの重さをはかるとき、分銅は左右どちらの皿にのせる？", a: "右の皿", n: "分銅をよく出し入れするので、ききうでの側にのせる。はかるものは左。" },
+          { q: "右ききの人が決まった重さをはかりとるとき、分銅は左右どちらの皿にのせる？", a: "左の皿", n: "少しずつ出し入れするもの（薬品など）をききうでの右側にのせる。" },
+          { q: "分銅をのせるときは、軽いもの・重いもののどちらから順にのせる？", a: "重いもの", n: "重い分銅から順にのせ、重すぎたら次に軽い分銅にとりかえる。" },
+          { q: "薬品をはかりとるとき、片方・両方のどちらの皿に何をのせる？", a: "両方の皿に薬包紙をのせる", r: "やくほうし", n: "片方だけだと、薬包紙の重さの分だけずれてしまう。" },
+          { q: "薬品は何を使ってあつかう？", a: "薬さじ", r: "やくさじ", n: "薬品を手でさわらない。" },
+          { q: "左右の皿の重さが等しいとき、針はどのようにふれる？", a: "目もり板の中央から左右に等しくふれる", n: "この状態でつりあっていると判断してよい。", long: true },
+          { q: "つりあいを確認するとき、針が止まるまで待つ必要はある？", a: "ない", n: "左右に等しくふれていれば、つりあっていると判断してよい。やがて針は中央を指して止まる。" },
+          { q: "上皿てんびんをしまうときは、皿をどうする？", a: "皿を片方に重ねる", n: "" },
+          { q: "上皿てんびんをしまうとき、皿を片方に重ねるのはなぜ？", a: "支点をいためないようにするため", n: "うでが動かないようにして、支点がすりへるのを防ぐ。", long: true },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "モーメントのつりあい", page: "p.48〜50",
+        cards: [
+          { q: "モーメントとは、どんなはたらき？", a: "てこの棒を左右にかたむける（回転させる）はたらき", n: "", long: true },
+          { q: "モーメントを表す式は？", a: "力の大きさ（おもりの重さ）×支点からのきょり", n: "おもりの重さ（g）×支点からのきょり（cm）で計算する。", long: true },
+          { q: "てこを左にかたむける（回転させる）はたらきを何という？", a: "左回りのモーメント", n: "" },
+          { q: "てこを右にかたむける（回転させる）はたらきを何という？", a: "右回りのモーメント", n: "" },
+          { q: "モーメントの向きはどうやって見つける？", a: "支点をおさえておもりをつるしたときに、てこが回転する向き", n: "", long: true },
+          { f: "c28_muki", q: "ア・イのおもりのモーメントの向きは？", a: "左回り", n: "支点より左につるしたおもりは、てこを左にかたむける。" },
+          { f: "c28_muki", q: "ウ・エのおもりのモーメントの向きは？", a: "右回り", n: "支点より右につるしたおもりは、てこを右にかたむける。" },
+          { q: "てこがつりあっているとき、左回りと右回りのモーメントはどうなっている？", a: "左回りのモーメント＝右回りのモーメント", n: "これがてこの計算のポイント。", long: true },
+          { f: "c28_kousiki", q: "図のてこがつりあっているとき、A・B・C・Dの関係を式で表すと？（棒の重さは考えない）", a: "A×B＝C×D", n: "左回りのモーメント（A×B）＝右回りのモーメント（C×D）" },
+          { f: "c28_rei1", q: "【例1】てこがつりあっている。Aの重さは何g？", a: "100g", n: "左回り＝150×20＝3000\n右回り＝A×30\nA＝3000÷30＝100g" },
+          { f: "c28_rei2", q: "【例2】てこがつりあっている。Bの長さは何cm？", a: "10cm", n: "左回り＝10×50＝500\n右回り＝50×B\nB＝500÷50＝10cm" },
+          { f: "c28_rei3", q: "【例3】てこがつりあっている。Cの重さは何g？", a: "100g", n: "左回り＝10×40＋40×20＝400＋800＝1200\n右回り＝C×12\nC＝1200÷12＝100g" },
+          { f: "c28_rei4", q: "【例4】支点が左はしのてこを、ばねはかり（32g）で上に引いてつりあわせた。Dの長さは何cm？", a: "40cm", n: "ばねはかりで上に引く力は左回り＝32×50＝1600\nおもりは右回り＝40×D\nD＝1600÷40＝40cm" },
+          { f: "c28_rei4", q: "図のように支点が左はしのとき、ばねはかりで上に引く力のモーメントは何回り？", a: "左回り", n: "上に引くと、てこは支点を中心に左回りに回転しようとする。下につるしたおもりは右回り。" },
+          { f: "c28_gyaku", q: "おもりが2つだけのとき、力の大きさ（おもりの重さ）と支点からのきょりはどんな関係？", a: "逆比の関係", r: "ぎゃくひ", n: "例：きょり10cm：20cm＝1：2なら、重さは200g：100g＝2：1" },
+          { q: "おもりが2つでつりあっているてこで、支点からのきょりの比が1：2のとき、おもりの重さの比は？", a: "2：1", n: "重さときょりは逆比になる。" },
+          { f: "c28_rei5", q: "【例5】てこがつりあっている。Aの重さは何g？（逆比で考える）", a: "60g", n: "きょりの比 30：50＝3：5\n重さの比は逆比で 5：3\n100g：A＝5：3 → A＝100÷5×3＝60g\n（たしかめ：100×30＝60×50＝3000）" },
+          { f: "c28_rei6", q: "【例6】てこがつりあっている。Bの長さは何cm？（逆比で考える）", a: "5cm", n: "重さの比 20：80＝1：4\nきょりの比は逆比で 4：1\n20cm：B＝4：1 → B＝20÷4＝5cm\n（たしかめ：20×20＝80×5＝400）" },
+          { f: "c28_ren1", q: "【練習】てこがつりあっている。?の重さは何g？", a: "50g", n: "左回り＝60×25＝1500\n右回り＝?×30\n?＝1500÷30＝50g" },
+          { f: "c28_ren2", q: "【練習】てこがつりあっている。?の長さは何cm？", a: "10cm", n: "重さの比 40：120＝1：3 → きょりの比 3：1\n30cm：?＝3：1 → ?＝10cm\n（たしかめ：40×30＝120×10＝1200）" },
+          { f: "c28_ren3", q: "【練習】てこがつりあっている。?の重さは何g？", a: "45g", n: "左回り＝20×30＋30×10＝600＋300＝900\n右回り＝?×20\n?＝900÷20＝45g" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "さおばかり", page: "p.51",
+        cards: [
+          { q: "さおばかりのポイントは？", a: "皿にのっているものの重さと、おもりの位置の目もりの値が等しい", n: "", long: true },
+          { f: "c28_sao", q: "さおばかりのアの部分（手でつるすところ）の名前は？", a: "さげひも", n: "さげひもの位置が支点になる。" },
+          { q: "さおばかりの皿に何ものっていないとき、おもりの位置は何gの目もり？", a: "0gの目もり", n: "0gのものがのっていると考える。" },
+          { q: "さおばかりの皿に500gのものがのっているとき、おもりの位置は何gの目もり？", a: "500gの目もり", n: "ものの重さと目もりの値が等しい。" },
+          { f: "c28_rei7", q: "【例7】さおばかりのおもり（100g）をA点につるすとつりあった。皿＋ものの重さは何g？（棒の重さは考えない）", a: "500g", n: "きょりの比 5：25＝1：5\n重さの比は逆比で 5：1\n（皿＋もの）：100g＝5：1 → 500g\n（たしかめ：500×5＝100×25＝2500）" },
+          { f: "c28_rei7", q: "【例7】このさおばかりのA点には、何gの目もりをつければよい？（皿は10g）", a: "490g", n: "皿＋もの＝500g\nもの＝500−10＝490g\n皿の重さを引くのをわすれない！" },
+          { f: "c28_ren4", q: "【練習】例7と同じさおばかりで、おもり（100g）を支点から15cmの位置につるすとつりあった。ものの重さは何g？", a: "290g", n: "（皿＋もの）×5＝100×15＝1500\n皿＋もの＝1500÷5＝300g\nもの＝300−10＝290g" },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no29",
+    no: "No.29",
+    name: "⚖️ No.29 てこのつりあい",
+    source: "要点 p.52〜57",
+    decks: [
+      {
+        id: "s1", no: 1, title: "てこの3点とてこの利用", page: "p.52〜53",
+        cards: [
+          { q: "てこを支え、回転の中心となる点を何という？", a: "支点", r: "してん", n: "" },
+          { q: "てこに力を加える点を何という？", a: "力点", r: "りきてん", n: "" },
+          { q: "てこの力が物体にはたらく点を何という？", a: "作用点", r: "さようてん", n: "" },
+          { f: "c29_3pt", q: "図のアは、てこの3点のうちどれ？", a: "支点", n: "てこを支え、回転の中心となる点。" },
+          { f: "c29_3pt", q: "図のイ（手でおす所）は、てこの3点のうちどれ？", a: "力点", n: "てこに力を加える点。" },
+          { f: "c29_3pt", q: "図のウ（石を持ち上げる所）は、てこの3点のうちどれ？", a: "作用点", n: "てこの力が物体（石）にはたらく点。" },
+          { f: "c29_typeA", q: "支点が作用点と力点の間にあるてこ（Aのてこ）では、力のはたらく向きはどうなる？", a: "逆になる", r: "ぎゃく", n: "力点を下におすと、作用点は上に動く。" },
+          { f: "c29_typeB", q: "作用点が支点と力点の間にあるてこ（Bのてこ）で、作用点ではたらく力は大きくなる？小さくなる？", a: "大きくなる", n: "せんぬきなど。小さい力で大きな力を出せる。" },
+          { f: "c29_typeB", q: "作用点が支点と力点の間にあるてこ（Bのてこ）で、作用点の動くきょりは大きくなる？小さくなる？", a: "小さくなる", n: "力は大きくなるが、動くきょりは小さくなる。" },
+          { f: "c29_typeC", q: "力点が支点と作用点の間にあるてこ（Cのてこ）で、作用点ではたらく力は大きくなる？小さくなる？", a: "小さくなる", n: "ピンセットなど。細かい作業に向いている。" },
+          { f: "c29_typeC", q: "力点が支点と作用点の間にあるてこ（Cのてこ）で、作用点の動くきょりは大きくなる？小さくなる？", a: "大きくなる", n: "力は小さくなるが、動くきょりは大きくなる。" },
+          { q: "①洋ばさみは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "A（支点が真ん中）", n: "支点（止めねじ）が、作用点（刃）と力点（指をかける所）の間にある。" },
+          { q: "②和ばさみは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "C（力点が真ん中）", n: "支点（後ろのはし）と作用点（刃先）の間を指でにぎる。" },
+          { q: "③ピンセットは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "C（力点が真ん中）", n: "支点（後ろのはし）と作用点（先）の間を指でつまむ。" },
+          { q: "④ペンチは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "A（支点が真ん中）", n: "支点が、作用点（先）と力点（にぎる所）の間にある。" },
+          { q: "⑤せんぬきは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "B（作用点が真ん中）", n: "支点（先のはし）と力点（手で持つ所）の間に、作用点（王冠のふち）がある。" },
+          { q: "⑥くぎぬきは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "A（支点が真ん中）", n: "支点（曲がった所）が、作用点（くぎをはさむ所）と力点（手で持つ所）の間にある。" },
+          { q: "⑦おし切りは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "B（作用点が真ん中）", n: "支点（はしの留め具）と力点（持ち手）の間で切る。" },
+          { q: "⑧穴あけパンチは、A（支点が真ん中）・B（作用点が真ん中）・C（力点が真ん中）のどのてこ？", a: "B（作用点が真ん中）", n: "支点（後ろのはし）と力点（おす所）の間で穴をあける。" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "モーメントのつりあい", page: "p.53",
+        cards: [
+          { q: "モーメントは、何×何で表す？", a: "力の大きさ×支点からのきょり", n: "てこをかたむけるはたらきの大きさ。", long: true },
+          { q: "てこがつりあうとき、モーメントはどんな関係になっている？", a: "左回りのモーメント＝右回りのモーメント", n: "", long: true },
+          { f: "c29_moment", q: "図で、左回りのモーメントを表す式は？（棒の重さは考えない）", a: "A×B", n: "Ag のおもりが、支点から Bcm のところにある。" },
+          { f: "c29_moment", q: "図で、右回りのモーメントを表す式は？（棒の重さは考えない）", a: "C×D", n: "Cg のおもりが、支点から Dcm のところにある。" },
+          { f: "c29_moment", q: "図のてこがつりあっているとき、成り立つ式は？", a: "A×B＝C×D", n: "左回りのモーメント＝右回りのモーメント" },
+          { f: "c29_m1", q: "図のてこがつりあっているとき、?は何g？（棒の重さは考えない）", a: "40g", n: "60×20＝?×30　1200÷30＝40" },
+          { f: "c29_m2", q: "図のてこがつりあっているとき、?は何cm？（棒の重さは考えない）", a: "20cm", n: "40×30＝60×?　1200÷60＝20" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "上下の力のつりあい", page: "p.54〜55",
+        cards: [
+          { q: "力（重さ）の向きを表す矢印を何という？", a: "力の矢印", r: "やじるし", n: "" },
+          { q: "てこがつりあっているとき、上向きの力と下向きの力はどんな関係？", a: "上向きの力の和＝下向きの力の和", n: "", long: true },
+          { q: "つりあっているてこの棒には、どんな2つの力がはたらいている？", a: "おもりから受ける下向きの力と、支点から受ける上向きの力", n: "この2つの力がつりあっている。", long: true },
+          { f: "c29_updown", q: "図のてこがつりあっているとき、てこの棒が支点から受ける力の向きと大きさは？", a: "上向きに300g", n: "下向きの力の和は100g＋200g＝300g。上向きの力も300gになる。" },
+          { f: "c29_rei1", q: "例1：図のてこで、上向きの力（㊤）は何g？", a: "180g", n: "ばねばかりが棒を上向きに引く力。" },
+          { f: "c29_rei1", q: "例1：図のてこで、下向きの力（㊦）を式で表すと？", a: "100g＋Ag＋60g", n: "3つのおもりの重さの和。" },
+          { f: "c29_rei1", q: "例1：図のてこで、Aの重さは何g？", a: "20g", n: "㊤＝㊦より　A＝180−100−60＝20" },
+          { f: "c29_p_rei1", q: "図のてこで、Aの重さは何g？（棒の重さは考えない）", a: "80g", n: "上向きの力＝下向きの力より　A＝250−80−90＝80" },
+          { f: "c29_m1", q: "図のてこがつりあっているとき、支点が棒を支える力は何g？（棒の重さは考えない）", a: "100g", n: "まず?＝40g（60×20＝?×30）。上向きの力＝60＋40＝100g" },
+        ]
+      },
+      {
+        id: "s4", no: 4, title: "棒に重さがあるてこのつりあい", page: "p.56〜57",
+        cards: [
+          { q: "「一様」とは、どういう意味？", a: "どこでも同じという意味", r: "いちよう", n: "「太さが一様な棒」は、どこでも同じ太さの棒。" },
+          { q: "ものの重さが1点にかかるところを何という？", a: "重心", r: "じゅうしん", n: "" },
+          { q: "太さが一様な棒の重さは、棒のどこにかかる？", a: "中心", r: "ちゅうしん", n: "重心＝中心になる。" },
+          { q: "ものの重心を糸でつるしたり支えたりすると、どうなる？", a: "つりあう", n: "重心を支えるとつりあう。" },
+          { q: "棒に重さがあるときは、どうやってモーメントの計算をする？", a: "棒の重さのかわりに、同じ重さのおもりを重心（太さが一様なら中心）につり下げて計算する", n: "", long: true },
+          { f: "c29_uni", q: "図の棒（太さが一様）の重さ20gは、支点からどちら側に何cmのところにかかると考える？", a: "右側に10cm", n: "棒の長さは20＋40＝60cm。中心は左はしから30cm。支点は左はしから20cmなので　30−20＝10cm" },
+          { f: "c29_uni", q: "図のてこ（棒の太さは一様）がつりあっているとき、Aは何g？", a: "20g", n: "50×20＝20×10＋A×40　1000＝200＋A×40　A＝800÷40＝20" },
+          { f: "c29_rei2", q: "例2：ばねばかりの値（A）を求めよう。左回りのモーメントを式で表すと？", a: "A×50", n: "ばねばかりは支点から50cmのところで棒を上に引いている。" },
+          { f: "c29_rei2", q: "例2：右回りのモーメントは？（棒の重さ60g・太さは一様）", a: "2000", n: "25×20＋60×25＝500＋1500＝2000　棒の重さは中心（支点から25cm）にかかる。" },
+          { f: "c29_rei2", q: "例2：ばねばかりの値（A）は何g？", a: "40g", n: "A×50＝2000より　A＝2000÷50＝40" },
+          { f: "c29_rei2", q: "例2：支点が棒を支える力は何g？", a: "45g", n: "上向きの力の和＝下向きの力の和より　支点の力＋40＝25＋60　支点の力＝45g" },
+          { f: "c29_p_uni", q: "図の棒（太さが一様・重さ40g）がつりあっているとき、?は何g？", a: "10g", n: "棒の中心は左はしから50cm＝支点から右へ20cm。50×30＝40×20＋?×70　1500＝800＋?×70　?＝10" },
+          { f: "c29_p_rei2", q: "図の棒（太さが一様・重さ40g）がつりあっているとき、ばねばかりの値?は何g？", a: "40g", n: "棒の重さは支点から30cmにかかる。?×60＝30×40＋40×30＝2400　?＝40" },
+          { q: "太さが一様でない棒の重心は、中心から太いほう・細いほうのどちらへずれる？", a: "太いほう", n: "太いほうが重いので、重心は太いほうへずれる。" },
+          { f: "c29_taper", q: "図の棒（重さ80g）がつりあっているとき、棒の重心は、中心からどちらへ何cmのところ？", a: "太いほう（左）へ10cm", n: "重心が中心からAcmとすると　80×A＝20×40　A＝800÷80＝10" },
+          { q: "棒の重心の位置がわからないときは、どうやって計算する？", a: "適当に位置を決めて、棒と同じ重さのおもりをつるして計算する", r: "てきとう", n: "", long: true },
+          { f: "c29_rei3", q: "例3：長さ100cmの棒。太いほう（A）を持ち上げると60g、細いほう（B）を持ち上げると40g。棒の重さは何g？", a: "100g", n: "両はしに上向きの力がかかっているので、上下のつりあいより　60＋40＝100g" },
+          { f: "c29_rei3", q: "例3：左はしの力：右はしの力を、かんたんな整数の比で表すと？", a: "3：2", n: "60g：40g＝3：2" },
+          { q: "力ときょりは、どんな比になる？", a: "逆比", r: "ぎゃくひ", n: "左右の力が3：2なら、重心からのきょりは2：3になる。" },
+          { f: "c29_rei3", q: "例3：重心から左はしまでのきょり：右はしまでのきょりは？", a: "2：3", n: "力（3：2）の逆比になる。" },
+          { f: "c29_rei3", q: "例3：棒の重心は、左はしから何cmのところ？", a: "40cm", n: "100×2/5＝40　（たしかめ：60×40＝40×60）" },
+          { f: "c29_p_rei3", q: "図の棒（長さ120cm）の重さと、重心の位置（太いはしから何cm）は？", a: "重さ120g・太いはしから45cm", n: "重さ＝75＋45＝120g。力の比75：45＝5：3なので、きょりの比は3：5。120×3/8＝45cm", long: true },
+        ]
+      },
+    ]
+  },
+  {
+    id: "no30",
+    no: "No.30",
+    name: "⚖️ No.30 ばねとものの重さ",
+    source: "要点 p.58〜63",
+    decks: [
+      {
+        id: "s1", no: 1, title: "ばねの性質", page: "p.58〜59",
+        cards: [
+          { q: "ばねの自然長とは何？", a: "何もつるさないときのばねの長さ", r: "しぜんちょう", long: true, n: "おもりをつるしたときにのびた長さは「のび」という。" },
+          { f: "c30_len", q: "図のアの長さを何という？", a: "自然長", r: "しぜんちょう", n: "何もつるさないときのばねの長さ。" },
+          { f: "c30_len", q: "図のイの長さを何という？", a: "のび", n: "おもりをつるしてのびた分の長さ。" },
+          { f: "c30_len", q: "図のウの長さ（ばね全体の長さ）を何という？", a: "全長", r: "ぜんちょう", n: "全長＝自然長＋のび" },
+          { q: "ばね全体の長さ（全長）を求める式は？", a: "全長＝自然長＋のび", n: "" },
+          { q: "おもりの重さとばねののびには、どんな関係がある？", a: "比例する", r: "ひれい", n: "重さが2倍、3倍…になると、のびも2倍、3倍…になる。" },
+          { q: "おもりの重さとばねののびが比例する関係を何という？", a: "フックの法則", r: "ふっくのほうそく", n: "" },
+          { q: "10gで1cmのびるばねに、30gのおもりをつるすと何cmのびる？", a: "3cm", n: "1cm×30g÷10g＝3cm（テキストの表より）" },
+          { q: "【練習】10gで1cmのびるばねに、45gのおもりをつるすと何cmのびる？", a: "4.5cm", n: "1cm×45g÷10g＝4.5cm" },
+          { f: "c30_ex1", q: "【例1】10gで22cm、20gで26cmになるばね。10gで何cmのびる？", a: "4cm", n: "20gと10gの差の10gで、26cm−22cm＝4cmのびる。" },
+          { f: "c30_ex1", q: "【例1】10gで22cm、20gで26cmになるばね。自然長は何cm？", a: "18cm", n: "10gで4cmのびて全長22cmなので、22cm−4cm＝18cm" },
+          { f: "c30_ex1", q: "【例1】10gで22cm、20gで26cmになるばね。50gをつるすと長さは何cm？", a: "38cm", n: "自然長＋のび＝18cm＋4cm×（50g÷10g）＝18＋20＝38cm" },
+          { q: "【練習】20gで15cm、40gで19cmになるばね。10gで何cmのびる？", a: "2cm", n: "20gふえて19−15＝4cmのびるので、10gでは2cm。" },
+          { q: "【練習】20gで15cm、40gで19cmになるばね。自然長は何cm？", a: "11cm", n: "20gで2cm×2＝4cmのびているので、15cm−4cm＝11cm" },
+          { q: "【練習】20gで15cm、40gで19cmになるばね。60gをつるすと長さは何cm？", a: "23cm", n: "11cm＋2cm×（60g÷10g）＝11＋12＝23cm" },
+          { f: "c30_graph", q: "グラフのばねAの自然長は何cm？", a: "40cm", n: "おもりの重さが0gのときの長さを読む。" },
+          { f: "c30_graph", q: "グラフのばねBの自然長は何cm？", a: "60cm", n: "おもりの重さが0gのときの長さを読む。" },
+          { f: "c30_graph", q: "グラフのばねAに20gのおもりをつるすと、何cmのびる？", a: "40cm", n: "20gで80cm。80cm−40cm（自然長）＝40cm" },
+          { f: "c30_graph", q: "グラフのばねBに20gのおもりをつるすと、何cmのびる？", a: "20cm", n: "20gで80cm。80cm−60cm（自然長）＝20cm" },
+          { f: "c30_graph", q: "グラフのばねA・Bで、のびやすいのはどちら？", a: "ばねA", n: "同じ20gで、Aは40cm、Bは20cmのびる。グラフのかたむきが大きいほうがのびやすい。" },
+          { f: "c30_graph", q: "グラフのばねA・Bに同じ重さのおもりをつるして同じ長さになるのは、何gのとき？何cm？", a: "20g・80cm", long: true, n: "グラフが交差するただ1つの点を読む。" },
+          { f: "c30_graph", q: "【練習】グラフのばねAに50gのおもりをつるすと、長さは何cm？", a: "140cm", n: "Aは10gで20cmのびる。40cm＋20cm×5＝140cm" },
+          { f: "c30_graph", q: "【練習】グラフのばねBに40gのおもりをつるすと、長さは何cm？", a: "100cm", n: "Bは10gで10cmのびる。60cm＋10cm×4＝100cm" },
+        ]
+      },
+      {
+        id: "s2", no: 2, title: "ばねの直列つなぎ", page: "p.60〜61",
+        cards: [
+          { f: "c30_series", q: "パターン1で、上のばねアには何gの力がかかる？（ばねの重さは考えない）", a: "10g", long: true, n: "直列につないだばねには、どちらにも下のおもりの重さ10gがかかる。" },
+          { f: "c30_series", q: "パターン1で、下のばねイには何gの力がかかる？", a: "10g", n: "おもり10gの重さがそのままかかる。" },
+          { f: "c30_series", q: "パターン2で、上のばねウには何gの力がかかる？", a: "20g", n: "ウより下にあるおもり10g＋10g＝20gがかかる。" },
+          { f: "c30_series", q: "パターン2で、下のばねエには何gの力がかかる？", a: "10g", n: "エより下にあるおもりは10gだけ。" },
+          { q: "【練習】自然長10cm、10gで2cmのびるばねを2本直列につなぎ、下に30gのおもりをつるす。全体の長さは何cm？", a: "32cm", long: true, n: "どちらのばねにも30gがかかり、6cmずつのびる。（10＋6）×2＝32cm" },
+          { f: "c30_horiAB", q: "ばねAにかかる力は何g？", a: "10g", n: "かべは、反対側に10gのおもりをつるしたのと同じはたらきをする。" },
+          { f: "c30_horiAB", q: "ばねBにかかる力は何g？", a: "10g", n: "両はしに10gずつつるしても、ばねにかかる力は20gではなく10g。" },
+          { f: "c30_horiCDEF", q: "ばねCとばねDにかかる力は、それぞれ何g？", a: "C：40g・D：40g", n: "横向きでも、直列につないだばねにはどちらにも40gがかかる。" },
+          { f: "c30_horiCDEF", q: "ばねEとばねFにかかる力は、それぞれ何g？", a: "E：40g・F：40g", n: "両はしに40gずつでも、ばねにかかる力は40g。" },
+          { f: "c30_ex2", q: "【例2】自然長20cmのばねA（10gで2cmのびる）とB（10gで3cmのびる）。図のように全体を50cmにした。A・Bの自然長の合計は？", a: "40cm", long: true, n: "20cm＋20cm＝40cm" },
+          { f: "c30_ex2", q: "【例2】全体が50cmのとき、ばねA・Bののびの合計は何cm？", a: "10cm", n: "50cm−40cm（自然長の合計）＝10cm" },
+          { f: "c30_ex2", q: "【例2】ばねA・Bに同じ力を加えたときの、のびの比（A：B）は？", a: "2：3", n: "10gでAは2cm、Bは3cmのびるから。" },
+          { f: "c30_ex2", q: "【例2】のびの合計10cmのうち、ばねAののびは何cm？", a: "4cm", n: "10cm×2÷（2＋3）＝4cm（Bは6cm）" },
+          { f: "c30_ex2", q: "【例2】このとき、ばねAの長さは何cm？", a: "24cm", n: "20cm＋4cm＝24cm。Bは20＋6＝26cmで、合計50cmになる。" },
+          { f: "c30_ex2", q: "【練習】例2のばねA・Bで、全体を60cmにした。ばねAの長さは何cm？", a: "28cm", long: true, n: "のびの合計60−40＝20cm。Aののび＝20×2÷5＝8cm。20＋8＝28cm（Bは20＋12＝32cm）" },
+        ]
+      },
+      {
+        id: "s3", no: 3, title: "ばねの並列つなぎ", page: "p.62〜63",
+        cards: [
+          { f: "c30_par", q: "同じ種類のばね2本を並列につなぎ、20gをつるした（ア）。1本のばねにかかる力は何g？", a: "10g", long: true, n: "2本ののびが同じになるので、同じ力がかかる。20g÷2＝10g" },
+          { f: "c30_par", q: "同じ種類のばね3本を並列につなぎ、60gをつるした（イ）。1本のばねにかかる力は何g？", a: "20g", long: true, n: "3本のばねに同じ力がかかる。60g÷3＝20g" },
+          { q: "同じ種類のばねを並列に2本、3本…とふやすと、1本あたりにかかる力は何倍になる？", a: "1/2倍、1/3倍…", long: true, n: "力が本数で等分される。" },
+          { q: "ばねの並列つなぎで、それぞれのばねの何が必ず同じになる？", a: "全長", r: "ぜんちょう", n: "2本のばねは同じ棒やおもりにつながっているので、全長が同じになる。" },
+          { q: "自然長が同じばねを並列につないだとき、のびはどうなる？", a: "同じになる", n: "自然長が同じなので、全長が同じなら、のびも同じ。" },
+          { f: "c30_parAB", q: "自然長が同じで、Aは10gで1cm、Bは10gで2cmのびる。60gを30gずつに分けると、のびは？", a: "A：3cm・B：6cm（長さが合わない）", long: true, n: "1cm×30g÷10g＝3cm、2cm×30g÷10g＝6cm。だから2等分ではない。" },
+          { f: "c30_parAB", q: "ばねA（10gで1cm）を2cmのばすのに必要な力は何g？", a: "20g", n: "1cmと2cmの最小公倍数2cmでくらべる。" },
+          { f: "c30_parAB", q: "ばねB（10gで2cm）を2cmのばすのに必要な力は何g？", a: "10g", n: "" },
+          { f: "c30_parAB", q: "のびが同じとき、ばねにかかる力の比（A：B）は？", a: "2：1", n: "20g：10g＝2：1" },
+          { f: "c30_parAB", q: "60gをつるしたとき、ばねAにかかる力は何g？", a: "40g", n: "60g×2÷（2＋1）＝40g" },
+          { f: "c30_parAB", q: "60gをつるしたとき、ばねBにかかる力は何g？", a: "20g", n: "60g−40g＝20g。AもBも4cmずつのびて、全長が同じになる。" },
+          { f: "c30_parAB", q: "【練習】同じばねA・Bに90gをつるすと、A・Bにかかる力は何g？", a: "A：60g・B：30g", n: "90g×2÷3＝60g、90−60＝30g。どちらも6cmのびる。" },
         ]
       },
     ]
